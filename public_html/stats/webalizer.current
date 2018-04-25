@@ -1,0 +1,262 @@
+# Webalizer V2.21-02 Incremental Data - 11/04/2016 17:54:20
+2016 11 4 17 54 20
+305 239 10 35 12 6 9899764 82 16 0
+4 1 104 1 4
+5 3 12009 4 4 4
+125 113 4823733 4 12 7
+32 29 1285751 1 2 1
+143 94 3778271 4 64 4
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+2 1 3809 2
+17 17 581253 0
+0 0 0 0
+106 63 3570939 34
+11 6 116766 7
+35 31 1286151 4
+0 0 0 0
+24 23 100569 22
+64 58 2571502 4
+0 0 0 0
+0 0 0 0
+1 0 11543 1
+8 7 369723 2
+36 32 1286217 5
+1 1 1292 1
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0
+0
+0
+239
+0
+0
+0
+0
+0
+0
+0
+0
+11
+0
+1
+0
+0
+0
+0
+0
+0
+53
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+0
+0
+0
+0
+0
+# -urls- 
+/resources/resproject/new_puranics_background.jpg
+1 2 20843264 1507328 0 0
+/
+0 70 0 841706 15 6
+/vendor/dropzone/dropzone.js
+0 5 0 319350 0 0
+/vendor/datatable-1.10.9/css/dataTables.bootstrap.min.css
+0 6 0 22956 0 0
+/vendor/font-awesome/css/font-awesome.min.css
+0 7 0 186977 0 0
+/vendor/bootstrap-4.0/css/bootstrap.min.css
+0 7 0 618443 0 0
+/vendor/office/js/office.js
+0 5 0 10465 0 0
+/vendor/dropzone/dropzone.css
+0 6 0 75522 0 0
+/vendor/datatable-1.10.9/js/dataTables.bootstrap.min.js
+0 5 0 10385 0 0
+/vendor/nice-scroll/jquery.nicescroll.js
+0 5 0 296820 0 0
+/vendor/font-awesome/fonts/ElegantIcons.woff
+0 1 20842704 63664 0 0
+/vendor/bootstrap-4.0/css/bootstrap-theme.css
+0 7 0 831243 0 0
+/vendor/bootstrap-4.0/js/bootstrap.min.js
+0 5 0 220585 0 0
+/vendor/foundation-date-time-picker/js/foundation-datepicker.min.js
+0 5 0 127680 0 0
+/vendor/font-awesome/fonts/fontawesome-webfont.woff
+0 5 0 418800 0 0
+/vendor/morris.js-0.5.1/morris.js
+0 5 0 330235 0 0
+/img/favicon.ico
+0 1 20842624 4286 0 0
+/vendor/validate/jquery.validate.js
+0 6 0 126570 0 0
+/vendor/office/css/login.css
+0 6 0 2802 0 0
+/vendor/jquery/jquery-ui-1.10.4.min.js
+0 5 0 1142725 0 0
+/js/property/resproject.js
+0 1 20842992 5052 0 0
+/vendor/office/css/office.css
+0 7 0 619542 0 0
+/vendor/jquery/jquery.js
+0 6 0 575772 0 0
+/vendor/nicEdit/nicEdit.js
+0 5 0 161975 0 0
+/vendor/office/css/widgets.css
+0 7 0 47642 0 0
+/vendor/foundation-date-time-picker/css/foundation-datepicker.min.css
+0 6 0 15696 0 0
+/vendor/font-awesome/css/elegant-icons-style.css
+0 7 0 176764 0 0
+/resources/blog/uniquepaf.jpg
+1 1 21056432 36352 0 0
+/vendor/morris.js-0.5.1/morris.css
+0 6 0 2598 0 0
+/vendor/select2-4.0.0/js/select2.min.js
+0 6 0 377004 0 0
+/nicEditorIcons.gif
+1 1 20843408 3351 0 0
+/vendor/dropzone/min/dropzone.min.css
+0 6 0 58302 0 0
+/vendor/nice-scroll/jquery.scrollTo.min.js
+0 6 0 14604 0 0
+/vendor/select2-4.0.0/css/select2.min.css
+0 6 0 89454 0 0
+/vendor/datatable-1.10.9/js/jquery.dataTables.min.js
+0 5 0 404325 0 0
+# End Of Table - urls
+# -sites- (monthly)
+crawl-66-249-65-57.googlebot.com
+0 1 0 208 0 0
+-
+crawl-66-249-66-147.googlebot.com
+0 1 1 86 1 1478018764
+/
+crawl-66-249-66-151.googlebot.com
+0 2 1 294 1 1478018826
+/
+186-116-138-120.mysipl.com
+0 161 146 5624839 7 1478255246
+/
+crawl-66-249-65-58.googlebot.com
+0 3 3 1484 2 1478282060
+/
+45.250.248.233
+0 2 1 11695 1 1478068679
+/
+crawl-66-249-65-143.googlebot.com
+0 13 13 524301 1 1478056897
+/
+crawl-66-249-65-147.googlebot.com
+0 6 5 60761 1 1478056886
+/
+45.250.249.103
+0 115 68 3676010 1 1478243288
+/
+crawl-66-249-66-143.googlebot.com
+0 1 1 86 1 1478018797
+/
+# End Of Table - sites (monthly)
+# -sites- (daily)
+crawl-66-249-65-57.googlebot.com
+0 1 0 208 0 0
+-
+186-116-138-120.mysipl.com
+0 24 23 100569 1 1478255246
+/
+crawl-66-249-65-58.googlebot.com
+0 3 3 1484 2 1478282060
+/
+45.250.249.103
+0 115 68 3676010 1 1478243288
+/
+# End Of Table - sites (daily)
+# -referrers- 
+- (Direct Request)
+0 20
+http://uniquepaf.com/res-project.php
+0 10
+http://uniquepaf.com/blog.php
+0 9
+http://uniquepaf.tglobalsolutions.com/vendor/font-awesome/css/font-awesome.min.css
+0 13
+http://uniquepaf.com/about-us.php
+0 1
+http://uniquepaf.tglobalsolutions.com/vendor/office/css/office.css
+0 4
+http://uniquepaf.tglobalsolutions.com/index.php
+0 218
+http://uniquepaf.com/res-property.php
+0 1
+http://uniquepaf.tglobalsolutions.com/vendor/font-awesome/css/elegant-icons-style.css
+0 1
+http://uniquepaf.tglobalsolutions.com/vendor/bootstrap-4.0/css/bootstrap-theme.css
+0 14
+http://uniquepaf.com/com-project.php
+0 3
+http://uniquepaf.com/res-projectdetails.php
+0 11
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+0 25
+Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2683.0 Safari/537.36
+0 115
+Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.96 Mobile S
+0 2
+Mozilla/5.0 (Windows NT 6.1; rv:49.0) Gecko/20100101 Firefox/49.0
+0 137
+Mozilla/5.0 (Linux; Android 5.1; XT1033 Build/LPBS23.13-56-2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.124 Mob
+0 2
+Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36
+0 24
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames

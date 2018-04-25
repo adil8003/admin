@@ -1,0 +1,7 @@
+AuthName "uniquepaf.tglobalsolutions.com statistics"
+AuthType Basic
+AuthUserFile /home/sancsvision/domains/uniquepaf.tglobalsolutions.com/.stats-htpasswd
+require valid-user
+<Files .stats-htpasswd>
+deny from all
+</Files>
