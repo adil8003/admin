@@ -5,20 +5,22 @@ namespace app\models;
 use Yii;
 
 //class Videopath extends \yii\db\ActiveRecord
-class mail{
-    public function sendEmail($arrMailDetails){
+class mail {
+
+    public function sendEmail($arrMailDetails) {
+        $email = 'asauravsuman@gmail.com';
         $date = date('d/m/Y');
         $to = $arrMailDetails['toemail'];
         $subject = $arrMailDetails['subject'];
         $body = $this->getEmailHeader();
         $body .= $arrMailDetails['body'];
         $body .= $this->getEmailFooter();
-        $header  =   'MIME-Version: 1.0' . "\r\n";
-        $header .=   'From:Unique Properties And Finance <sadil8003@gmail.com>' . "\r\n" .
-                     'Content-type: text/html' . "\r\n" .
-                     'Reply-To:  sadil8003@gmail.com' . "\r\n" .
+        $header = 'MIME-Version: 1.0' . "\r\n";
+        $header .= 'From:Kiwings <asauravsuman@gmail.com>' . "\r\n" .
+                'Content-type: text/html' . "\r\n" .
+                'Reply-To: sadil8003@gmail.com' . "\r\n" .
 //                     'CC: asauravsuman@gmail.com ' . "\r\n" .
-                     'X-Mailer: PHP/' . phpversion();
+                'X-Mailer: PHP/' . phpversion();
 
         $mail = mail($to, $subject, $body, $header);
         if ($mail) {
@@ -26,10 +28,9 @@ class mail{
         } else {
             $arrReturn['status'] = FALSE;
         }
-        return $arrReturn;
- }
+    }
 
-    public function getCSS(){
+    public function getCSS() {
         $strCSS = "    html {font-family: sans-serif;font-size: 62.5%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}body {margin: 0;font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;font-size: 14px;
             line-height: 1.428571429;color: #333333;background-color: #ffffff;padding-top: 20px;padding-bottom: 20px;
@@ -56,17 +57,18 @@ class mail{
         ";
         return $strCSS;
     }
-        public function getEmailHeader(){
-        $logoURL ='http://uniquepaf.com/img/logo.png';
-        $headURL = 'http://uniquepaf.com';
-        $header = " Unique Properties And Finance ";
+
+    public function getEmailHeader() {
+        $logoURL = 'http://kiwings.com/images/kwings.png';
+        $headURL = 'http://kiwings.com';
+        $header = " Kiwings ";
         $emailCss = $this->getCSS();
         $headHtml = "<!DOCTYPE html>
                 <html lang='en'>
                 <head>
-                        <title>".$header."</title>
+                        <title>" . $header . "</title>
                 </head>
-                <style>".$emailCss."</style>
+                <style>" . $emailCss . "</style>
                     <body>
                         <div class='container header' style='max-width: 98%;   line-height: 2.1428571435;
                         color: inherit;
@@ -78,34 +80,32 @@ class mail{
                         padding: 6px 20px;
                         border-top-left-radius: 8px;
                         border-top-right-radius: 8px;'>
-                            <div class='header' >
-                                <a href= '".$headURL."'><img width='30%' border='0' title='".$header."g' alt='".$header."' src='".$logoURL."'></a>
+                            <div style= 'background-color : #afaaff' class='header' >
+                                <a href= '" . $headURL . "'><img width='30%' border='0' title='" . $header . "g' alt='" . $header . "' src='" . $logoURL . "'></a>
                             </div>";
         return $headHtml;
     }
-    public function getEmailFooter(){
-          $comURL = 'http://uniquepaf.com/';
-          $companyName = 'Unique Properties And Finance ';
-          $companyUrl = 'http://uniquepaf.com/';
-          $comName = 'Unique Properties And Finance';
-          $email = 'sadil8003@gmail.com';
-        $footer =       "<div style= 'background-color : #FFE4AA' class='header nullTopCorner' >
+
+    public function getEmailFooter() {
+        $comURL = 'http://kiwings.com/';
+        $companyName = 'Kiwings ';
+        $companyUrl = 'http://kiwings.com/';
+        $comName = 'Kiwings';
+        $email = 'asauravsuman@gmail.com';
+        $footer = "<div style= 'background-color : #FFE4AA' class='header nullTopCorner' >
                         </div>
                         <div class='footer' >
+                         <p  class= 'setPOne' style= 'font-size : 13.5px;color: #999;font-style: oblique;font-family: serif;'>
+                                    You are receiving this email because your email address was used to register at <a href= '" . $comURL . "' class= 'comName'>" . $comName . "</a>.If you have received this email in error please disregard or contact <span class= 'comName'>" . $email . "</span>.
+                                                </p>
                             <p class= 'setPFooter' style= 'font-size : 13.5px;color: #999;font-style: oblique;font-family: serif;'>
-                               
+                                Keep <span>contact@kiwings.com</span> in your contacts. <a href= '" . $companyUrl . "' class= 'comName'>" . $companyName . "</a>
                             </p>
                         </div>
                         </div>
                     </body>
                 </html>";
         return $footer;
-        
     }
 
 }
-
-
-       
-		
-		

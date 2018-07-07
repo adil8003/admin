@@ -8,15 +8,21 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property integer $id
+ * @property string $fullname
  * @property string $username
  * @property string $email
  * @property string $password
- * @property integer $role_id
+ * @property string $phone
+ * @property string $image
  * @property integer $status_id
+ * @property integer $role_id
  * @property string $reg_date
+ * @property integer $isverify
+ * @property integer $mobverify
  *
  * @property Status $status
  * @property Roles $role
+ * @property Userroles[] $userroles
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -34,11 +40,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'email', 'password', 'role_id', 'status_id'], 'required'],
-            [['role_id', 'status_id'], 'integer'],
+            [['status_id', 'role_id', 'isverify', 'mobverify'], 'integer'],
             [['reg_date'], 'safe'],
-            [['username', 'email', 'password'], 'string', 'max' => 700],
-            [['username', 'email'], 'unique', 'targetAttribute' => ['username', 'email'], 'message' => 'The combination of Username and Email has already been taken.']
+            [['fullname'], 'string', 'max' => 500],
+            [['username', 'email', 'password', 'image'], 'string', 'max' => 700],
+            [['phone'], 'string', 'max' => 50]
         ];
     }
 
@@ -49,12 +55,17 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'fullname' => 'Fullname',
             'username' => 'Username',
             'email' => 'Email',
             'password' => 'Password',
-            'role_id' => 'Role ID',
+            'phone' => 'Phone',
+            'image' => 'Image',
             'status_id' => 'Status ID',
+            'role_id' => 'Role ID',
             'reg_date' => 'Reg Date',
+            'isverify' => 'Isverify',
+            'mobverify' => 'Mobverify',
         ];
     }
 
@@ -72,5 +83,13 @@ class User extends \yii\db\ActiveRecord
     public function getRole()
     {
         return $this->hasOne(Roles::className(), ['id' => 'role_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserroles()
+    {
+        return $this->hasMany(Userroles::className(), ['user_id' => 'id']);
     }
 }

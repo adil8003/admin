@@ -6,7 +6,7 @@
         if (substr($baseDir, -strlen($thisClass)) === $thisClass) {
             $baseDir = substr($baseDir, 0, -strlen($thisClass));
         }
-echo  $className;
+        $className ;
         $className = ltrim($className, '\\');
         $fileName  = $baseDir;
         $namespace = '';

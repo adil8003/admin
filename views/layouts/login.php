@@ -22,8 +22,8 @@ AppAsset::register($this);
 	    <!-- The fav icon -->
     <link rel="shortcut icon" href="img/favicon.ico">
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap-4.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendor/assets/css/bootstrap.min.css" rel="stylesheet">
+	<link href="vendor/assets/css/fontawesome-min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="vendor/office/css/login.css" rel="stylesheet">

@@ -45,7 +45,7 @@
             position:'bottom-right'
         },
         glossary:{
-            title:'Unique Properties And Finance',
+            title:'Kiwings',
             ok: 'OK',
             cancel: 'Cancel',
             acccpt: 'Accept',

@@ -1,357 +1,149 @@
 <?php
 $this->title = Yii::t('app', 'Dashboard');
-
-//function getExpectedPriceinString($digit) {
-//    $strReturn = $digit;
-//    $lengthNum = strlen($digit);
-//    if ($lengthNum != 0 && $lengthNum != NULL) {
-//        switch ($lengthNum) {
-//            case 3:
-//                $val = $digit / 100;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Thundred";
-//                break;
-//            case 4:
-//                $val = $digit / 1000;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Thousand";
-//                break;
-//            case 5:
-//                $val = $digit / 1000;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Thousand";
-//                break;
-//            case 6:
-//                $val = $digit / 100000;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Lakh";
-//                break;
-//            case 7:
-//                $val = $digit / 100000;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Lakh";
-//                break;
-//            case 8:
-//                $val = $digit / 10000000;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Crore";
-//                break;
-//            case 9:
-//                $val = $digit / 10000000;
-//                $val = round($val, 2);
-//                $strReturn = $val . " Crore";
-//                break;
-//        }
-//    }
-//    return $strReturn;
-//}
-//function userName($data){
-//    $strReturn = $data;
-//     if ($data != 0 && $data != NULL) {
-//        switch ($data) {
-//            case $data->builderid == 1:
-//                $val = 'Owner';
-//                $strReturn = $val;
-//                break;
-//            case $data->ownerid == 1:
-//                $val = 'bui';
-//                  $strReturn = $val;
-//                break;
-//            case $data->agentid == 1:
-//                $val = 'agent';
-//                  $strReturn = $val;
-//                break;
-//
-//        }
-//    }
-//    return $strReturn;
-//    
-//}
 ?>
-<div class="container">
-    <div class="row">
-        <!--<h3> Today's Followups(<?= $date ?>)</h3>-->
-        <a target="_BLANK"href="index.php?r=cron/dailyfollowup/"><button type="button" class="btn btn-success">GET TODAY'S FOLLOWUP IN MY MAIL</button></a>
-        <a href="#"><button type="button" onclick="addProperty();" class="btn btn-success">ADD PROPERTYS</button></a>
-<?php // if (count($objFollowup)) { ?>
-            <table id="tblfollowup" class="table table-striped table-bordered DataTable" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>FollowUp Id</th>
-                        <th>Customer Name</th>
-                        <th>Customer Phone</th>
-                        <th>Property Type</th>
-                        <th>First Discussion By</th>
-                        <th>Fisrt Remark</th>
-                        <th>Followup Date</th>
-                        <th>Status</th>
-                        <!-- <th>Follow Up</th> -->
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-//                    foreach ($objFollowup AS $row) {
-//                        echo "<tr>";
-//                        echo "<td><a href='index.php?r=property/followup&id=" . $row['id'] . "' target='_blank'>" . $row['id'] . "</a></td>";
-//                        echo "<td>" . $row['customername'] . "</td>";
-//                        echo "<td>" . $row['customerphone'] . "</td>";
-//                        echo "<td>" . $row['projecttype'] . "</td>";
-//                        echo "<td>" . $row['firstdiscussionby'] . "</td>";
-//                        echo "<td>" . $row['firstremark'] . "</td>";
-//                        echo "<td>" . $row['followupdate'] . "</td>";
-//                        echo "<td>" . $row['status'] . "</td>";
-//                        echo "</tr>";
-//                    }
-                    ?>
-                </tbody>
-            </table>
-            <?php
-//        } else {
-//            echo "<h4>No Followups Assigned for Today !!</h4>";
-//        }
-        ?>
-        <div class="container">
-            <h3>PROPERTIES DETAILS</h3>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-default">
-                    <tr>
-                        <th>Sr. No</th>
-                        <th>Items</th>
-                        <th>Total Number</th>
-                        <th>Added Yesterday( <?php // echo $yesterday ?>)</th>
-                        <th>Added Last Week( <?php // echo $yesterday . " to " . $lastWeek ?>) </th>
-                        <th>Added Last Month( <?php // echo $yesterday . " to " . $lastMonth ?>)</th>        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><b>Builders</b></td>
-                        <td><?php // echo $countBuilder; ?></td>
-                        <td><?php // echo $countYesterdayBuilder; ?></td>
-                        <td><?php // echo $countLastWeekBuilder; ?></td>
-                        <td><?php // echo $countLastMonthBuilder; ?></td>
-                    </tr>
-                    <tr>
-                    <tr>
-                        <td>2</td>
-                        <td><b>Residential Projects</b></td>
-                        <td><?php // echo $countResproject; ?></td>
-                        <td><?php // echo $countYesterdayResproject; ?></td>
-                        <td><?php // echo $countLastWeekResproject; ?></td>
-                        <td><?php // echo $countLastMonthResproject; ?></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><b>Commercial Projects</b></td>
-                        <td><?php // echo $countComproject; ?></td>
-                        <td><?php // echo $countYesterdayCom; ?></td>
-                        <td><?php // echo $countLastWeekCom; ?></td>
-                        <td><?php // echo $countLastMonthCom; ?></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><b>Resale/Rent Properties</b></td>
-                        <td><?php // echo $countResaleproperty; ?></td>
-                        <td><?php // echo $countYesterdayResale; ?></td>
-                        <td><?php // echo $countLastWeekResale; ?></td>
-                        <td><?php // echo $countLastMonthResale; ?></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><b>Total Prperties</b></td>
-                        <td><?php // echo $TotalProperties; ?></td>
-                        <td><?php // echo $TotalPropertiesYesterday; ?></td>
-                        <td><?php // echo $TotalPropertiesLastWeek; ?></td>
-                        <td><?php // echo $TotalPropertiesLastMonth; ?></td>
-                    </tr>
-                </tbody>
-            </table>
 
-            <h3>CUSTOMERS AND FOLLOWUPS DETAILS</h3>
-            <table class="table table-bordered table-striped">
-                <thead class="thead-default">
-                    <tr>
-                        <th>Sr. No</th>
-                        <th>Items</th>
-                        <th>Total Number</th>
-                        <th>Added Yesterday( <?php // echo $yesterday ?>)</th>
-                        <th>Added Last Week( <?php // echo $yesterday . " to " . $lastWeek ?>) </th>
-                        <th>Added Last Month( <?php // echo $yesterday . " to " . $lastMonth ?>)</th>        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><b>Customers</b></td>
-                        <td><?php // echo $countBuilder; ?></td>
-                        <td><?php // echo $countYesterdayResproject; ?></td>
-                        <td><?php // echo $countLastWeekResproject; ?></td>
-                        <td><?php // echo $countLastMonthResproject; ?></td>
-                    </tr>
-                    <tr>
-                    <tr>
-                        <td>2</td>
-                        <td><b>General FeedBacks</b></td>
-                        <td><?php // echo $countResproject; ?></td>
-                        <td><?php // echo $countYesterdayResproject; ?></td>
-                        <td><?php // echo $countLastWeekResproject; ?></td>
-                        <td><?php // echo $countLastMonthResproject; ?></td>
-                    </tr>
-
-                </tbody>
-            </table>
-            <hr>
-            <h2>Live data</h2>
-            <h4><div>resale =rsl; <span>residential= res; </span><span>commercial= com</span></div></h4>
-            <table id="LiveData" class="table table-striped table-bordered DataTable" cellspacing="0" width="100%">
-                <thead class="thead-default">
-                    <tr>
-                        <td>Min price:</td>
-                        <td><input type="text" id="min" name="min"></td>
-                        <td>Max Price:</td>
-                        <td><input type="text" id="max" name="max"></td>
-                    </tr>
-                    <tr>
-                        <th>Propertyid</th>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Expected price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-//                    foreach ($objLiveData AS $row) {
-//                        echo "<tr>";
-//                        echo "<td>" . $row->propertyid . "</td>";
-//                        echo "<td>" . $row->name . "</td>";
-//                        echo "<td>" . $row->location . "</td>";
-//                        echo "<td>" . getExpectedPriceinString($row->expectedprice) . "</td>";
-//                        echo "</tr>";
-//                    }
-                    ?>
-                </tbody>
-            </table>
-             <hr>
-            <h2>User property list</h2>
-            <table id="userproperty" class="table table-striped table-bordered DataTable" cellspacing="0" width="100%">
-                <thead class="thead-default">
-                    <tr>
-                        <td>Min price:</td>
-                        <td><input type="text" id="postmin" name="min"></td>
-                        <td>Max Price:</td>
-                        <td><input type="text" id="postmax" name="max"></td>
-                    </tr>
-                    <tr>
-                        <th>Builder</th>
-                        <th>Agent </th>
-                        <th>Owner </th>
-                        <th>Rent</th>
-                        <th>Sale</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-                        <th>Location</th>
-                        <th>Total area</th>
-                        <th>Expected price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-//                    foreach ($objPostproperty AS $row) {
-////                        $val = $row->builderid == 1;
-//                          $builder = $row->builderid == 1 ? 'Builder' : '';
-//                          $agent= $row->agentid == 1 ? 'Agent' : '';
-//                          $owner = $row->ownerid == 1 ? 'Owner' : '';
-//                          $rent = $row->rentid == 1 ? 'Rent' : '';
-//                          $sale = $row->saleid == 1 ? 'Sale' : '';
-//                        echo "<tr>";
-//                        echo "<td>" . $builder . "</td>";
-//                        echo "<td>" . $agent . "</td>";
-//                        echo "<td>" . $owner . "</td>";
-//                        echo "<td>" . $rent. "</td>";
-//                        echo "<td>" . $sale . "</td>";
-//                        echo "<td>" . $row->email . "</td>";
-//                        echo "<td>" . $row->contact . "</td>";
-//                        echo "<td>" . $row->location . "</td>";
-//                        echo "<td>" . $row->totalarea . "</td>";
-//                        echo "<td>" . getExpectedPriceinString($row->expectedprice) . "</td>";
-//                        echo "</tr>";
-//                    }
-//                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-</div> 
-
-<div class="modal fade modal-ext" id="adddata" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="margin-left: -300px;" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h3><i class="fa fa-database"></i> Data </h3>
-            </div>
-            <div class="modal-body">
-                <p>  Data added successfully . </p>
+<div class="row">
+    <div class="col-md-12">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="min-height:150px">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-warning text-center">
+                                            <i class="ti-world"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Organisations</p>
+                                            30
+                                        </div>
+                                    </div>
+                                </div>
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i>new org xyz
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                       <div class="card" style="min-height:150px">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center">
+                                            <i class="ti-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Employees</p>
+                                            1,345
+                                        </div>
+                                    </div>
+                                </div>
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-calendar"></i> New employee
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="min-height:150px">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-danger text-center">
+                                            <i class="ti-book"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Courses</p>
+                                            25
+                                        </div>
+                                    </div>
+                                </div>
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-timer"></i> new course
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                       <div class="card" style="min-height:150px">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-info text-center">
+                                            <i class="ti-twitter-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Followers</p>
+                                            +45
+                                        </div>
+                                    </div>
+                                </div>
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> Updated now
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Organisations</h4>
+                                <p class="category">Last Performance</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-pie" style="width: 100%; height: 100%;"><g class="ct-series ct-series-c"><path d="M235,5A117.5,117.5,0,0,0,191.364,13.403L235,122.5Z" class="ct-slice-pie" ct:value="6"></path></g><g class="ct-series ct-series-b"><path d="M191.745,13.251A117.5,117.5,0,0,0,154.865,208.434L235,122.5Z" class="ct-slice-pie" ct:value="32"></path></g><g class="ct-series ct-series-a"><path d="M154.566,208.154A117.5,117.5,0,1,0,235,5L235,122.5Z" class="ct-slice-pie" ct:value="62"></path></g><g><text dx="289.6243685459348" dy="144.12731747022482" text-anchor="middle" class="ct-label">62%</text><text dx="177.29062401968952" dy="111.49134776808874" text-anchor="middle" class="ct-label">32%</text><text dx="223.99134776808862" dy="64.79062401968955" text-anchor="middle" class="ct-label">6%</text></g></svg></div>
+
+                                    <div class="chart-legend">
+<!--                                        <i class="fa fa-circle text-info"></i> Performance high
+                                        <i class="fa fa-circle text-danger"></i> Performance high
+                                        <i class="fa fa-circle text-warning"></i> Performance high-->
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <!--<i class="ti-timer"></i> Campaign sent 2 days ago-->
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card ">
+                            <div class="header">
+                                <h4 class="title">Employees</h4>
+                                <p class="category">All Organisations employee</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartActivity" class="ct-chart"><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="245px" class="ct-chart-line" style="width: 100%; height: 245px;"><g class="ct-grids"><line y1="210" y2="210" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="182.14285714285714" y2="182.14285714285714" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="154.28571428571428" y2="154.28571428571428" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="126.42857142857143" y2="126.42857142857143" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="98.57142857142857" y2="98.57142857142857" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="70.71428571428572" y2="70.71428571428572" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="42.85714285714286" y2="42.85714285714286" x1="50" x2="455" class="ct-grid ct-vertical"></line><line y1="15" y2="15" x1="50" x2="455" class="ct-grid ct-vertical"></line></g><g><g class="ct-series ct-series-a"><path d="M50,114.729C55.625,114.682,72.5,113.429,83.75,114.45C95,115.471,106.25,127.218,117.5,120.857C128.75,114.496,140,82.461,151.25,76.286C162.5,70.111,173.75,87.196,185,83.807C196.25,80.418,207.5,40.768,218.75,55.95C230,71.132,241.25,160.089,252.5,174.9C263.75,189.711,275,156.05,286.25,144.814C297.5,133.579,308.75,115.657,320,107.486C331.25,99.314,342.5,104.514,353.75,95.786C365,87.057,376.25,68.346,387.5,55.114C398.75,41.882,415.625,22.846,421.25,16.393" class="ct-line"></path><line x1="50" y1="114.72857142857143" x2="50.01" y2="114.72857142857143" class="ct-point" ct:value="542"></line><line x1="83.75" y1="114.45" x2="83.76" y2="114.45" class="ct-point" ct:value="543"></line><line x1="117.5" y1="120.85714285714286" x2="117.51" y2="120.85714285714286" class="ct-point" ct:value="520"></line><line x1="151.25" y1="76.28571428571428" x2="151.26" y2="76.28571428571428" class="ct-point" ct:value="680"></line><line x1="185" y1="83.80714285714286" x2="185.01" y2="83.80714285714286" class="ct-point" ct:value="653"></line><line x1="218.75" y1="55.94999999999999" x2="218.76" y2="55.94999999999999" class="ct-point" ct:value="753"></line><line x1="252.5" y1="174.9" x2="252.51" y2="174.9" class="ct-point" ct:value="326"></line><line x1="286.25" y1="144.81428571428572" x2="286.26" y2="144.81428571428572" class="ct-point" ct:value="434"></line><line x1="320" y1="107.48571428571428" x2="320.01" y2="107.48571428571428" class="ct-point" ct:value="568"></line><line x1="353.75" y1="95.78571428571429" x2="353.76" y2="95.78571428571429" class="ct-point" ct:value="610"></line><line x1="387.5" y1="55.11428571428573" x2="387.51" y2="55.11428571428573" class="ct-point" ct:value="756"></line><line x1="421.25" y1="16.39285714285714" x2="421.26" y2="16.39285714285714" class="ct-point" ct:value="895"></line></g><g class="ct-series ct-series-b"><path d="M50,201.643C55.625,198.718,72.5,191.057,83.75,184.093C95,177.129,106.25,168.539,117.5,159.857C128.75,151.175,140,137.711,151.25,132C162.5,126.289,173.75,128.982,185,125.593C196.25,122.204,207.5,116.168,218.75,111.664C230,107.161,241.25,103.725,252.5,98.571C263.75,93.418,275,85.293,286.25,80.743C297.5,76.193,308.75,73.407,320,71.271C331.25,69.136,342.5,69.693,353.75,67.929C365,66.164,376.25,64.632,387.5,60.686C398.75,56.739,415.625,46.989,421.25,44.25" class="ct-line"></path><line x1="50" y1="201.64285714285714" x2="50.01" y2="201.64285714285714" class="ct-point" ct:value="230"></line><line x1="83.75" y1="184.09285714285716" x2="83.76" y2="184.09285714285716" class="ct-point" ct:value="293"></line><line x1="117.5" y1="159.85714285714286" x2="117.51" y2="159.85714285714286" class="ct-point" ct:value="380"></line><line x1="151.25" y1="132" x2="151.26" y2="132" class="ct-point" ct:value="480"></line><line x1="185" y1="125.59285714285714" x2="185.01" y2="125.59285714285714" class="ct-point" ct:value="503"></line><line x1="218.75" y1="111.66428571428571" x2="218.76" y2="111.66428571428571" class="ct-point" ct:value="553"></line><line x1="252.5" y1="98.57142857142857" x2="252.51" y2="98.57142857142857" class="ct-point" ct:value="600"></line><line x1="286.25" y1="80.74285714285713" x2="286.26" y2="80.74285714285713" class="ct-point" ct:value="664"></line><line x1="320" y1="71.27142857142857" x2="320.01" y2="71.27142857142857" class="ct-point" ct:value="698"></line><line x1="353.75" y1="67.92857142857142" x2="353.76" y2="67.92857142857142" class="ct-point" ct:value="710"></line><line x1="387.5" y1="60.68571428571428" x2="387.51" y2="60.68571428571428" class="ct-point" ct:value="736"></line><line x1="421.25" y1="44.25" x2="421.26" y2="44.25" class="ct-point" ct:value="795"></line></g></g><g class="ct-labels"><foreignObject style="overflow: visible;" x="50" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Jan</span></foreignObject><foreignObject style="overflow: visible;" x="83.75" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Feb</span></foreignObject><foreignObject style="overflow: visible;" x="117.5" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Mar</span></foreignObject><foreignObject style="overflow: visible;" x="151.25" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Apr</span></foreignObject><foreignObject style="overflow: visible;" x="185" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Mai</span></foreignObject><foreignObject style="overflow: visible;" x="218.75" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Jun</span></foreignObject><foreignObject style="overflow: visible;" x="252.5" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Jul</span></foreignObject><foreignObject style="overflow: visible;" x="286.25" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Aug</span></foreignObject><foreignObject style="overflow: visible;" x="320" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Sep</span></foreignObject><foreignObject style="overflow: visible;" x="353.75" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Oct</span></foreignObject><foreignObject style="overflow: visible;" x="387.5" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Nov</span></foreignObject><foreignObject style="overflow: visible;" x="421.25" y="215" width="33.75" height="20"><span class="ct-label ct-horizontal ct-end" style="width: 34px; height: 20px" xmlns="http://www.w3.org/1999/xhtml">Dec</span></foreignObject><foreignObject style="overflow: visible;" y="182.14285714285714" x="10" height="27.857142857142858" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">200</span></foreignObject><foreignObject style="overflow: visible;" y="154.28571428571428" x="10" height="27.857142857142858" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">300</span></foreignObject><foreignObject style="overflow: visible;" y="126.42857142857142" x="10" height="27.857142857142854" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">400</span></foreignObject><foreignObject style="overflow: visible;" y="98.57142857142857" x="10" height="27.85714285714286" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">500</span></foreignObject><foreignObject style="overflow: visible;" y="70.71428571428572" x="10" height="27.857142857142847" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">600</span></foreignObject><foreignObject style="overflow: visible;" y="42.85714285714286" x="10" height="27.85714285714286" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">700</span></foreignObject><foreignObject style="overflow: visible;" y="15" x="10" height="27.85714285714286" width="30"><span class="ct-label ct-vertical ct-start" style="height: 28px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">800</span></foreignObject><foreignObject style="overflow: visible;" y="-15" x="10" height="30" width="30"><span class="ct-label ct-vertical ct-start" style="height: 30px; width: 30px" xmlns="http://www.w3.org/1999/xhtml">900</span></foreignObject></g></svg></div>
+
+                                    <div class="chart-legend">
+                                        <i class="fa fa-circle text-info"></i> Active employees
+                                        <i class="fa fa-circle text-warning"></i>Inactive employees
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="ti-check"></i> Data information certified
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        var oTable1 = $('#LiveData').dataTable().yadcf([
-            {column_number: 2,
-                filter_type: "multi_select",
-                select_type: 'select2',
-                filter_default_label: 'Select Location',
-                select_type_options: {
-                    width: '150px',
-                    minimumResultsForSearch: -1 // remove search box
-                }
-            },
-            {column_number: 0,
-                filter_type: "text",
-                select_type_options: {
-                    width: '150px',
-                    minimumResultsForSearch: -1 // remove search box
-                }
-            },
-        ]);
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var min = parseInt($('#min').val(), 10);
-            var max = parseInt($('#max').val(), 10);
-            var expectedprice = parseInt(data[3]) || 0; // use data for the expectedprice column
-            if ((isNaN(min) && isNaN(max)) || (isNaN(min) && expectedprice <= max) || (min <= expectedprice && isNaN(max)) || (min <= expectedprice && expectedprice <= max))
-            {
-                return true;
-            }
-            return false;
-        });
-        var table1 = $('#LiveData').DataTable();
-        $('#min, #max').keyup(function () {
-            table1.draw();
-        });
-    }); // end document.ready
-    function  addProperty() {
-        $.ajax({
-            url: 'index.php?r=cron/refreshsearchresproject',
-            async: false,
-            success: function (data) {
-                data = JSON.parse(data);
-                console.log(data);
-                $('#adddata').modal('show');
-                setTimeout(function () {
-                    $('#adddata').modal('hide')
-                }, 2000);
-
-
-            }
-        });
-    }
-</script>
-
-

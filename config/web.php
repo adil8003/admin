@@ -17,10 +17,10 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-			'returnUrl' => 'index.php?r=site/dashboard',
+            'returnUrl' => 'index.php?r=site/dashboard',
         ],
         'errorHandler' => [
-            'errorAction' => 'index.php?r=site/error',
+//            'errorAction' => 'site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -39,6 +39,16 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+        'urlManager' => [
+            'class' => 'yii\web\UrlManager',
+//             'enablePrettyUrl' => true,
+//            'showScriptName' => false,
+            'rules' => [
+                // ... set urls rules
+                [
+                ],
+            ]
+        ]
     ],
     'params' => $params,
 ];
@@ -50,9 +60,9 @@ if (YII_ENV_DEV) {
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-                                'class' => 'yii\gii\Module',
-                                'allowedIPs' => ['*']
-                        ];
+        'class' => 'yii\gii\Module',
+        'allowedIPs' => ['*']
+    ];
 }
 
 return $config;

@@ -1,7 +1,13 @@
-<div class="container">
-    <ol class="breadcrumb">
-        <li><a href="index.php?r=dashboard">Home</a></li>
-        <li class="active">Page Not found</li>
-    </ol>
-    <h2>Oops. This page does not exist. </h2>
-</div> <!-- /container -->
+<?php
+$this->title = Yii::t('app', 'Error');
+?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Error</h4><br>
+                <p>Oops. This page does not exist.</p>
+            </div>
+        </div>
+    </div>
+</div>

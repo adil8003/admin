@@ -14,8 +14,6 @@ use Yii;
  */
 class Status extends \yii\db\ActiveRecord
 {
-    const INACTIVE = 1;
-    const ACTIVE = 2;
     /**
      * @inheritdoc
      */
@@ -31,7 +29,7 @@ class Status extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 100]
+            [['name'], 'string', 'max' => 700]
         ];
     }
 

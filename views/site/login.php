@@ -1,26 +1,49 @@
 <?php
-$this->title = 'Login';
+$this->title = Yii::t('app', 'Login');
 ?>
-<div class="container">
-	<form id="form-login" method="POST" action="index.php?r=site/verification">
-	<div class="signin row">
-		<h3 class="card-title text-center">Unique Properties And Finance</h3>
-		<div class="col-sm-12">
-			<div class="card card-block">
-				<p class="card-text text-center"><i class="fa fa-user fa-fw fa-5x"></i></p>
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-					<input name="username" id="username" type="text" pattern=".{2,}" minlength="2" class="form-control" placeholder="Username" required>
-				</div>
-				<p id="username-error" class="card-text"></p>
-				<div class="input-group">
-					<span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-					<input name="password" id="password" type="password" pattern=".{2,}" minlength="2" class="form-control" placeholder="Password" required >
-				</div>
-				<p id="password-error" class="card-text"></p>
-				<button id="btn-save" type="submit" class="btn btn-primary btn-sm btn-block">Sign in</button>
-			</div>
-		</div>
-	</div>
-	</form>
-</div> <!-- /container -->
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="login-card card">
+                        <div class="header text-center">
+                            <h4 class="title"><img src="images/kwings.png" /></h4>
+                        </div>
+                        <div class="content">
+                            <form id="form-login" method="POST" action="index.php?r=site/verification">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" >
+                                            <label style="color: #fff !important">Username:<span class="asterik">*</span>
+                                                <span  class="errmsg" id="err-fullname"></span> </label>
+                                            <input  type="email" class="form-control border-input" placeholder="Email" name="email"  id="email" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" >
+                                            <label style="color: #fff !important">Password:<span class="asterik">*</span>
+                                                <span class="errmsg" style="color: #fff !important" id="err-password"></span> </label>
+                                            <input  type="password" class="form-control border-input" onblur="checkPassword();" placeholder="Password" id="password" name="password"  required>  
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button id="loginButton"  type="submit" class="btn btn-info btn-fill btn-wd">Login</button>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="index.php?r=site/forgotpassword" >Forgot Password</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/site/login.js"></script>
