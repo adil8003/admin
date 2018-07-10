@@ -42,7 +42,8 @@ class AppAsset extends AssetBundle {
         "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css",
         "https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css",
 //        "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/css/britecharts.css",
-        "https://cdn.jsdelivr.net/npm/britecharts/dist/css/britecharts.min.css"
+        "https://cdn.jsdelivr.net/npm/britecharts/dist/css/britecharts.min.css",
+        "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
        
 
 
@@ -70,7 +71,9 @@ class AppAsset extends AssetBundle {
         "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js",
          "https://cdn.jsdelivr.net/npm/britecharts@2/dist/bundled/britecharts.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/bundled/britecharts.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"
+        "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js",
+        "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
+        "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
     ];
     public $depends = [
             //'yii\web\YiiAsset',

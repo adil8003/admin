@@ -9,7 +9,8 @@ use yii\filters\VerbFilter;
 use app\models\User;
 use app\models\Userroles;
 use app\models\Status;
-use app\models\Organisation;
+use app\models\Buytype;
+use app\models\Propertytypee;
 
 class CrmController extends Controller {
 
@@ -30,12 +31,28 @@ class CrmController extends Controller {
     }
 
     public function actionAdd() {
+        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objMeetingtype = \app\models\meetingtype :: find()->all();
+        $objPropertytype = \app\models\Propertytype::find()->all();
         return $this->render('add', [
+                    'objBuyTpe' => $objBuyTpe,
+                    'objMeetingtype' => $objMeetingtype,
+                    'objPropertytype' => $objPropertytype
         ]);
     }
 
     public function actionEdit() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objMeetingtype = \app\models\meetingtype :: find()->all();
+        $objPropertytype = \app\models\Propertytype::find()->all();
+        $objCrm = \app\models\Crm::findOne($id);
         return $this->render('edit', [
+                    'objBuyTpe' => $objBuyTpe,
+                    'objMeetingtype' => $objMeetingtype,
+                    'objPropertytype' => $objPropertytype,
+                    'objCrm' => $objCrm
         ]);
     }
 
@@ -43,35 +60,116 @@ class CrmController extends Controller {
         return $this->render('error', [
         ]);
     }
+    public function actionFollowup() {
+        return $this->render('followup', [
+        ]);
+    }
 
-    public function actionGetallcoursestats() {
+    public function actionSavecustomer() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            try {
+                $objCrm = new \app\models\Crm;
+                $objCrm->cname = $request->post('cname');
+                $objCrm->cphone = $request->post('cphone');
+                $objCrm->ptypeid = $request->post('ptypeid');
+                $objCrm->buytypeid = $request->post('buytypeid');
+                $objCrm->price = $request->post('price');
+                $objCrm->location = $request->post('location');
+                $objCrm->meetingstatus = $request->post('meetingstatus');
+                $objCrm->meetingtypeid = $request->post('meetingtypeid');
+                $objCrm->detailsofproperty = $request->post('detailsofproperty');
+                $objCrm->postremark = $request->post('postremark');
+                $objCrm->remark = $request->post('remark');
+                $objCrm->finalstatus = $request->post('finalstatus');
+                $objCrm->followupdate = $request->post('followupdate');
+                $objCrm->reffrom = $request->post('reffrom');
+
+                if ($objCrm->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objCrm->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                } else {
+                    $arrReturn['crmerr'][] = $objCrm->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionEidtcustomer() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->post('crmid');
+        if ($request->isPost) {
+            try {
+                if ($id != ' ') {
+                    $objCrm =  \app\models\Crm:: find(['id' => $id])->one();
+                    $objCrm->cname = $request->post('cname');
+                    $objCrm->cphone = $request->post('cphone');
+                    $objCrm->ptypeid = $request->post('ptypeid');
+                    $objCrm->buytypeid = $request->post('buytypeid');
+                    $objCrm->price = $request->post('price');
+                    $objCrm->location = $request->post('location');
+                    $objCrm->meetingstatus = $request->post('meetingstatus');
+                    $objCrm->meetingtypeid = $request->post('meetingtypeid');
+                    $objCrm->detailsofproperty = $request->post('detailsofproperty');
+                    $objCrm->postremark = $request->post('postremark');
+                    $objCrm->remark = $request->post('remark');
+                    $objCrm->finalstatus = $request->post('finalstatus');
+                    $objCrm->followupdate = $request->post('followupdate');
+                    $objCrm->reffrom = $request->post('reffrom');
+
+                    if ($objCrm->save()) {
+                        $arrReturn['status'] = TRUE;
+                        $arrReturn['id'] = $objCrm->id;
+                        $arrReturn['msg'] = 'save successfully.';
+                    }
+                } else {
+                    $arrReturn['crmerr'][] = $objCrm->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionGetallcustomers() {
         $arrOrganisation['status'] = FALSE;
         $arrJSON = array();
         $arrOrganisation = array();
         $this->layout = "";
-        $connection = Yii::$app->db;
         $request = Yii::$app->request;
-        $objOrgbyEmployee = $connection->createCommand('Select  o.orgname,o.id as org_id,u.id as user_id from `organisation` o '
-                        . 'LEFT join `userroles` ur on ur.org_id = o.id '
-                        . 'LEFT join `user` u on u.id = ur.user_id where u.id !=' . Yii::$app->session['userid'] . ' AND ur.org_id = o.id' . ' ')->queryAll();
-        echo "<pre>";
-        print_r($objOrgbyEmployee);
-        print_r(count($objrow['org_id']));
-        echo "</pre>";
-        die;
-        foreach ($objOrgbyEmployee AS $objrow) {
-
+        $Data = \app\models\Crm::find()->all();
+        foreach ($Data AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
-            $arrTemp['user_id'] = $objrow['user_id'];
-            $arrTemp['org_id'] = $objrow['org_id'];
-            $arrTemp['orgname'] = $objrow['orgname'];
-//            $arrTemp['email'] = $objrow['email'];
-//            $arrTemp['phone'] = $objrow['phone'];
-//            $arrTemp['status_id'] = $objrow['status_id'];
-//            $objRole = User::findOne($objrow['user_id']);
-//            $arrTemp['roles'] = $objRole->role->name;
-//            $arrTemp['reg_date'] = date('M-d,Y', strtotime($objrow['reg_date']));
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['cname'] = $objrow['cname'];
+            $arrTemp['cphone'] = $objrow['cphone'];
+            $arrTemp['price'] = $objrow['price'];
+            $arrTemp['location'] = $objrow['location'];
+            $arrTemp['ptypeid'] = $objrow['ptypeid'];
+//             $arrTemp['ptypeid'] = $objrow['propertytype']->name;
+//            $objRole = \app\models\Propertytype::findOne($objrow['id']);
+//            $arrTemp['propertytype'] = $objRole->propertytype->name;
+            $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
             $arrOrganisation[] = $arrTemp;
         }
         $arrJSON['data'] = $arrOrganisation;

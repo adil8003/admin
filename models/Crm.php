@@ -14,7 +14,7 @@ use Yii;
  * @property integer $buytypeid
  * @property double $price
  * @property string $location
- * @property integer $meetingstatus
+ * @property string $meetingstatus
  * @property integer $meetingtypeid
  * @property string $detailsofproperty
  * @property string $postremark
@@ -22,7 +22,7 @@ use Yii;
  * @property string $finalstatus
  * @property string $followupdate
  * @property string $addeddate
- * @property string $Reffrom
+ * @property string $reffrom
  */
 class Crm extends \yii\db\ActiveRecord
 {
@@ -40,13 +40,13 @@ class Crm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'cphone', 'ptypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'remark', 'finalstatus', 'followupdate', 'Reffrom'], 'required'],
-            [['ptypeid', 'buytypeid', 'meetingstatus', 'meetingtypeid'], 'integer'],
+            [['cname', 'cphone', 'ptypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'remark', 'finalstatus', 'followupdate', 'reffrom'], 'required'],
+            [['ptypeid', 'buytypeid', 'meetingtypeid'], 'integer'],
             [['price'], 'number'],
             [['followupdate', 'addeddate'], 'safe'],
-            [['cname', 'location'], 'string', 'max' => 500],
+            [['cname', 'location', 'meetingstatus'], 'string', 'max' => 500],
             [['cphone', 'detailsofproperty', 'postremark', 'remark', 'finalstatus'], 'string', 'max' => 700],
-            [['Reffrom'], 'string', 'max' => 200]
+            [['reffrom'], 'string', 'max' => 200]
         ];
     }
 
@@ -71,7 +71,7 @@ class Crm extends \yii\db\ActiveRecord
             'finalstatus' => 'Finalstatus',
             'followupdate' => 'Followupdate',
             'addeddate' => 'Addeddate',
-            'Reffrom' => 'Reffrom',
+            'reffrom' => 'Reffrom',
         ];
     }
 }
