@@ -156,7 +156,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" onclick="eidtCustomer();" class="btn btn-info btn-fill btn-wd">Save Organisation</button>
+                    <button type="button" onclick="eidtCustomer();" class="btn btn-info btn-fill btn-wd">Update customer</button>
                 </div>
                 <div class="clearfix"></div><br>
             </form>

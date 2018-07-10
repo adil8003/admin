@@ -65,6 +65,35 @@ class CrmController extends Controller {
         ]);
     }
 
+    public function actionSavefollowup() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            try {
+                $objCrm = new \app\models\Followup();
+                $objCrm->crm_id = $request->post('crm_id');
+                $objCrm->remark = $request->post('remark');
+                $objCrm->followupdate = $request->post('followupdate');
+
+                if ($objCrm->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objCrm->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                } else {
+                    $arrReturn['crmerr'][] = $objCrm->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
     public function actionSavecustomer() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -169,6 +198,25 @@ class CrmController extends Controller {
 //             $arrTemp['ptypeid'] = $objrow['propertytype']->name;
 //            $objRole = \app\models\Propertytype::findOne($objrow['id']);
 //            $arrTemp['propertytype'] = $objRole->propertytype->name;
+            $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
+            $arrOrganisation[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrOrganisation;
+        echo json_encode($arrJSON);
+    }
+    public function actionGetallfollowup() {
+        $arrOrganisation['status'] = FALSE;
+        $arrJSON = array();
+        $arrOrganisation = array();
+        $this->layout = "";
+        $request = Yii::$app->request;
+        $Data = \app\models\Followup::find()->all();
+        foreach ($Data AS $objrow) {
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['remark'] = $objrow['remark'];
+            $arrTemp['followupdate'] = date('M-d,Y', strtotime($objrow['followupdate']));
             $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
             $arrOrganisation[] = $arrTemp;
         }
