@@ -288,9 +288,9 @@ class CrmController extends Controller {
     }
 
     public function actionGetalltodaycallcustomerlist() {
-        $arrOrganisation['status'] = FALSE;
+        $arrTodaycustomerList['status'] = FALSE;
         $arrJSON = array();
-        $arrOrganisation = array();
+        $arrTodaycustomerList = array();
         $this->layout = "";
         $connection = Yii::$app->db;
         $TodayM = date("m");
@@ -313,10 +313,10 @@ class CrmController extends Controller {
                 $arrTemp['location'] = $objrow['location'];
                 $arrTemp['ptype'] = $objrow['ptype'];
                 $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
-                $arrOrganisation[] = $arrTemp;
+                $arrTodaycustomerList[] = $arrTemp;
             }
         }
-        $arrJSON['data'] = $arrOrganisation;
+        $arrJSON['data'] = $arrTodaycustomerList;
         echo json_encode($arrJSON);
     }
 
@@ -378,7 +378,7 @@ class CrmController extends Controller {
         $id = $request->get('id');
         $objData = $connection->createCommand('Select f.id,f.crm_id,f.remark,f.followupdate,f.addeddate
                         from `Followup` f 
-                        where f.crm_id =' . $id . ' ORDER BY `addeddate` DESC ')->queryAll();
+                        where f.crm_id =' . $id . ' ORDER BY `followupdate` ASC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
