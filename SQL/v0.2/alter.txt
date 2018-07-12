@@ -1,3 +1,1 @@
-
-
-ALTER TABLE `crm` ADD FOREIGN KEY (`ptypeid`) REFERENCES propertytype(`id`)
+ALTER TABLE `crm` ADD FOREIGN KEY (`propertytypeid`) REFERENCES propertytype(`id`)

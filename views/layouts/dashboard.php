@@ -31,7 +31,7 @@ AppAsset::register($this);
                 <div class="sidebar-wrapper">
                     <div class="logo">
                         <a href="#" class="simple-text">
-                            KIWINGS
+                            Unique property solutions
                         </a>
                     </div>
                     <ul  class="nav" id="sidemenu">

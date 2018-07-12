@@ -1,13 +1,91 @@
-
 $(document).ready(function () {
     allFollowup();
+    getFollowbycustomerdetaisbyid();
     var crmid = $('#crm_id').val();
+    var follow_id = $('#follow_id').val();
     $('#followupdate').datetimepicker({
         format: 'Y-m-d H:i',
         step: 15
     });
-
+    $('#updateForm').hide();
 }); // end document.ready
+
+function Updateform(id, remark, followupdate) {
+    $('#ufollowupdate').datetimepicker({
+        format: 'Y-m-d H:i',
+        step: 15
+    });
+    $('#addForm').hide();
+    $('#customerDetails').show();
+    $('#updateForm').show();
+    $('#uremark').val(remark);
+    $('#ufollowupdate').val(followupdate);
+    $('#follow_id').val(id);
+}
+function  updateFollowup() {
+    var follow_id = $('#follow_id').val();
+    var crmid = $('#crm_id').val();
+    if (validateFollowupupdate()) {
+        alertify.confirm("Are you sure you want update this follow up?",
+                function () {
+                    var obj = new Object();
+                    obj.crm_id = crmid;
+                    obj.id = follow_id;
+                    obj.remark = $('#uremark').val();
+                    obj.followupdate = $('#ufollowupdate').val();
+
+                    $.ajax({
+                        url: 'index.php?r=crm/updatefollowup',
+                        async: false,
+                        data: obj,
+                        type: 'POST',
+                        success: function (data) {
+                            showMessage('success', 'Update successfully.');
+                            allFollowup();
+                            $('#addForm').show();
+                            $('#updateForm').hide();
+                        },
+                        error: function (data) {
+                            showMessage('danger', 'Please try again.');
+                        }
+                    });
+                });
+    }
+}
+function getFollowbycustomerdetaisbyid() {
+    var crmid = $('#crm_id').val();
+    var obj = new Object();
+    obj.id = crmid;
+    $.ajax({
+        url: "index.php?r=crm/getcustomerdetailsbyid",
+        async: false,
+        data: obj,
+        type: 'GET',
+        success: function (data) {
+            var data = JSON.parse(data);
+            console.log(data);
+            if (data.status == true) {
+                createHTML(data);
+
+            }
+        }
+    });
+}
+function createHTML(data) {
+    var id = $('#org_id').val();
+    var html = '';
+    html += '<div class="card " style="min-height: 240px;">';
+    html += '<div class="alert alert-info text-info">';
+    html += '<strong> Customer Name:   <a href="index.php?r=crm/edit&amp;id=' + data.data.id + '">    ' + data.data.cname + ' </a></strong>';
+    html += '</div>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Phone no.:- ' + data.data.cphone + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px"> Property type:- ' + data.data.ptype + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Buy/Rent/REsale:-  ' + data.data.btype + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px"> Detals of property:-  ' + data.data.detailsofproperty + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Status:-  ' + data.data.finalstatus + '</p>';
+    html += '</div>';
+    $('#customerDetails').html(html);
+}
 
 function allFollowup(id) {
     var crmid = $('#crm_id').val();
@@ -29,19 +107,18 @@ function allFollowup(id) {
                     var htm = '';
                     htm = getCourseHorizontalCard(data);
                     $('#followuplist').html(htm);
+
                 }
             }
         }
     });
 }
 
-
-//course layout-
+//follow up layout-
 function searchPage(page) {
     $('#listpage').val(page);
-    allCourse();
+    allFollowup();
 }
-
 function getCourseHorizontalCard(dataAll) {
     dataAll = window.listCourse;
     var intRecords = dataAll.data.length;
@@ -55,12 +132,60 @@ function getCourseHorizontalCard(dataAll) {
         var startRecord = (intCurrPage - 1) * intRecordsPerpage;
         var endRecord = intCurrPage * intRecordsPerpage;
         if (startRecord <= k && k < endRecord) {
-            html += '<div class="card shadow">';
-            html += '<div class="alert alert-info">';
-            html += '<strong>' + v.followupdate + '</strong> ';
-            html += '</div>';
-            html += '<p class="card-text text-info">' + v.remark + '</p>';
-            html += '</div>';
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = mm + '-' + dd + '-' + yyyy;
+            if (v.date < today) {
+
+                var Expired = ' Follow up expired';
+
+                html += '<div class="card shadow" >';
+                html += '<div class="alert alert-info">';
+                html += '<strong style="color:red">' + v.followupdate + '</strong><span><a class="iconPencil hide" href="#" onclick="Updateform(`' + v.id + '`,`' + v.remark + '`,`' + v.followupdate + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
+                html += '</div>';
+                html += '<p class="card-text text-info">' + v.remark + '</p>';
+                html += '<p class="card-text text-danger"><span><p class="text-center text-danger">' + Expired + '</p> </span></p>';
+                html += '</div>';
+                $('#editIcon').hide();
+
+            } else {
+                if (v.date === today) {
+                    var callCustomer = 'Cull this customer <i class="ti-bell teal-text"></i>';
+                    html += '<div class="card shadow">';
+                    html += '<div class="alert alert-info">';
+                    html += '<strong>' + v.followupdate + '</strong> <span>\n\
+                             <a href="#" onclick="Updateform(`' + v.id + '`,`' + v.remark + '`,`' + v.followupdate + '`);" id="editForm">\n\
+                            <span class="pull-right blink text-danger">' + callCustomer + '</span> \n\
+                            <i  class="ti-pencil teal-text pull-right ">&nbsp;</i></a></span> ';
+                    html += '</div>';
+                    html += '<p class="card-text text-info">' + v.remark + '</p>';
+                    html += '</div>';
+                } else {
+                    html += '<div class="card shadow">';
+                    html += '<div class="alert alert-info">';
+                    html += '<strong>' + v.followupdate + '</strong> \n\
+                             <span><a href="#" onclick="Updateform(`' + v.id + '`,`' + v.remark + '`,`' + v.followupdate + '`);" id="editForm">\n\
+                            <span class="pull-right blink text-danger"></span> \n\
+                            <i  class="ti-pencil teal-text pull-right ">&nbsp;</i></a></span> ';
+                    html += '</div>';
+                    html += '<p class="card-text text-info">' + v.remark + '</p>';
+                    html += '</div>';
+                }
+                function blink_text() {
+                    $('.blink').fadeOut(500);
+                    $('.blink').fadeIn(500);
+                }
+                setInterval(blink_text, 1000);
+            }
         }
     });
 
@@ -97,6 +222,8 @@ function saveFollowup() {
                         success: function (data) {
                             showMessage('success', 'Added successfully.');
                             allFollowup();
+                            $('#remark').val(' ');
+                            $('#followupdate').val(' ');
                         },
                         error: function (data) {
                             showMessage('danger', 'Please try again.');
@@ -104,6 +231,29 @@ function saveFollowup() {
                     });
                 });
     }
+}
+function validateFollowupupdate() {
+    var flag = true;
+    var remark = $('#uremark').val();
+    var followupdate = $('#ufollowupdate').val();
+
+
+
+    if (remark == '') {
+        $('#err-uremark').html('Remark required');
+        flag = false;
+    } else {
+        $('#err-uremark').html('');
+    }
+    if (followupdate == '') {
+        $('#err-ufollowupdate').html('Date required');
+        flag = false;
+    } else {
+        $('#err-ufollowupdate').html('');
+    }
+
+
+    return flag;
 }
 function validateFollowup() {
     var flag = true;

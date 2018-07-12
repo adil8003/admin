@@ -4,9 +4,10 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
 ?>
 <input type="hidden" id="crm_id" value="<?php echo $id; ?>" />
 <input type="hidden" id="listpage" value="1" />
+<input type="hidden" id="follow_id" value=" " />
 <div class="row">
     <div class="col-lg-4 col-md-5">
-        <div class="card card-user">
+        <div class="card card-user" id="addForm">
             <div id="updateprofile">
                 <div class="content" >
                     <form name="form" >
@@ -35,6 +36,43 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                         <div class="clearfix"></div><br>
                     </form>
                 </div>
+                <div class="card " id="customerDetails" style=" min-height: 240px;">
+
+                </div>
+            </div>
+        </div>
+        <div class="card card-user" id="updateForm">
+            <div id="updateprofile">
+                <div class="content" >
+                    <form name="form" >
+                        <div class="row" >
+                            <div class="col-md-12">
+                                <div class="form-group" >
+                                    <label>Remark:<span class="asterik">*</span><span  class="errmsg" id="err-uremark"></span> </label>
+                                    <input type="text" class="form-control border-input input-sm"  name="remark" id="uremark" placeholder="  Remark "
+                                           required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-12">
+                                <div class="form-group" >
+                                    <label>Follow up date and time:<span class="asterik">*</span><span  class="errmsg" id="err-ufollowupdate"></span> </label>
+                                    <input type="text"  class="form-control border-input input-sm" name="followupdate" id="ufollowupdate" placeholder=" Follow up date "
+                                           required/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" onclick="updateFollowup();" class="btn btn-info btn-fill btn-wd">Update</button>
+                        </div>
+                        <div class="clearfix"></div><br>
+                    </form>
+                </div>
+                <div class="card " id="customerDetails" style=" min-height: 240px;">
+
+                </div>
             </div>
         </div>
     </div>
@@ -59,6 +97,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
         </div>
     </div>
 </div>
+
 <script src="js/crm/followup.js"></script>
 <style>
     .shadow{-webkit-box-shadow:  -18px 17px 9px -17px rgba(212,26,26,1);

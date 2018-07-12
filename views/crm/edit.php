@@ -8,7 +8,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
 <div class="col-lg-12 col-md-12">
     <div  class="card">
         <div class="header">
-            <h4 class="title">CRM 
+            <h4 class="title">CRM - Customer update
                 <span>
                     <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
                 </span> </h4>
@@ -34,11 +34,11 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group" >
-                            <label>Property type:<span class="asterik">*</span><span  class="errmsg" id="err-ptypeid"></span> </label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="ptypeid" name="ptypeid" placeholder="- Select Customer Status -">
+                            <label>Property type:<span class="asterik">*</span><span  class="errmsg" id="err-propertytypeid"></span> </label>
+                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="propertytypeid" name="propertytypeid" placeholder="- Select Customer Status -">
                                 <?php
                                 foreach ($objPropertytype as $key => $value) {
-                                    if ($value->id == $objCrm->ptypeid) {
+                                    if ($value->id == $objCrm->propertytypeid) {
                                         echo "<option selected value='$value->id' >" . $value->name . "</option>";
                                     } else {
                                         echo "<option value='$value->id' >" . $value->name . "</option>";
@@ -148,10 +148,20 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>followupdate:</label>
-                            <input type="date" value="<?php echo $objCrm->followupdate; ?>" name="followupdate" id="followupdate"  class="form-control border-input input-sm"
-                                   placeholder=" ">
+                        <div class="form-group ">
+                            <label>Status :</label>
+                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">
+                                <?php
+                                foreach ($objStatus as $key => $value) {
+                                    if ($value->id == $objCrm->statusid) {
+                                        echo "<option selected value='$value->id' >" . $value->name . "</option>";
+                                    } else {
+                                        echo "<option value='$value->id' >" . $value->name . "</option>";
+                                    }
+                                }
+                                ?>
+
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -9,15 +9,16 @@ $this->title = Yii::t('app', ' CRM');
             <h4 class="title">CRM - Add customer
                 <span>
                     <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
+                    <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Go to customer list</button></a>
                 </span> </h4>
         </div><hr>
         <div class="content">
             <form name="form" >
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group" >
-                            <label>Client Name:<span class="asterik">*</span><span  class="errmsg" id="err-cname"></span> </label>
-                            <input type="text" class="form-control border-input input-sm" name="cname" id="cname" placeholder="  Organisationa Name "
+                        <div class="form-group">
+                            <label>Customer Name:<span class="asterik">*</span><span  class="errmsg" id="err-cname"></span> </label>
+                            <input type="text" class="form-control border-input input-sm" name="cname" id="cname" placeholder="  Customer Name "
                                    required/>
                         </div>
                     </div>
@@ -25,15 +26,15 @@ $this->title = Yii::t('app', ' CRM');
                         <div class="form-group">
                             <label>Contact No:<span class="asterik">*</span><span  class="errmsg" id="err-cphone"></span> </label>
                             <input type="text" name="cphone" id="cphone"  class="form-control border-input input-sm"
-                                   placeholder="Website">
+                                   placeholder="Customer no.">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label>Property type :<span class="asterik">*</span><span  class="errmsg" id="err-ptypeid"></span> </label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="ptypeid" name="ptypeid" placeholder="- Select Customer Status -">
+                            <label>Property type :<span class="asterik">*</span><span  class="errmsg" id="err-propertytypeid"></span> </label>
+                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="propertytypeid" name="propertytypeid" placeholder="- Select Customer type -">
                                 <?php
                                 foreach ($objPropertytype as $key => $value) {
                                     echo "<option value='$value->id' >" . $value->name . "</option>";
@@ -44,7 +45,7 @@ $this->title = Yii::t('app', ' CRM');
                     </div>
                     <div class="col-md-6">
                         <div class="form-group ">
-                            <label>buytype :<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
+                            <label>Buy type :<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="buytypeid" name="buytypeid" placeholder="- Select Customer Status -">
                                 <?php
                                 foreach ($objBuyTpe as $key => $value) {
@@ -65,7 +66,7 @@ $this->title = Yii::t('app', ' CRM');
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>location:<span class="asterik">*</span><span  class="errmsg" id="err-location"></span> </label>
+                            <label>Location:<span class="asterik">*</span><span  class="errmsg" id="err-location"></span> </label>
                             <input type="text" name="location" id="location"   class="form-control border-input input-sm"
                                    placeholder="Location">
                         </div>
@@ -97,7 +98,7 @@ $this->title = Yii::t('app', ' CRM');
                         <div class="form-group">
                             <label>Post remark:</label>
                             <input type="text" name="postremark" id="postremark"  class="form-control border-input input-sm"
-                                   placeholder=" ">
+                                   placeholder=" Post remark">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -120,23 +121,28 @@ $this->title = Yii::t('app', ' CRM');
                         <div class="form-group">
                             <label>Ref From:</label>
                             <input type="text" name="reffrom" id="reffrom"  class="form-control border-input input-sm"
-                                   placeholder=" ">
+                                   placeholder="Ref From ">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>final status:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
+                            <label>Final status:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
                             <input type="text" name="finalstatus" id="finalstatus"  class="form-control border-input input-sm"
                                    placeholder="Final status">
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>follow update:</label>
-                            <input type="date" name="followupdate" id="followupdate"  class="form-control border-input input-sm"
-                                   placeholder=" ">
+                        <div class="form-group ">
+                            <label>Status :</label>
+                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">
+                                <?php
+                                foreach ($objStatus as $key => $value) {
+                                    echo "<option value='$value->id' >" . $value->name . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ function saveCustomer() {
                     var obj = new Object();
                     obj.cname = $('#cname').val();
                     obj.cphone = $('#cphone').val();
-                    obj.ptypeid = $('#ptypeid').val();
+                    obj.propertytypeid = $('#propertytypeid').val();
                     obj.buytypeid = $('#buytypeid').val();
                     obj.price = $('#price').val();
                     obj.location = $('#location').val();
@@ -20,14 +20,14 @@ function saveCustomer() {
                     obj.remark = $('#remark').val();
                     obj.reffrom = $('#reffrom').val();
                     obj.finalstatus = $('#finalstatus').val();
-                    obj.followupdate = $('#followupdate').val();
+                    obj.statusid = $('#statusid').val();
                     $.ajax({
                         url: 'index.php?r=crm/savecustomer',
                         async: false,
                         data: obj,
                         type: 'POST',
                         success: function (data) {
-                            showMessage('success', 'Course added successfully.');
+                            showMessage('success', 'Customer added successfully.');
 //                            $('#fees').val();
                         },
                         error: function (data) {
@@ -41,13 +41,12 @@ function validateCourse() {
     var flag = true;
     var cname = $('#cname').val();
     var cphone = $('#cphone').val();
-    var ptypeid = $('#ptypeid').val();
+    var propertytypeid = $('#propertytypeid').val();
     var buytypeid = $('#buytypeid').val();
     var price = $('#price').val();
     var location = $('#location').val();
     var meetingstatus = $('#meetingstatus').val();
     var meetingtypeid = $('#meetingtypeid').val();
-
 
     if (cname == '') {
         $('#err-cname').html('Name required');
@@ -55,17 +54,39 @@ function validateCourse() {
     } else {
         $('#err-cname').html('');
     }
+    $('#cname').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-cname').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+
+
     if (cphone == '') {
         $('#err-cphone').html('Phone required');
         flag = false;
     } else {
         $('#err-cphone').html('');
+        if (((cphone.length) > 10) || ((cphone.length) < 10)) {
+            $('#err-cphone').html('10 Digit mobile number required');
+            flag = false;
+        }
+        if (isNaN(cphone)) {
+            $('#err-cphone').html('Must be numerical');
+            flag = false;
+        }
     }
-    if (ptypeid == '') {
-        $('#err-ptypeid').html('Property type required');
+    if (propertytypeid == '') {
+        $('#err-propertytypeid').html('Property type required');
         flag = false;
     } else {
-        $('#err-ptypeid').html('');
+        $('#err-propertytypeid').html('');
     }
     if (buytypeid == '') {
         $('#err-buytypeid').html('Type required');

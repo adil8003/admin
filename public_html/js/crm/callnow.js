@@ -1,11 +1,12 @@
 $(document).ready(function () {
-    Allcrm();
+    AllCallCustomer();
+
 }); // end document.ready
 
-function Allcrm() {
+function AllCallCustomer() {
     $.noConflict()
-    $('#tblCrmCustomer').DataTable({
-        ajax: "index.php?r=crm/getallcustomers",
+     $('#tblAllcalllist').DataTable({
+        ajax: "index.php?r=crm/getalltodaycallcustomerlist",
         "iDisplayLength": 5,
         "columns": [
             {"data": "cname"},
@@ -13,15 +14,6 @@ function Allcrm() {
             {"data": "location"},
             {"data": "price"},
             {"data": "ptype"},
-//            {"data": "buytypeid"},
-//            {"data": "meetingstatus"},
-//            {"data": "meetingtypeid"},
-//            {"data": "postremark"},
-//            {"data": "detailsofproperty"},
-//            {"data": "remark"},
-//            {"data": "reffrom"},
-//            {"data": "finalstatus"},
-//            {"data": "followupdate"},
             {"data": "addeddate"},
             {"data": "id",
                 "render": function (data, type, full, meta) {
@@ -33,28 +25,5 @@ function Allcrm() {
                 }
             }
         ]
-    });
-}
-//function seacrhCustomer(v){
-//   var location =  $('#search').val(v);
-//   alert(location);
-//}
-
-function seacrhCustomer() {
-    var location = $('#search').val();
-    var obj = new Object();
-    obj.location = location;
-
-    $.ajax({
-        url: 'index.php?r=crm/getcustomer',
-        async: false,
-        data: obj,
-        type: 'POST',
-        success: function (data) {
-            showMessage('success', 'Added successfully.');
-        },
-        error: function (data) {
-            showMessage('danger', 'Please try again.');
-        }
     });
 }

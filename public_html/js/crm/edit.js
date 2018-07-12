@@ -4,13 +4,13 @@ $(document).ready(function () {
 function eidtCustomer() {
      var crmid = $('#crm_id').val();
     if (validateCustomer()) {
-        alertify.confirm("Are you sure you want add this customer?",
+        alertify.confirm("Are you sure you want update this customer?",
                 function () {
                     var obj = new Object();
                     obj.crmid = crmid;
                     obj.cname = $('#cname').val();
                     obj.cphone = $('#cphone').val();
-                    obj.ptypeid = $('#ptypeid').val();
+                    obj.propertytypeid = $('#propertytypeid').val();
                     obj.buytypeid = $('#buytypeid').val();
                     obj.price = $('#price').val();
                     obj.location = $('#location').val();
@@ -21,14 +21,14 @@ function eidtCustomer() {
                     obj.remark = $('#remark').val();
                     obj.reffrom = $('#reffrom').val();
                     obj.finalstatus = $('#finalstatus').val();
-                    obj.followupdate = $('#followupdate').val();
+                    obj.statusid = $('#statusid').val();
                     $.ajax({
                         url: 'index.php?r=crm/eidtcustomer',
                         async: false,
                         data: obj,
                         type: 'POST',
                         success: function (data) {
-                            showMessage('success', 'Course added successfully.');
+                            showMessage('success', 'Customer update successfully.');
 //                            $('#fees').val();
                         },
                         error: function (data) {
@@ -42,7 +42,7 @@ function validateCustomer() {
     var flag = true;
     var cname = $('#cname').val();
     var cphone = $('#cphone').val();
-    var ptypeid = $('#ptypeid').val();
+    var propertytypeid = $('#propertytypeid').val();
     var buytypeid = $('#buytypeid').val();
     var price = $('#price').val();
     var location = $('#location').val();
@@ -62,11 +62,11 @@ function validateCustomer() {
     } else {
         $('#err-cphone').html('');
     }
-    if (ptypeid == '') {
-        $('#err-ptypeid').html('Property type required');
+    if (propertytypeid == '') {
+        $('#err-propertytypeid').html('Property type required');
         flag = false;
     } else {
-        $('#err-ptypeid').html('');
+        $('#err-propertytypeid').html('');
     }
     if (buytypeid == '') {
         $('#err-buytypeid').html('Type required');

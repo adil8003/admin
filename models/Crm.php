@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $cname
  * @property string $cphone
- * @property integer $ptypeid
+ * @property integer $propertytypeid
  * @property integer $buytypeid
  * @property double $price
  * @property string $location
@@ -20,9 +20,9 @@ use Yii;
  * @property string $postremark
  * @property string $remark
  * @property string $finalstatus
- * @property string $followupdate
  * @property string $addeddate
  * @property string $reffrom
+ * @property integer $statusid
  */
 class Crm extends \yii\db\ActiveRecord
 {
@@ -40,10 +40,10 @@ class Crm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'cphone', 'ptypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'remark', 'finalstatus', 'followupdate', 'reffrom'], 'required'],
-            [['ptypeid', 'buytypeid', 'meetingtypeid'], 'integer'],
+            [['cname', 'cphone', 'propertytypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'remark', 'finalstatus', 'reffrom', 'statusid'], 'required'],
+            [['propertytypeid', 'buytypeid', 'meetingtypeid', 'statusid'], 'integer'],
             [['price'], 'number'],
-            [['followupdate', 'addeddate'], 'safe'],
+            [['addeddate'], 'safe'],
             [['cname', 'location', 'meetingstatus'], 'string', 'max' => 500],
             [['cphone', 'detailsofproperty', 'postremark', 'remark', 'finalstatus'], 'string', 'max' => 700],
             [['reffrom'], 'string', 'max' => 200]
@@ -59,7 +59,7 @@ class Crm extends \yii\db\ActiveRecord
             'id' => 'ID',
             'cname' => 'Cname',
             'cphone' => 'Cphone',
-            'ptypeid' => 'Ptypeid',
+            'propertytypeid' => 'Propertytypeid',
             'buytypeid' => 'Buytypeid',
             'price' => 'Price',
             'location' => 'Location',
@@ -69,9 +69,9 @@ class Crm extends \yii\db\ActiveRecord
             'postremark' => 'Postremark',
             'remark' => 'Remark',
             'finalstatus' => 'Finalstatus',
-            'followupdate' => 'Followupdate',
             'addeddate' => 'Addeddate',
             'reffrom' => 'Reffrom',
+            'statusid' => 'Statusid',
         ];
     }
 }

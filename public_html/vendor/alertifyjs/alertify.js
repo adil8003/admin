@@ -45,7 +45,7 @@
             position:'bottom-right'
         },
         glossary:{
-            title:'Kiwings',
+            title:'Unique property solutions',
             ok: 'OK',
             cancel: 'Cancel',
             acccpt: 'Accept',
