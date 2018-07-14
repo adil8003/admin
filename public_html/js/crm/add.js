@@ -1,9 +1,8 @@
 $(document).ready(function () {
 });
 
-
 function saveCustomer() {
-    if (validateCourse()) {
+    if (validateCustomer()) {
         alertify.confirm("Are you sure you want add this customer?",
                 function () {
                     var obj = new Object();
@@ -17,7 +16,6 @@ function saveCustomer() {
                     obj.meetingtypeid = $('#meetingtypeid').val();
                     obj.postremark = $('#postremark').val();
                     obj.detailsofproperty = $('#detailsofproperty').val();
-                    obj.remark = $('#remark').val();
                     obj.reffrom = $('#reffrom').val();
                     obj.finalstatus = $('#finalstatus').val();
                     obj.statusid = $('#statusid').val();
@@ -37,7 +35,7 @@ function saveCustomer() {
                 });
     }
 }
-function validateCourse() {
+function validateCustomer() {
     var flag = true;
     var cname = $('#cname').val();
     var cphone = $('#cphone').val();
@@ -45,7 +43,9 @@ function validateCourse() {
     var buytypeid = $('#buytypeid').val();
     var price = $('#price').val();
     var location = $('#location').val();
-    var meetingstatus = $('#meetingstatus').val();
+    var reffrom = $('#reffrom').val();
+    var postremark = $('#postremark').val();
+    var finalstatus = $('#finalstatus').val();
     var meetingtypeid = $('#meetingtypeid').val();
 
     if (cname == '') {
@@ -63,6 +63,19 @@ function validateCourse() {
         {
             e.preventDefault();
             $('#err-cname').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+   
+    $('#remark').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-remark').html(' Please Enter Alphabate');
             return false;
         }
     });
@@ -101,12 +114,19 @@ function validateCourse() {
     } else {
         $('#err-location').html('');
     }
-    if (meetingstatus == '') {
-        $('#err-meetingstatus').html('Metting status required');
-        flag = false;
-    } else {
-        $('#err-meetingstatus').html('');
-    }
+    $('#location').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-location').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+  
     if (meetingtypeid == '') {
         $('#err-meetingtypeid').html('Metting type required');
         flag = false;
@@ -119,7 +139,7 @@ function validateCourse() {
     } else {
         $('#err-price').html('');
         if (isNaN(price)) {
-            $('#err-fees').html('Must be numerical');
+            $('#err-price').html('Must be numerical');
             flag = false;
         }
     }

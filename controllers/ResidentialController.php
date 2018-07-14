@@ -11,6 +11,7 @@ use app\models\Userroles;
 use app\models\Status;
 use app\models\Newarrivalproduct;
 use app\models\Productstatus;
+use app\models\Keylocation;
 
 class ResidentialController extends Controller {
 
@@ -32,6 +33,10 @@ class ResidentialController extends Controller {
 
     public function actionAmenities() {
         return $this->render('amenities', [
+        ]);
+    }
+    public function actionKeylocation() {
+        return $this->render('keylocation', [
         ]);
     }
 
@@ -169,6 +174,41 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+    public function actionUpdatekeylocation() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->post('id');
+        if ($request->isPost) {
+            try {
+                if ($id != ' ') {
+                    $objKeylocation = \app\models\Keylocation:: find()->where(['id' => $id])->one();
+                    $objKeylocation->residentialid = $request->post('residentialid');
+                    $objKeylocation->kname = $request->post('kname');
+                    $objKeylocation->distance = $request->post('distance');
+                    $objKeylocation->type = 1;
+                    $objKeylocation->statusid = 2;
+
+
+                    if ($objKeylocation->save()) {
+                        $arrReturn['status'] = TRUE;
+                        $arrReturn['id'] = $objKeylocation->id;
+                        $arrReturn['msg'] = 'save successfully.';
+                    }
+                } else {
+                    $arrReturn['crmerr'][] = $objKeylocation->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
 
     public function actionGetresdetailsbyid() {
         $arrReturn = array();
@@ -212,6 +252,28 @@ class ResidentialController extends Controller {
         $arrJSON['data'] = $arrfollow;
         echo json_encode($arrJSON);
     }
+    public function actionGetallkeylocation() {
+        $arrKeylocation['status'] = FALSE;
+        $arrJSON = array();
+        $arrKeylocation = array();
+        $this->layout = "";
+        $connection = Yii::$app->db;
+        $request = Yii::$app->request;
+        $id = $request->get('residentialid');
+        $objData = $connection->createCommand('Select k.id,k.kname,k.statusid,k.type,k.addeddate,k.distance
+                        from `Keylocation` k 
+                        where k.residentialid =' . $id . ' ORDER BY `addeddate` DESC ')->queryAll();
+        foreach ($objData AS $objrow) {
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['kname'] = $objrow['kname'];
+            $arrTemp['distance'] = $objrow['distance'];
+            $arrKeylocation[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrKeylocation;
+        echo json_encode($arrJSON);
+    }
 
     public function actionSaveamenities() {
         $transaction = Yii::$app->db->beginTransaction();
@@ -233,6 +295,37 @@ class ResidentialController extends Controller {
                     $arrReturn['msg'] = 'save successfully.';
                 } else {
                     $arrReturn['reserr'][] = $objAmenities->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+    public function actionSavekeylocation() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            try {
+                $objKeylocation = new \app\models\Keylocation();
+                $objKeylocation->residentialid = $request->post('residentialid');
+                $objKeylocation->kname = $request->post('kname');
+                $objKeylocation->distance = $request->post('distance');
+                $objKeylocation->type = 1;
+                $objKeylocation->statusid = 2;
+
+                if ($objKeylocation->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objKeylocation->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                } else {
+                    $arrReturn['reserr'][] = $objKeylocation->getErrors();
                 }
                 $transaction->commit();
                 yii::info('all modal saved');

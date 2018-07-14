@@ -124,30 +124,21 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Remark:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
-                            <input type="text" value="<?php echo $objCrm->remark; ?>" name="remark" id="remark"  class="form-control border-input input-sm"
-                                   placeholder="Remark">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Ref From:</label>
                             <input type="text" value="<?php echo $objCrm->reffrom; ?>" name="reffrom" id="reffrom"  class="form-control border-input input-sm"
                                    placeholder=" ">
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label>finalstatus:<span class="asterik">*</span><span  class="errmsg" id="err-finalstatus"></span> </label>
+                            <label>Final status:<span class="asterik">*</span><span  class="errmsg" id="err-finalstatus"></span> </label>
                             <input type="text" value="<?php echo $objCrm->finalstatus; ?>" name="finalstatus" id="finalstatus"  class="form-control border-input input-sm"
                                    placeholder="Organisation admin phone">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>Status :</label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">

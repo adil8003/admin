@@ -130,7 +130,6 @@ class CrmController extends Controller {
                 $objCrm->meetingtypeid = $request->post('meetingtypeid');
                 $objCrm->detailsofproperty = $request->post('detailsofproperty');
                 $objCrm->postremark = $request->post('postremark');
-                $objCrm->remark = $request->post('remark');
                 $objCrm->finalstatus = $request->post('finalstatus');
                 $objCrm->statusid = $request->post('statusid');
                 $objCrm->reffrom = $request->post('reffrom');
@@ -173,7 +172,6 @@ class CrmController extends Controller {
                     $objCrm->meetingtypeid = $request->post('meetingtypeid');
                     $objCrm->detailsofproperty = $request->post('detailsofproperty');
                     $objCrm->postremark = $request->post('postremark');
-                    $objCrm->remark = $request->post('remark');
                     $objCrm->finalstatus = $request->post('finalstatus');
                     $objCrm->reffrom = $request->post('reffrom');
                     $objCrm->statusid = $request->post('statusid');
@@ -378,7 +376,7 @@ class CrmController extends Controller {
         $id = $request->get('id');
         $objData = $connection->createCommand('Select f.id,f.crm_id,f.remark,f.followupdate,f.addeddate
                         from `Followup` f 
-                        where f.crm_id =' . $id . ' ORDER BY `followupdate` ASC ')->queryAll();
+                        where f.crm_id =' . $id . ' ORDER BY `followupdate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;

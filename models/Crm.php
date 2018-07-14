@@ -18,7 +18,6 @@ use Yii;
  * @property integer $meetingtypeid
  * @property string $detailsofproperty
  * @property string $postremark
- * @property string $remark
  * @property string $finalstatus
  * @property string $addeddate
  * @property string $reffrom
@@ -40,12 +39,12 @@ class Crm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'cphone', 'propertytypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'remark', 'finalstatus', 'reffrom', 'statusid'], 'required'],
+            [['cname', 'cphone', 'propertytypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'finalstatus', 'reffrom', 'statusid'], 'required'],
             [['propertytypeid', 'buytypeid', 'meetingtypeid', 'statusid'], 'integer'],
             [['price'], 'number'],
             [['addeddate'], 'safe'],
             [['cname', 'location', 'meetingstatus'], 'string', 'max' => 500],
-            [['cphone', 'detailsofproperty', 'postremark', 'remark', 'finalstatus'], 'string', 'max' => 700],
+            [['cphone', 'detailsofproperty', 'postremark', 'finalstatus'], 'string', 'max' => 700],
             [['reffrom'], 'string', 'max' => 200]
         ];
     }
@@ -67,7 +66,6 @@ class Crm extends \yii\db\ActiveRecord
             'meetingtypeid' => 'Meetingtypeid',
             'detailsofproperty' => 'Detailsofproperty',
             'postremark' => 'Postremark',
-            'remark' => 'Remark',
             'finalstatus' => 'Finalstatus',
             'addeddate' => 'Addeddate',
             'reffrom' => 'Reffrom',

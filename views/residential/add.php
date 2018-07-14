@@ -8,7 +8,7 @@ $this->title = Yii::t('app', ' Add residential');
         <div class="header">
             <h4 class="title">Add residential project
                 <span>
-                    <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
+                    <a href="index.php?r=residential"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
                 </span> </h4>
         </div><hr>
         <div class="content">
@@ -156,7 +156,7 @@ $this->title = Yii::t('app', ' Add residential');
 
                 </div>
                 <div class="text-center">
-                    <button type="button" onclick="saveProperty();" class="btn btn-info btn-fill btn-wd">Save Customer</button>
+                    <button type="button" onclick="saveProperty();" class="btn btn-info btn-fill btn-wd">Save Property</button>
                 </div>
                 <div class="clearfix"></div><br>
             </form>

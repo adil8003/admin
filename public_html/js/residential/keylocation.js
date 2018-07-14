@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    allAmenities();
+    allKeyLocation();
     GetResdetailsbyid();
     var res_id = $('#res_id').val();
+    var keylocation_id = $('#keylocation_id').val();
     $('#updateForm').hide();
 }); // end document.ready
 
@@ -42,32 +43,35 @@ function getPriceinString(digit) {
     }
     return strReturn;
 }
-
-function UpdateAmenities (id,aname) {
+function Updateform(id, kname, distance) {
     $('#addForm').hide();
-    $('#propertyDetails').show();
+    $('#customerDetails').show();
     $('#updateForm').show();
-    $('#uaname').val(aname);
-    $('#amenities_id').val(id);
+    $('#ukname').val(kname);
+    $('#udistance').val(distance);
+    $('#keylocation_id').val(id);
 }
-function  updateAmenities() {
-    var amenities_id = $('#amenities_id').val();
+
+function  updateLocation() {
+    var keylocation_id = $('#keylocation_id').val();
     var res_id = $('#res_id').val();
-    if (validateFollowupupdate()) {
-        alertify.confirm("Are you sure you want update this amenities?",
+    if (validateUpdateLocation()) {
+        alertify.confirm("Are you sure you want update this follow up?",
                 function () {
                     var obj = new Object();
                     obj.residentialid = res_id;
-                    obj.id = amenities_id;
-                    obj.aname = $('#uaname').val();
+                    obj.id = keylocation_id;
+                    obj.kname = $('#ukname').val();
+                    obj.distance = $('#udistance').val();
+
                     $.ajax({
-                        url: 'index.php?r=residential/updateamenities',
+                        url: 'index.php?r=residential/updatekeylocation',
                         async: false,
                         data: obj,
                         type: 'POST',
                         success: function (data) {
                             showMessage('success', 'Update successfully.');
-                            allAmenities();
+                            allKeyLocation();
                             $('#addForm').show();
                             $('#updateForm').hide();
                         },
@@ -100,7 +104,7 @@ function GetResdetailsbyid() {
 function createHTML(data) {
     var html = '';
     html += '<div class="card " style="min-height: 240px;">';
-    html += '<div class="alert alert-info text-info">';
+    html += '<div class="alert alert-info" style="#DD0330">';
     html += '<strong> Project Name:   <a href="index.php?r=residential/edit&amp;id=' + data.data.id + '">    ' + data.data.pname + ' </a></strong>';
     html += '</div>';
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Developer name.:- ' + data.data.dname + '</p>';
@@ -111,28 +115,28 @@ function createHTML(data) {
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Carpet Area:-  ' + data.data.carpetarea + ' sqft</p>';
     html += '</div>';
     $('#propertyDetails').html(html);
-}
 
-function allAmenities(id) {
+}
+function allKeyLocation(id) {
     var res_id = $('#res_id').val();
     var obj = new Object();
     obj.residentialid = res_id;
     obj.page = $('#listpage').val();
     $.ajax({
-        url: "index.php?r=residential/getallamenities",
+        url: "index.php?r=residential/getallkeylocation",
         async: false,
         data: obj,
         type: 'GET',
         success: function (data) {
             data = JSON.parse(data);
-            if (data.data == '') {
-                $('#notAvailable').html("<h5>Amenities  not available </h5>");
+            if (data.data.length === 0) {
+                $('#notAvailable').html("<h5>Key location not available </h5>");
             } else {
                 if (data.data[0].status === true) {
-                    window.listCourse = data;
+                    window.listKeylocation = data;
                     var htm = '';
-                    htm = getAmenitiesCard(data);
-                    $('#amenitiesList').html(htm);
+                    htm = getkeylocationHtmlCard(data);
+                    $('#keylocationlist').html(htm);
 
                 }
             }
@@ -143,10 +147,10 @@ function allAmenities(id) {
 //follow up layout-
 function searchPage(page) {
     $('#listpage').val(page);
-    allAmenities();
+    allKeyLocation();
 }
-function getAmenitiesCard(dataAll) {
-    dataAll = window.listCourse;
+function getkeylocationHtmlCard(dataAll) {
+    dataAll = window.listKeylocation;
     var intRecords = dataAll.data.length;
     var intRecordsPerpage = 5;
     var intRecordsMaxpage = Math.ceil(dataAll.data.length / intRecordsPerpage);
@@ -158,9 +162,9 @@ function getAmenitiesCard(dataAll) {
         var startRecord = (intCurrPage - 1) * intRecordsPerpage;
         var endRecord = intCurrPage * intRecordsPerpage;
         if (startRecord <= k && k < endRecord) {
-            html += '<div class="card shadow" >';
+            html += '<div class="card shadow" style="    width: 298px;" >';
             html += '<div class="alert alert-info">';
-            html += '<strong style="color:red">' + v.aname + '</strong><span><a class="iconPencil " href="#" onclick="UpdateAmenities(`' + v.id + '`,`' + v.aname + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
+            html += '<span>'+ v.distance +' KM </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>' + v.kname + '</strong><span><a class="iconPencil " href="#" onclick="Updateform(`' + v.id + '`,`' + v.kname + '`,`' + v.distance + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
             html += '</div>';
 //            html += '<p class="card-text text-info">' + v.aname + '</p>';
 //            html += '<p class="card-text text-danger"><span><p class="text-center text-danger"></p> </span></p>';
@@ -175,6 +179,7 @@ function getAmenitiesCard(dataAll) {
             html += '<span onclick="searchPage(' + i + ');" class="page-num">' + i + '</span>';
         } else {
             html += '<span class="current page-num">' + i + '</span>';
+
         }
     }
     html += '</div><br>';
@@ -183,23 +188,25 @@ function getAmenitiesCard(dataAll) {
 
 
 
-function saveAmenities() {
+function saveLocation() {
     var res_id = $('#res_id').val();
-    if (validateFollowup()) {
-        alertify.confirm("Are you sure you want add this amenities?",
+    if (validateLocation()) {
+        alertify.confirm("Are you sure you want add this key location?",
                 function () {
                     var obj = new Object();
                     obj.residentialid = res_id;
-                    obj.aname = $('#aname').val();
+                    obj.kname = $('#kname').val();
+                    obj.distance = $('#distance').val();
                     $.ajax({
-                        url: 'index.php?r=residential/saveamenities',
+                        url: 'index.php?r=residential/savekeylocation',
                         async: false,
                         data: obj,
                         type: 'POST',
                         success: function (data) {
-                            showMessage('success', 'Amenities added successfully.');
-                            allAmenities();
-                            $('#aname').val(' ');
+                            showMessage('success', 'Added successfully.');
+                            allKeyLocation();
+                            $('#kname').val(' ');
+                            $('#distance').val(' ');
                         },
                         error: function (data) {
                             showMessage('danger', 'Please try again.');
@@ -208,49 +215,71 @@ function saveAmenities() {
                 });
     }
 }
-function validateFollowupupdate() {
+function validateUpdateLocation() {
     var flag = true;
-    var remark = $('#uremark').val();
-    var followupdate = $('#ufollowupdate').val();
-
-
-
-    if (remark == '') {
-        $('#err-uremark').html('Remark required');
+    var kname = $('#ukname').val();
+    var distance = $('#udistance').val();
+    if (kname == '') {
+        $('#err-kanme').html('Key Location required');
         flag = false;
     } else {
-        $('#err-uremark').html('');
+        $('#err-kname').html('');
     }
-    if (followupdate == '') {
-        $('#err-ufollowupdate').html('Date required');
+      $('#ukname').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-ukname').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+    if (distance == '') {
+        $('#err-udistance').html('Distance required');
         flag = false;
     } else {
-        $('#err-ufollowupdate').html('');
+        $('#err-udistance').html('');
+         if (isNaN(distance)) {
+            $('#err-udistance').html('Must be numerical');
+            flag = false;
+        }
     }
-
-
     return flag;
 }
-function validateFollowup() {
+function validateLocation() {
     var flag = true;
-    var remark = $('#remark').val();
-    var followupdate = $('#followupdate').val();
-
-
-
-    if (remark == '') {
-        $('#err-remark').html('Remark required');
+    var kname = $('#kname').val();
+    var distance = $('#distance').val();
+    if (kname == '') {
+        $('#err-kname').html('Key Location required');
         flag = false;
     } else {
-        $('#err-remark').html('');
+        $('#err-kname').html('');
     }
-    if (followupdate == '') {
-        $('#err-followupdate').html('Date required');
+      $('#kname').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-kname').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+    if (distance == '') {
+        $('#err-distance').html('Distance required');
         flag = false;
     } else {
-        $('#err-followupdate').html('');
+        $('#err-distance').html('');
+         if (isNaN(distance)) {
+            $('#err-distance').html('Must be numerical');
+            flag = false;
+        }
     }
-
-
     return flag;
 }

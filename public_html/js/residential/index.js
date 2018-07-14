@@ -59,7 +59,8 @@ function AllResidential() {
                 "render": function (data, type, full, meta) {
                     var htmlAction = '';
                     htmlAction += '<a href="index.php?r=residential/edit&amp;id=' + data + '" title="Edit" class="teal-text"  onclick="getCustomerdetails(`' + full.id + '`)" ><i  class="ti-pencil teal-text "></i></a>&nbsp;&nbsp;'
-                    htmlAction += '<a href="index.php?r=residential/amenities&amp;id=' + data + '" title="User list" class="teal-text"  ><i   class="ti-home teal-text "></i></a>&nbsp;&nbsp;'
+                    htmlAction += '<a href="index.php?r=residential/amenities&amp;id=' + data + '" title="Amenities" class="teal-text"  ><i   class="ti-home teal-text "></i></a>&nbsp;&nbsp;'
+                    htmlAction += '<a href="index.php?r=residential/keylocation&amp;id=' + data + '" title="Key location" class="teal-text"  ><i   class="ti-car teal-text "></i></a>&nbsp;&nbsp;'
                     return htmlAction;
                 }
             }

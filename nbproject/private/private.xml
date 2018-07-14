@@ -3,18 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/admin/controllers/ResidentialController.php</file>
-            <file>file:/C:/wamp64/www/admin/views/crm/followup.php</file>
-            <file>file:/C:/wamp64/www/admin/public_html/js/crm/followup.js</file>
-            <file>file:/C:/wamp64/www/admin/views/crm/edit.php</file>
-            <file>file:/C:/wamp64/www/admin/views/residential/index.php</file>
-            <file>file:/C:/wamp64/www/admin/public_html/js/crm/add.js</file>
             <file>file:/C:/wamp64/www/admin/SQL/v0.2/alter.txt</file>
-            <file>file:/C:/wamp64/www/admin/views/residential/amenities.php</file>
+            <file>file:/C:/wamp64/www/admin/public_html/js/residential/keylocation.js</file>
             <file>file:/C:/wamp64/www/admin/controllers/CrmController.php</file>
-            <file>file:/C:/wamp64/www/admin/public_html/js/residential/index.js</file>
-            <file>file:/C:/wamp64/www/admin/public_html/js/crm/edit.js</file>
-            <file>file:/C:/wamp64/www/admin/public_html/js/residential/amenities.js</file>
+            <file>file:/C:/wamp64/www/admin/controllers/CronController.php</file>
+            <file>file:/C:/wamp64/www/admin/models/Mail.php</file>
+            <file>file:/C:/wamp64/www/admin/views/residential/keylocation.php</file>
         </group>
     </open-files>
 </project-private>

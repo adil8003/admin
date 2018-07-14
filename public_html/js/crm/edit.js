@@ -18,7 +18,6 @@ function eidtCustomer() {
                     obj.meetingtypeid = $('#meetingtypeid').val();
                     obj.postremark = $('#postremark').val();
                     obj.detailsofproperty = $('#detailsofproperty').val();
-                    obj.remark = $('#remark').val();
                     obj.reffrom = $('#reffrom').val();
                     obj.finalstatus = $('#finalstatus').val();
                     obj.statusid = $('#statusid').val();
@@ -46,9 +45,10 @@ function validateCustomer() {
     var buytypeid = $('#buytypeid').val();
     var price = $('#price').val();
     var location = $('#location').val();
-    var meetingstatus = $('#meetingstatus').val();
+    var reffrom = $('#reffrom').val();
+    var postremark = $('#postremark').val();
+    var finalstatus = $('#finalstatus').val();
     var meetingtypeid = $('#meetingtypeid').val();
-
 
     if (cname == '') {
         $('#err-cname').html('Name required');
@@ -56,11 +56,46 @@ function validateCustomer() {
     } else {
         $('#err-cname').html('');
     }
+    $('#cname').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-cname').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+   
+    $('#remark').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-remark').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+
+
     if (cphone == '') {
         $('#err-cphone').html('Phone required');
         flag = false;
     } else {
         $('#err-cphone').html('');
+        if (((cphone.length) > 10) || ((cphone.length) < 10)) {
+            $('#err-cphone').html('10 Digit mobile number required');
+            flag = false;
+        }
+        if (isNaN(cphone)) {
+            $('#err-cphone').html('Must be numerical');
+            flag = false;
+        }
     }
     if (propertytypeid == '') {
         $('#err-propertytypeid').html('Property type required');
@@ -81,12 +116,19 @@ function validateCustomer() {
     } else {
         $('#err-location').html('');
     }
-    if (meetingstatus == '') {
-        $('#err-meetingstatus').html('Metting status required');
-        flag = false;
-    } else {
-        $('#err-meetingstatus').html('');
-    }
+    $('#location').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-location').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
+  
     if (meetingtypeid == '') {
         $('#err-meetingtypeid').html('Metting type required');
         flag = false;
@@ -99,7 +141,7 @@ function validateCustomer() {
     } else {
         $('#err-price').html('');
         if (isNaN(price)) {
-            $('#err-fees').html('Must be numerical');
+            $('#err-price').html('Must be numerical');
             flag = false;
         }
     }

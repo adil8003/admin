@@ -8,7 +8,7 @@ use Yii;
 class mail {
 
     public function sendEmail($arrMailDetails) {
-        $email = 'asauravsuman@gmail.com';
+        $email = 'sadil8003@gmail.com';
         $date = date('d/m/Y');
         $to = $arrMailDetails['toemail'];
         $subject = $arrMailDetails['subject'];
@@ -16,7 +16,7 @@ class mail {
         $body .= $arrMailDetails['body'];
         $body .= $this->getEmailFooter();
         $header = 'MIME-Version: 1.0' . "\r\n";
-        $header .= 'From:Kiwings <asauravsuman@gmail.com>' . "\r\n" .
+        $header .= 'From:Unique property <sadil8003@gmail.com>' . "\r\n" .
                 'Content-type: text/html' . "\r\n" .
                 'Reply-To: sadil8003@gmail.com' . "\r\n" .
 //                     'CC: asauravsuman@gmail.com ' . "\r\n" .
@@ -61,7 +61,7 @@ class mail {
     public function getEmailHeader() {
         $logoURL = 'http://kiwings.com/images/kwings.png';
         $headURL = 'http://kiwings.com';
-        $header = " Kiwings ";
+        $header = " Unique proprty ";
         $emailCss = $this->getCSS();
         $headHtml = "<!DOCTYPE html>
                 <html lang='en'>
@@ -91,7 +91,7 @@ class mail {
         $companyName = 'Kiwings ';
         $companyUrl = 'http://kiwings.com/';
         $comName = 'Kiwings';
-        $email = 'asauravsuman@gmail.com';
+        $email = 'sadil8003@gmail.com';
         $footer = "<div style= 'background-color : #FFE4AA' class='header nullTopCorner' >
                         </div>
                         <div class='footer' >

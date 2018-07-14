@@ -4,7 +4,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
 ?>
 <input type="hidden" id="res_id" value="<?php echo $id; ?>" />
 <input type="hidden" id="listpage" value="1" />
-<input type="hidden" id="amenities_id" value=" " />
+<input type="hidden" id="keylocation_id" value=" " />
 <div class="row">
     <div class="col-lg-4 col-md-5">
         <div class="card card-user" id="addForm">
@@ -14,14 +14,24 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                         <div class="row" >
                             <div class="col-md-12">
                                 <div class="form-group" >
-                                    <label>Amenities Name:<span class="asterik">*</span><span  class="errmsg" id="err-aname"></span> </label>
-                                    <input type="text" class="form-control border-input input-sm"  name="aname" id="aname" placeholder="  Amenities "
+                                    <label>Key location name:<span class="asterik">*</span><span  class="errmsg" id="err-kname"></span> </label>
+                                    <input type="text" class="form-control border-input input-sm"  name="kname" id="kname" placeholder="  Key location "
                                            required/>
                                 </div>
                             </div>
                         </div>
+                        <div class="row" >
+                            <div class="col-md-12">
+                                <div class="form-group" >
+                                    <label>Distances:<span class="asterik">*</span><span  class="errmsg" id="err-distance"></span> </label>
+                                    <input type="text"  class="form-control border-input input-sm" name="distance" id="distance" placeholder=" Distance "
+                                           required/>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="text-center">
-                            <button type="button" onclick="saveAmenities();" class="btn btn-info btn-fill btn-wd">Save</button>
+                            <button type="button" onclick="saveLocation();" class="btn btn-info btn-fill btn-wd">Save</button>
                         </div>
                         <div class="clearfix"></div><br>
                     </form>
@@ -34,18 +44,28 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
         <div class="card card-user" id="updateForm">
             <div id="updateprofile">
                 <div class="content" >
-                    <form name="form" >
+                     <form name="form" >
                         <div class="row" >
                             <div class="col-md-12">
                                 <div class="form-group" >
-                                    <label>Amenities:<span class="asterik">*</span><span  class="errmsg" id="err-uaname"></span> </label>
-                                    <input type="text" class="form-control border-input input-sm"  name="uaname" id="uaname" placeholder="  Amenities "
+                                    <label>Key location name:<span class="asterik">*</span><span  class="errmsg" id="err-ukname"></span> </label>
+                                    <input type="text" class="form-control border-input input-sm"  name="kname" id="ukname" placeholder="  Remark "
                                            required/>
                                 </div>
                             </div>
                         </div>
+                        <div class="row" >
+                            <div class="col-md-12">
+                                <div class="form-group" >
+                                    <label>Distances:<span class="asterik">*</span><span  class="errmsg" id="err-udistance"></span> </label>
+                                    <input type="text"  class="form-control border-input input-sm" name="distance" id="udistance" placeholder=" Follow up date "
+                                           required/>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="text-center">
-                            <button type="button" onclick="updateAmenities();" class="btn btn-info btn-fill btn-wd">Update</button>
+                            <button type="button" onclick="updateLocation();" class="btn btn-info btn-fill btn-wd">Update</button>
                         </div>
                         <div class="clearfix"></div><br>
                     </form>
@@ -59,14 +79,14 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
     <div class="col-lg-8 col-md-7">
         <div  class="card">
             <div class="header">
-                <h4 class="title">Amenities List
+                <h4 class="title">Key location and distance list
                     <span>
                         <a href="index.php?r=residential"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
                     </span> </h4>
             </div><hr>
             <div id="updateprofile">
                 <div class="content" style="    padding: 0px 9px 10px 10px;">
-                    <div class="row " id="amenitiesList">
+                    <div class="row " id="keylocationlist">
                         <div class="text-danger" id="notAvailable" style="    text-align: center;">
 
                         </div>
@@ -78,7 +98,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
     </div>
 </div>
 
-<script src="js/residential/amenities.js"></script>
+<script src="js/residential/keylocation.js"></script>
 <style>
     .shadow{-webkit-box-shadow:  -18px 17px 9px -17px rgba(212,26,26,1);
             -moz-box-shadow: -18px 17px 9px -17px rgba(212,26,26,1);

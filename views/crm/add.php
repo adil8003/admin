@@ -9,7 +9,6 @@ $this->title = Yii::t('app', ' CRM');
             <h4 class="title">CRM - Add customer
                 <span>
                     <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
-                    <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Go to customer list</button></a>
                 </span> </h4>
         </div><hr>
         <div class="content">
@@ -31,7 +30,7 @@ $this->title = Yii::t('app', ' CRM');
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
                             <label>Property type :<span class="asterik">*</span><span  class="errmsg" id="err-propertytypeid"></span> </label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="propertytypeid" name="propertytypeid" placeholder="- Select Customer type -">
@@ -43,9 +42,9 @@ $this->title = Yii::t('app', ' CRM');
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group ">
-                            <label>Buy type :<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
+                            <label>Type :<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="buytypeid" name="buytypeid" placeholder="- Select Customer Status -">
                                 <?php
                                 foreach ($objBuyTpe as $key => $value) {
@@ -55,16 +54,49 @@ $this->title = Yii::t('app', ' CRM');
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Price: <span class="asterik">*</span><span  class="errmsg" id="err-price"></span> </label>
-                            <input type="text" name="price" id="price"   class="form-control border-input input-sm"
-                                   placeholder="Price">
+                    <div class="col-md-4">
+                        <div class="form-group ">
+                            <label>Meeting Place :</label>
+                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="meetingtypeid" name="meetingtypeid" placeholder="- Select Customer Status -">
+                                <?php
+                                foreach ($objMeetingtype as $key => $value) {
+                                    echo "<option value='$value->id' >" . $value->name . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="row">
+                            <!--<div class="col-sm-2">-->
+                            <label for="price"  class="">Price<span class="text-danger text-center" id="err-price" style="margin: 126px;">*</span></label>
+                            <div class="col-sm-6"> 
+
+                                <div class="form-control">
+                                    <select class="form-control border-input input-sm" style="height: 40px;
+                                            margin-top: -13px;
+                                            width: 259px;
+                                            margin-left: -13px;" id="price-format" name="price-format" >
+                                        <option value="Thousand">Thousand</option>
+                                        <option value="Lakh">Lakh</option>
+                                        <option value="Crore">Crore</option>
+                                    </select>
+                                    <!--<p id="err-price" class="text-danger"></p>-->
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group row control-group" style="    margin-top: -6px;
+                                     height: 38px;"> 
+                                    <input type="text" class="form-control input-sm border-input" id="price" name="price" placeholder="Price"
+                                           value="" >
+                                    <!--<p id="err-price" class="text-danger"></p>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label>Location:<span class="asterik">*</span><span  class="errmsg" id="err-location"></span> </label>
                             <input type="text" name="location" id="location"   class="form-control border-input input-sm"
@@ -81,15 +113,10 @@ $this->title = Yii::t('app', ' CRM');
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group ">
-                            <label>Meeting Place :</label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="meetingtypeid" name="meetingtypeid" placeholder="- Select Customer Status -">
-                                <?php
-                                foreach ($objMeetingtype as $key => $value) {
-                                    echo "<option value='$value->id' >" . $value->name . "</option>";
-                                }
-                                ?>
-                            </select>
+                        <div class="form-group">
+                            <label>Details of Property Shown to him:<span class="asterik">*</span><span  class="errmsg" id="err-detailsofproperty"></span> </label>
+                            <input type="text" name="detailsofproperty" id="detailsofproperty"  class="form-control border-input input-sm"
+                                   placeholder="Details of Property Shown to him">
                         </div>
                     </div>
                 </div>
@@ -101,36 +128,22 @@ $this->title = Yii::t('app', ' CRM');
                                    placeholder=" Post remark">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Details of Property Shown to him:<span class="asterik">*</span><span  class="errmsg" id="err-detailsofproperty"></span> </label>
-                            <input type="text" name="detailsofproperty" id="detailsofproperty"  class="form-control border-input input-sm"
-                                   placeholder="Details of Property Shown to him">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Remark:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
-                            <input type="text" name="remark" id="remark"  class="form-control border-input input-sm"
-                                   placeholder="Remark">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Ref From:</label>
-                            <input type="text" name="reffrom" id="reffrom"  class="form-control border-input input-sm"
-                                   placeholder="Ref From ">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Final status:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
                             <input type="text" name="finalstatus" id="finalstatus"  class="form-control border-input input-sm"
                                    placeholder="Final status">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ref From:</label>
+                            <input type="text" name="reffrom" id="reffrom"  class="form-control border-input input-sm"
+                                   placeholder="Ref From ">
                         </div>
                     </div>
                     <div class="col-md-6">

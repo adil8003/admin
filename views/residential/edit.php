@@ -10,7 +10,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
         <div class="header">
             <h4 class="title">Update residential project
                 <span>
-                    <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
+                    <a href="index.php?r=residential"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
                 </span> </h4>
         </div><hr>
         <div class="content">

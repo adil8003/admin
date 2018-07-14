@@ -245,12 +245,25 @@ function validateFollowupupdate() {
     } else {
         $('#err-uremark').html('');
     }
+      $('#uremark').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-uremark').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
     if (followupdate == '') {
         $('#err-ufollowupdate').html('Date required');
         flag = false;
     } else {
         $('#err-ufollowupdate').html('');
     }
+   
 
 
     return flag;
@@ -268,12 +281,25 @@ function validateFollowup() {
     } else {
         $('#err-remark').html('');
     }
+      $('#remark').keypress(function (e) {
+        var regex = new RegExp("^[a-zA-Z]+$");
+        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(str)) {
+            return true;
+        } else
+        {
+            e.preventDefault();
+            $('#err-remark').html(' Please Enter Alphabate');
+            return false;
+        }
+    });
     if (followupdate == '') {
         $('#err-followupdate').html('Date required');
         flag = false;
     } else {
         $('#err-followupdate').html('');
     }
+    
 
 
     return flag;
