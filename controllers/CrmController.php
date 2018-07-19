@@ -271,7 +271,7 @@ class CrmController extends Controller {
         $arrCustomer = array();
         $this->layout = "";
         $connection = Yii::$app->db;
-        $objData = $connection->createCommand('Select c.id,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+        $objData = $connection->createCommand('Select c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
                         from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
@@ -282,6 +282,7 @@ class CrmController extends Controller {
             $arrTemp['id'] = $objrow['id'];
             $arrTemp['cname'] = $objrow['cname'];
             $arrTemp['cphone'] = $objrow['cphone'];
+            $arrTemp['cemail'] = $objrow['cemail'];
             $arrTemp['price'] = $objrow['price'];
             $arrTemp['location'] = $objrow['location'];
             $arrTemp['ptype'] = $objrow['ptype'];

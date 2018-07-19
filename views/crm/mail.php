@@ -1,5 +1,5 @@
 <?php
-$this->title = Yii::t('app', 'Edit');
+$this->title = Yii::t('app', 'Mail');
 $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
 ?>
 <input type="hidden" id="crm_id" value="<?php echo $id; ?>" />

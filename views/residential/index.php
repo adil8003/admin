@@ -64,6 +64,14 @@ function getExpectedPriceinString($digit) {
                 <div class="content table-responsive table-full-width">
                     <table class="table table-striped" id="tblResidential">
                         <thead>
+                            <tr>
+                                <td>Minimum price:</td>
+                                <td><input type="text" class="form-control border-input input-xm small" id="resmin" name="min"></td>
+                            </tr>
+                            <tr>
+                                <td>Maximum price:</td>
+                                <td><input type="text" class="form-control border-input input-sm" id="resmax" name="max"></td>
+                            </tr>
                         <th> Name</th>
                         <th> Type</th>
                         <th>Location</th>
@@ -101,5 +109,8 @@ function getExpectedPriceinString($digit) {
             margin: 14px;
             padding: 6px;
             word-wrap: break-word;
+    }
+     .dataTables_length{
+        display: none;
     }
 </style>

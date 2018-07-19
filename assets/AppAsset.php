@@ -32,8 +32,8 @@ class AppAsset extends AssetBundle {
         "vendor/assets/css/course.css",
         "https://fonts.googleapis.com/css?family=Muli:400,300",
         "vendor/datatable-1.10.9/css/dataTables.bootstrap.min.css",
-//          "vendor/office/css/office.css",
-         "vendor/datatable-1.10.9/css/dataTables.bootstrap.min.css",
+        "vendor/assets/css/jquery.dataTables.yadcf",
+        "vendor/datatable-1.10.9/css/dataTables.bootstrap.min.css",
         "vendor/dropzone/dropzone.css",
         "vendor/dropzone/min/dropzone.min.css",
         "vendor/alertifyjs/css/alertify.css",
@@ -45,15 +45,12 @@ class AppAsset extends AssetBundle {
 //        "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/css/britecharts.css",
         "https://cdn.jsdelivr.net/npm/britecharts/dist/css/britecharts.min.css",
         "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css",
-        "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css"
-       
-
-
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css",
     ];
     public $js = [
         "vendor/assets/js/jquery.min.js",
         "vendor/paper/paper.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js",
+//        "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js",
 //        "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js",
         "vendor/assets/js/bootstrap.min.js",
         "vendor/assets/js/jquery.validate.js",
@@ -61,6 +58,8 @@ class AppAsset extends AssetBundle {
         "vendor/dropzone/dropzone.js",
         "vendor/datatable-1.10.9/js/jquery.dataTables.min.js",
         "vendor/datatable-1.10.9/js/dataTables.bootstrap.min.js",
+//        "http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js",
+        "vendor/assets/js/jquery.dataTables.yadcf",
         //alertify js
         "vendor/alertifyjs/alertify.js",
         "vendor/assets/select2/select2.min.js",
@@ -72,7 +71,7 @@ class AppAsset extends AssetBundle {
         "https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.1/jquery.rateyo.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.1/jquery.twbsPagination.js",
         "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js",
-         "https://cdn.jsdelivr.net/npm/britecharts@2/dist/bundled/britecharts.min.js",
+        "https://cdn.jsdelivr.net/npm/britecharts@2/dist/bundled/britecharts.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/bundled/britecharts.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js",
         "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",

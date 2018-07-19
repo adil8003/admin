@@ -49,9 +49,9 @@ AppAsset::register($this);
                                 </a>
                             </li>
                             <li class="sub-menu">
-                                <a href="index.php?r=rent">
+                                <a href="index.php?r=residential">
                                     <i class="ti-blackboard"></i>
-                                    <p>RENT</p>
+                                    <p>Residential project</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
@@ -61,9 +61,9 @@ AppAsset::register($this);
                                 </a>
                             </li>
                             <li class="sub-menu">
-                                <a href="index.php?r=residential">
+                                <a href="index.php?r=rent">
                                     <i class="ti-blackboard"></i>
-                                    <p>Residential</p>
+                                    <p>RENT</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
@@ -273,7 +273,7 @@ AppAsset::register($this);
                 }
             });
         </script>
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>
