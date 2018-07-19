@@ -2,15 +2,25 @@ $(document).ready(function () {
 });
 
 function saveCustomer() {
+    var price = $('#price').val();
+    var priceFormat = $('#price-format').val();
+    if (priceFormat == 'Lakh') {
+        var amt = price * 100000;
+    } else if (priceFormat == 'Thousand') {
+        var amt = price * 1000;
+    } else if (priceFormat == 'Crore') {
+        var amt = price * 10000000;
+    }
     if (validateCustomer()) {
         alertify.confirm("Are you sure you want add this customer?",
                 function () {
                     var obj = new Object();
                     obj.cname = $('#cname').val();
+                    obj.cemail = $('#cemail').val();
                     obj.cphone = $('#cphone').val();
                     obj.propertytypeid = $('#propertytypeid').val();
                     obj.buytypeid = $('#buytypeid').val();
-                    obj.price = $('#price').val();
+                    obj.price = amt;
                     obj.location = $('#location').val();
                     obj.meetingstatus = $('#meetingstatus').val();
                     obj.meetingtypeid = $('#meetingtypeid').val();
@@ -37,6 +47,7 @@ function saveCustomer() {
 }
 function validateCustomer() {
     var flag = true;
+    var cemail = $('#cemail').val();
     var cname = $('#cname').val();
     var cphone = $('#cphone').val();
     var propertytypeid = $('#propertytypeid').val();
@@ -47,6 +58,7 @@ function validateCustomer() {
     var postremark = $('#postremark').val();
     var finalstatus = $('#finalstatus').val();
     var meetingtypeid = $('#meetingtypeid').val();
+    var reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (cname == '') {
         $('#err-cname').html('Name required');
@@ -66,7 +78,16 @@ function validateCustomer() {
             return false;
         }
     });
-   
+    if (cemail == '') {
+        $('#err-cemail').html('Email required');
+        flag = false;
+    } else {
+        $('#err-cemail').html('');
+        if (!reg.test(cemail)) {
+            $('#err-cemail').html(' Valid email required');
+            flag = false;
+        }
+    }
     $('#remark').keypress(function (e) {
         var regex = new RegExp("^[a-zA-Z]+$");
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
@@ -126,7 +147,7 @@ function validateCustomer() {
             return false;
         }
     });
-  
+
     if (meetingtypeid == '') {
         $('#err-meetingtypeid').html('Metting type required');
         flag = false;
@@ -144,4 +165,23 @@ function validateCustomer() {
         }
     }
     return flag;
+}
+function checkUniqueEmail() {
+    var input_value = $('#cemail').val();
+    $.ajax({
+        url: 'index.php?r=crm/checkuniqueemail',
+        type: 'POST',
+        data: {
+            cname: input_value,
+        },
+        success: function (response) {
+            data = JSON.parse(response);
+            if (data.status == false) {
+                $('#err-cemail').text("Already exist,try different !");
+                $('#cemail').focus();
+            } else {
+                $('#err-cemail').text('');
+            }
+        }
+    });
 }

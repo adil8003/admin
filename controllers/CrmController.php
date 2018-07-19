@@ -12,6 +12,7 @@ use app\models\Status;
 use app\models\Buytype;
 use app\models\Propertytypee;
 use app\models\Crm;
+use app\models\Mail;
 
 class CrmController extends Controller {
 
@@ -31,10 +32,15 @@ class CrmController extends Controller {
         ]);
     }
 
+    public function actionMail() {
+        return $this->render('mail', [
+        ]);
+    }
+
     public function actionAdd() {
-        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objBuyTpe = \app\models\Buytype :: find()->all();
         $objStatus = \app\models\Status :: find()->all();
-        $objMeetingtype = \app\models\meetingtype :: find()->all();
+        $objMeetingtype = \app\models\Meetingtype :: find()->all();
         $objPropertytype = \app\models\Propertytype::find()->all();
         return $this->render('add', [
                     'objBuyTpe' => $objBuyTpe,
@@ -48,8 +54,8 @@ class CrmController extends Controller {
         $request = Yii::$app->request;
         $id = $request->get('id');
         $objStatus = \app\models\Status :: find()->all();
-        $objBuyTpe = \app\models\buytype :: find()->all();
-        $objMeetingtype = \app\models\meetingtype :: find()->all();
+        $objBuyTpe = \app\models\Buytype :: find()->all();
+        $objMeetingtype = \app\models\Meetingtype :: find()->all();
         $objPropertytype = \app\models\Propertytype::find()->all();
         $objCrm = \app\models\Crm::findOne($id);
         return $this->render('edit', [
@@ -111,6 +117,34 @@ class CrmController extends Controller {
         echo json_encode($arrReturn);
     }
 
+    public function actionCheckuniqueemail() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $Email = $request->post('cemail');
+        $objCrm = Crm::findOne(['cemail' => ($Email)]);
+        if ($objCrm) {
+            $arrReturn['status'] = TRUE;
+        }
+        echo json_encode($arrReturn);
+        die;
+    }
+
+//     public function actionCheckcurrentpass() {
+//        $arrReturn = array();
+//        $arrReturn['status'] = FALSE;
+//        $request = Yii::$app->request;
+//        $this->layout = "";
+//        $currentpassword = ($request->post('currentpassword'));
+//        $id = $request->post('id');
+//        $objUser = User::find()->where(['id' => Yii::$app->session['userid']])->andWhere(['password' => md5($currentpassword)])->one();
+//        if ($objUser) {
+//            $arrReturn['status'] = TRUE;
+//        }
+//        echo json_encode($arrReturn);
+//        die;
+//    }
     public function actionSavecustomer() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -121,6 +155,7 @@ class CrmController extends Controller {
             try {
                 $objCrm = new \app\models\Crm;
                 $objCrm->cname = $request->post('cname');
+                $objCrm->cemail = $request->post('cemail');
                 $objCrm->cphone = $request->post('cphone');
                 $objCrm->propertytypeid = $request->post('propertytypeid');
                 $objCrm->buytypeid = $request->post('buytypeid');
@@ -163,6 +198,7 @@ class CrmController extends Controller {
                 if ($id != ' ') {
                     $objCrm = \app\models\Crm:: find()->where(['id' => $id])->one();
                     $objCrm->cname = $request->post('cname');
+                    $objCrm->cemail = $request->post('cemail');
                     $objCrm->cphone = $request->post('cphone');
                     $objCrm->propertytypeid = $request->post('propertytypeid');
                     $objCrm->buytypeid = $request->post('buytypeid');
@@ -230,13 +266,13 @@ class CrmController extends Controller {
     }
 
     public function actionGetallcustomers() {
-        $arrOrganisation['status'] = FALSE;
+        $arrCustomer['status'] = FALSE;
         $arrJSON = array();
-        $arrOrganisation = array();
+        $arrCustomer = array();
         $this->layout = "";
         $connection = Yii::$app->db;
         $objData = $connection->createCommand('Select c.id,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
-                        from `Crm` c 
+                        from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
                        where c.statusid = ' . 2 . '  ORDER BY `addeddate` DESC ')->queryAll();
@@ -250,9 +286,9 @@ class CrmController extends Controller {
             $arrTemp['location'] = $objrow['location'];
             $arrTemp['ptype'] = $objrow['ptype'];
             $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
-            $arrOrganisation[] = $arrTemp;
+            $arrCustomer[] = $arrTemp;
         }
-        $arrJSON['data'] = $arrOrganisation;
+        $arrJSON['data'] = $arrCustomer;
         echo json_encode($arrJSON);
     }
 
@@ -265,10 +301,10 @@ class CrmController extends Controller {
         $location = $request->post('location');
         $connection = Yii::$app->db;
         $objData = $connection->createCommand('Select c.id,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
-                        from `Crm` c 
+                        from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
-                        where `location` LIKE %'.$location.'% ')->queryAll();
+                        where `location` LIKE %' . $location . '% ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
@@ -293,15 +329,15 @@ class CrmController extends Controller {
         $connection = Yii::$app->db;
         $TodayM = date("m");
         $TodayD = date("d");
-        $objData = $connection->createCommand('Select c.id,f.followupdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
-                        from `Crm` c 
+        $objData = $connection->createCommand('Select c.id,f.followupdate ffadte,f.addeddate as fdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+                        from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                          LEFT join `followup` f on f.crm_id = c.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 2 . ' ')->queryAll();
         foreach ($objData AS $objrow) {
-            $M = date('m', strtotime($objrow['followupdate']));
-            $D = date('d', strtotime($objrow['followupdate']));
-            if ($TodayM == $M && $TodayD === $D) {
+            $M = date('m', strtotime($objrow['ffadte']));
+            $D = date('d', strtotime($objrow['ffadte']));
+            if ($TodayM == $M && $TodayD == $D) {
                 $arrTemp = array();
                 $arrTemp['status'] = TRUE;
                 $arrTemp['id'] = $objrow['id'];
@@ -327,7 +363,7 @@ class CrmController extends Controller {
         $TodayM = date("m");
         $TodayD = date("d");
         $objData = $connection->createCommand('Select c.id,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
-                        from `Crm` c 
+                        from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 1 . ' ')->queryAll();
         foreach ($objData AS $objrow) {
@@ -346,6 +382,58 @@ class CrmController extends Controller {
         echo json_encode($arrJSON);
     }
 
+    public function actionMailsend() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            $Tomail = $request->post('tomail');
+            $From = $request->post('from');
+            $Message = $request->post('message');
+            ////////////////////MAiL fUNCTION////////////////////////////////
+            $date = date('Y-m-d');
+            if($Tomail || $From || $Message){
+//            $orgname = $objOrganisation->orgname;
+//            $email = $objUser->email;
+//            $phone = $objUser->phone;
+            $header = 'Unique property';
+            $logo = 'http://uniquepaf.tglobalsolutions.com/images/logo.png';
+            $comURL = 'http://uniquepaf.tglobalsolutions.com/';
+            $companyemail = 'sadil8003@gmail';
+            // to customer mail body
+            $body = "  
+                    <div class='jumbotron'>
+                            <p  class= 'headSetFont'>Thank you for Registering with us.<br></p>
+                            <p  class= 'setPOne fontBold'><b>Hi</b> " . $Message . ",<br></p>
+                            <p  class= 'setPOne fontBold'><b>Username:</b> " . 'ss' . "<br></p>
+                            <p  class= 'setPOne fontBold'><b>Password:</b> " . 'dd' . "<br></p>
+                            <p  class= 'setPOne fontBold'><b>Url:</b> " . $comURL . "<br></p>
+                            <p  class= 'setPOne fontBold'><b>Thank you.</b> <br></p>
+                            <p  class= 'setPOne'>Please feel free to contact us for any queries: <br></p>
+                            <p class= 'setPOne'>Email - " . $companyemail . " <br>
+                                Contact -  <br>
+                            </p>
+                    </div>";
+            // to organisation
+            $arrMailDetails = Array();
+            $arrMailDetails['subject'] = 'Welcome to  Unique property ';
+            $arrMailDetails['toemail'] = $Tomail;
+            $arrMailDetails['body'] = $body;
+            $arrMailDetails['logo'] = $logo;
+            $objMail = new Mail();
+            $objMail->sendEmail($arrMailDetails);
+             echo "MAIL SENT SUCCESSFULLY !!";
+        } else {
+            $body .= "THERE ARE NO FOLLOWUPS ASSIGNED FOR TODAY.";
+        }
+            //////////////////////////////////////////
+        }
+
+//        echo json_encode($arrReturn);
+    }
+
     public function actionGetcustomerdetailsbyid() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -353,14 +441,22 @@ class CrmController extends Controller {
         $connection = Yii::$app->db;
         $request = Yii::$app->request;
         $id = $request->get('id');
-        $objData = $connection->createCommand('Select c.id,c.finalstatus,c.detailsofproperty,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
-                        from `Crm` c 
+        $objData = $connection->createCommand('Select c.id,c.cemail,c.meetingstatus,c.finalstatus,c.reffrom,mt.name as mtype,f.followupdate,f.remark,
+             c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,mt.name as mtype,c.cphone
+                        from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
+                        LEFT join `meetingtype` mt on c.meetingtypeid = mt.id 
+                        LEFT join `followup` f on c.id = f.crm_id 
                         where c.id =' . $id . ' ')->queryOne();
         if ($objData) {
             $arrReturn['status'] = TRUE;
             $arrReturn['data'] = $objData;
+//            $arrReturn['fdate'] = $objData;
+            $arrReturn['fdateshow'] = date('M-d,Y', strtotime($objData['followupdate']));
+            ;
+            $arrReturn['fdate'] = date('m-d,Y', strtotime($objData['followupdate']));
+            ;
         }
         echo json_encode($arrReturn);
         die;
@@ -375,7 +471,7 @@ class CrmController extends Controller {
         $request = Yii::$app->request;
         $id = $request->get('id');
         $objData = $connection->createCommand('Select f.id,f.crm_id,f.remark,f.followupdate,f.addeddate
-                        from `Followup` f 
+                        from `followup` f 
                         where f.crm_id =' . $id . ' ORDER BY `followupdate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();

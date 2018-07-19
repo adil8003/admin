@@ -64,6 +64,7 @@ class AppAsset extends AssetBundle {
         //alertify js
         "vendor/alertifyjs/alertify.js",
         "vendor/assets/select2/select2.min.js",
+        "vendor/assets/nicEdit/nicEdit.js",
         "vendor/assets/formbuilderassets/vendor.js",
         "vendor/assets/formbuilderassets/form-builder.min.js",
         "vendor/assets/formbuilderassets/form-render.min.js",
@@ -76,7 +77,8 @@ class AppAsset extends AssetBundle {
         "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js",
         "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
         "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js"
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js",
+        "http://js.nicedit.com/nicEdit-latest.js"
     ];
     public $depends = [
             //'yii\web\YiiAsset',

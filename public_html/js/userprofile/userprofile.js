@@ -253,7 +253,7 @@ function checkCurrentpass() {
     var input_value = $('#currentpassword').val();
     var id = $('#userid').val();
     $.ajax({
-        url: 'index.php?r=employeprofile/checkcurrentpass',
+        url: 'index.php?r=profile/checkcurrentpass',
         type: 'POST',
         data: {
             currentpassword: input_value,
@@ -281,7 +281,7 @@ function saveChangePassword() {
                         obj.id = id;
                         obj.password = $('#confirmpassword').val();
                         $.ajax({
-                            url: 'index.php?r=employeprofile/changepassword',
+                            url: 'index.php?r=profile/changepassword',
                             async: false,
                             data: obj,
                             type: 'POST',

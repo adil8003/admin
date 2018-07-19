@@ -191,7 +191,7 @@ AppAsset::register($this);
                 </div>
 
             </div>
-            <footer class="footer footercss">
+            <footer class="footer footercss hide">
                 <div class="container-fluid">
                     <nav class="pull-left">
                         <ul>

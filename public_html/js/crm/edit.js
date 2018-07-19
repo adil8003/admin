@@ -2,6 +2,15 @@ $(document).ready(function () {
     var crmid = $('#crm_id').val();
 }); // end document.ready
 function eidtCustomer() {
+     var price = $('#price').val();
+    var priceFormat = $('#price-format').val();
+    if (priceFormat == 'Lakh') {
+        var amt = price * 100000;
+    } else if (priceFormat == 'Thousand') {
+        var amt = price * 1000;
+    } else if (priceFormat == 'Crore') {
+        var amt = price * 10000000;
+    }
      var crmid = $('#crm_id').val();
     if (validateCustomer()) {
         alertify.confirm("Are you sure you want update this customer?",
@@ -9,10 +18,11 @@ function eidtCustomer() {
                     var obj = new Object();
                     obj.crmid = crmid;
                     obj.cname = $('#cname').val();
+                    obj.cemail = $('#cemail').val();
                     obj.cphone = $('#cphone').val();
                     obj.propertytypeid = $('#propertytypeid').val();
                     obj.buytypeid = $('#buytypeid').val();
-                    obj.price = $('#price').val();
+                    obj.price = amt;
                     obj.location = $('#location').val();
                     obj.meetingstatus = $('#meetingstatus').val();
                     obj.meetingtypeid = $('#meetingtypeid').val();

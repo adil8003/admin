@@ -10,9 +10,10 @@ use Yii;
  * @property integer $id
  * @property string $cname
  * @property string $cphone
+ * @property string $cemail
  * @property integer $propertytypeid
  * @property integer $buytypeid
- * @property double $price
+ * @property integer $price
  * @property string $location
  * @property string $meetingstatus
  * @property integer $meetingtypeid
@@ -39,11 +40,10 @@ class Crm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'cphone', 'propertytypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'finalstatus', 'reffrom', 'statusid'], 'required'],
-            [['propertytypeid', 'buytypeid', 'meetingtypeid', 'statusid'], 'integer'],
-            [['price'], 'number'],
+            [['cname', 'cphone', 'cemail', 'propertytypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'finalstatus', 'reffrom', 'statusid'], 'required'],
+            [['propertytypeid', 'buytypeid', 'price', 'meetingtypeid', 'statusid'], 'integer'],
             [['addeddate'], 'safe'],
-            [['cname', 'location', 'meetingstatus'], 'string', 'max' => 500],
+            [['cname', 'cemail', 'location', 'meetingstatus'], 'string', 'max' => 500],
             [['cphone', 'detailsofproperty', 'postremark', 'finalstatus'], 'string', 'max' => 700],
             [['reffrom'], 'string', 'max' => 200]
         ];
@@ -58,6 +58,7 @@ class Crm extends \yii\db\ActiveRecord
             'id' => 'ID',
             'cname' => 'Cname',
             'cphone' => 'Cphone',
+            'cemail' => 'Cemail',
             'propertytypeid' => 'Propertytypeid',
             'buytypeid' => 'Buytypeid',
             'price' => 'Price',

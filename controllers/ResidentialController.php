@@ -35,8 +35,16 @@ class ResidentialController extends Controller {
         return $this->render('amenities', [
         ]);
     }
+
     public function actionKeylocation() {
         return $this->render('keylocation', [
+        ]);
+    }
+
+    public function actionImage() {
+        $objimages = \app\models\Imagegallery::find()->all();
+        return $this->render('image', [
+                    'objimages' => $objimages
         ]);
     }
 
@@ -73,14 +81,159 @@ class ResidentialController extends Controller {
         ]);
     }
 
-    public function actionGetallresidential() {
-        $arrOrganisation['status'] = FALSE;
+//    public function actionGetimages() {
+//        $arrReturn = array();
+//        $arrReturn['status'] = FALSE;
+//        $request = Yii::$app->request;
+//        $this->layout = "";
+//        $id = $request->post('id');
+//        $objImagegallery = \app\models\Imagegallery:: find()->where(['residentialid' => $id])->all();
+//        if ($id != '') {
+//            $arrReturn['status'] = TRUE;
+//            $arrReturn['data'] = $objImagegallery;
+//        }
+//        echo json_encode($arrReturn);
+//        die;
+//    }
+    public function actionGetimages() {
+        $arrResidential['status'] = FALSE;
         $arrJSON = array();
-        $arrOrganisation = array();
+        $arrResidential = array();
+        $this->layout = "";
+        $request = Yii::$app->request;
+        $id = $request->post('id');
+        $connection = Yii::$app->db;
+        $objData = $connection->createCommand('Select *
+                        from `imagegallery` r 
+                       where r.residentialid = ' . $id . ' AND r.statusid = ' . 2 . '   ORDER BY `addeddate` DESC ')->queryAll();
+        foreach ($objData AS $objrow) {
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['image'] = $objrow['image'];
+            $arrTemp['type'] = $objrow['type'];
+            $arrTemp['imgtype'] = $objrow['imgtype'];
+            $arrTemp['statusid'] = $objrow['statusid'];
+            $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
+            $arrResidential[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrResidential;
+        echo json_encode($arrJSON);
+    }
+
+    public function actionLinkuserimageflorplan() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $objImagegallery = \app\models\Imagegallery::find()->where(['id' => $id])->andWhere(['imgtype' => 'florplan'])->one();
+        $file = $objImagegallery->image;
+
+        header('Content-type: resources/png');
+        readfile($file);
+    }
+    public function actionLinkuserimageamenities() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $objImagegallery = \app\models\Imagegallery::find()->where(['id' => $id])->andWhere(['imgtype' => 'amenities'])->one();
+        $file = $objImagegallery->image;
+        header('Content-type: resources/png');
+        readfile($file);
+    }
+    public function actionLinkuserimageother() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $objImagegallery = \app\models\Imagegallery::find()->where(['id' => $id])->andWhere(['imgtype' => 'other'])->one();
+        $file = $objImagegallery->image;
+        header('Content-type: resources/png');
+        readfile($file);
+    }
+
+    public function actionUploadresidentialamenities() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+        if (!empty($_FILES)) {
+            $uploaddir = 'resources/residential/';
+            $image_name = md5(date('Ymdhis'));
+            $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+                $request = Yii::$app->request;
+                $id = $request->get('id');
+                $imgtype = $request->get('imgtype');
+                $objResprojectimage = new \app\models\Imagegallery();
+                $objResprojectimage->residentialid = $id;
+                $objResprojectimage->type = 1;
+                $objResprojectimage->imgtype = $imgtype;
+                $objResprojectimage->image = $uploadfile;
+                $objResprojectimage->statusid = 2;
+                $objResprojectimage->save();
+                $arrReturn['status'] = TRUE;
+            } else {
+                $arrReturn['msg'] = 'Try again.';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+    public function actionUploadresidentialotherimag() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+        if (!empty($_FILES)) {
+            $uploaddir = 'resources/residential/';
+            $image_name = md5(date('Ymdhis'));
+            $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+                $request = Yii::$app->request;
+                $id = $request->get('id');
+                $imgtype = $request->get('imgtype');
+                $objResprojectimage = new \app\models\Imagegallery();
+                $objResprojectimage->residentialid = $id;
+                $objResprojectimage->type = 1;
+                $objResprojectimage->imgtype = $imgtype;
+                $objResprojectimage->image = $uploadfile;
+                $objResprojectimage->statusid = 2;
+                $objResprojectimage->save();
+                $arrReturn['status'] = TRUE;
+            } else {
+                $arrReturn['msg'] = 'Try again.';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+    public function actionUploadresidentialflorplan() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+        if (!empty($_FILES)) {
+            $uploaddir = 'resources/residential/';
+            $image_name = md5(date('Ymdhis'));
+            $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+                $request = Yii::$app->request;
+                $id = $request->get('id');
+                $imgtype = $request->get('imgtype');
+                $objResprojectimage = new \app\models\Imagegallery();
+                $objResprojectimage->residentialid = $id;
+                $objResprojectimage->type = 1;
+                $objResprojectimage->imgtype = $imgtype;
+                $objResprojectimage->image = $uploadfile;
+                $objResprojectimage->statusid = 2;
+                $objResprojectimage->save();
+                $arrReturn['status'] = TRUE;
+            } else {
+                $arrReturn['msg'] = 'Try again.';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionGetallresidential() {
+        $arrResidential['status'] = FALSE;
+        $arrJSON = array();
+        $arrResidential = array();
         $this->layout = "";
         $connection = Yii::$app->db;
         $objData = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
-                        from `Residential` r 
+                        from `residential` r 
                         LEFT join `propertytype` p on r.propertytypeid = p.id 
                         LEFT join `buytype` bt on r.buytypeid = bt.id 
                        where r.statusid = ' . 2 . '  ORDER BY `addeddate` DESC ')->queryAll();
@@ -94,9 +247,9 @@ class ResidentialController extends Controller {
             $arrTemp['location'] = $objrow['location'];
             $arrTemp['price'] = $objrow['price'];
             $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
-            $arrOrganisation[] = $arrTemp;
+            $arrResidential[] = $arrTemp;
         }
-        $arrJSON['data'] = $arrOrganisation;
+        $arrJSON['data'] = $arrResidential;
         echo json_encode($arrJSON);
     }
 
@@ -174,6 +327,7 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
     public function actionUpdatekeylocation() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -217,7 +371,7 @@ class ResidentialController extends Controller {
         $connection = Yii::$app->db;
         $request = Yii::$app->request;
         $id = $request->get('id');
-        $objData = $connection->createCommand('Select c.carpetarea,c.id,c.dname,c.location,c.price,c.pname ,p.name as ptype,bt.name as btype,c.landmark
+        $objData = $connection->createCommand('Select c.carpetarea,c.id,c.reraid,c.possesiondate,c.pland,c.dname,c.location,c.price,c.pname ,p.name as ptype,bt.name as btype,c.landmark
                         from `residential` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
@@ -240,7 +394,7 @@ class ResidentialController extends Controller {
         $request = Yii::$app->request;
         $id = $request->get('residentialid');
         $objData = $connection->createCommand('Select a.id,a.aname,a.statusid,a.type,a.addeddate
-                        from `Amenities` a 
+                        from `amenities` a 
                         where a.residentialid =' . $id . ' ORDER BY `addeddate` ASC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
@@ -252,6 +406,7 @@ class ResidentialController extends Controller {
         $arrJSON['data'] = $arrfollow;
         echo json_encode($arrJSON);
     }
+
     public function actionGetallkeylocation() {
         $arrKeylocation['status'] = FALSE;
         $arrJSON = array();
@@ -261,7 +416,7 @@ class ResidentialController extends Controller {
         $request = Yii::$app->request;
         $id = $request->get('residentialid');
         $objData = $connection->createCommand('Select k.id,k.kname,k.statusid,k.type,k.addeddate,k.distance
-                        from `Keylocation` k 
+                        from `keylocation` k 
                         where k.residentialid =' . $id . ' ORDER BY `addeddate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
@@ -305,6 +460,7 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
     public function actionSavekeylocation() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();

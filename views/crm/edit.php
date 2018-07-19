@@ -16,18 +16,25 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
         <div class="content">
             <form name="form" >
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group" >
                             <label>Client Name:<span class="asterik">*</span><span  class="errmsg" id="err-cname"></span> </label>
                             <input type="text" value="<?php echo $objCrm->cname; ?>" class="form-control border-input input-sm" name="cname" id="cname" placeholder="  Organisationa Name "
                                    required/>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Email:<span class="asterik">*</span><span  class="errmsg" id="err-cemail"></span> </label>
+                            <input type="text" readonly="" value="<?php echo $objCrm->cemail; ?>" name="cemail" id="cemail"  class="form-control border-input input-sm"
+                                   placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Contact No:<span class="asterik">*</span><span  class="errmsg" id="err-cphone"></span> </label>
                             <input type="text" value="<?php echo $objCrm->cphone; ?>" name="cphone" id="cphone"  class="form-control border-input input-sm"
-                                   placeholder="Website">
+                                   placeholder="Contact No.">
                         </div>
                     </div>
                 </div>
@@ -67,10 +74,92 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>price<span class="asterik">*</span><span  class="errmsg" id="err-orgadminemail"></span> </label>
-                            <input type="email"  value="<?php echo $objCrm->price; ?>"name="price" id="price"   class="form-control border-input input-sm"
-                                   placeholder="Organisation admin email">
+                        <div class="row">
+                            <label for="price" class="">Price<span class="text-danger">*</span></label>
+                            <div class="col-sm-6"> 
+                                <div class="form-control">
+                                    <select class="form-control border-input input-sm" style="height: 40px;
+                                            margin-top: -13px;
+                                            width: 230px;
+                                            margin-left: -13px;" id="price-format" name="price-format" >
+                                            <?php
+                                            $digit = $objCrm->price;
+                                            $lengthNum = strlen($digit);
+                                            if ($lengthNum == 0 && $lengthNum == NULL) {
+                                                return ' ';
+                                            } else {
+                                                $lengthNum = strlen($digit);
+//                                $n =  strlen($no); // 7
+                                                switch ($lengthNum) {
+                                                    case 3:
+                                                        $val = $digit / 100;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." hundred";
+                                                        break;
+                                                    case 4:
+                                                        $val = $digit / 1000;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." thousand";
+                                                        break;
+                                                    case 5:
+                                                        $val = $digit / 1000;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." thousand";
+                                                        break;
+                                                    case 6:
+                                                        $val = $digit / 100000;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." lakh";
+                                                        break;
+                                                    case 7:
+                                                        $val = $digit / 100000;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." lakh";
+                                                        break;
+                                                    case 8:
+                                                        $val = $digit / 10000000;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." crore";
+                                                        break;
+                                                    case 9:
+                                                        $val = $digit / 10000000;
+                                                        $val = round($val, 2);
+//                                        $finalval =  $val ." crore";
+                                                        break;
+
+                                                    default:
+                                                        $val = 0;
+                                                }
+                                            }
+
+                                            $digit = $objCrm->price;
+                                            $lengthNum = strlen($digit);
+                                            $lakh = 6;
+                                            $thousand = 5;
+                                            $crore = 9;
+                                            if ($lengthNum > 5 && $lengthNum < 8) {
+                                                echo ' <option value="Lakh">Lakh</option>';
+                                            } else if ($lengthNum < 6 && $lengthNum > 0 && $lengthNum == 4) {
+                                                echo ' <option value="Thousand">Thousand</option>';
+                                            } else if ($lengthNum < 10 && $lengthNum > 7) {
+                                                echo '<option value="Crore">Crore</option>';
+                                            }
+                                            ?>
+                                        <option value="Thousand">Thousand</option>
+                                        <option value="Lakh">Lakh</option>
+                                        <option value="Crore">Crore</option>
+                                    </select>
+                                    <p id="err-price" class="text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group row control-group" style="    margin-top: -6px;
+                                     height: 38px;">
+                                    <input type="text" class="form-control input-sm border-input" id="price" name="price" placeholder="Price"
+                                           value="<?php echo $val; ?>" >
+                                    <p id="err-price" class="text-danger"></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">

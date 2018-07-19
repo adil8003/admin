@@ -14,14 +14,21 @@ $this->title = Yii::t('app', ' CRM');
         <div class="content">
             <form name="form" >
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Customer Name:<span class="asterik">*</span><span  class="errmsg" id="err-cname"></span> </label>
                             <input type="text" class="form-control border-input input-sm" name="cname" id="cname" placeholder="  Customer Name "
                                    required/>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Email:<span class="asterik">*</span><span  class="errmsg" id="err-cemail"></span> </label>
+                            <input type="text" name="cemail" id="cemail" onblur="checkUniqueEmail();"  class="form-control border-input input-sm"
+                                   placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label>Contact No:<span class="asterik">*</span><span  class="errmsg" id="err-cphone"></span> </label>
                             <input type="text" name="cphone" id="cphone"  class="form-control border-input input-sm"

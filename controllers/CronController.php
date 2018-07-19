@@ -47,7 +47,7 @@ class CronController extends Controller {
         $TodayD = date("d");
         $todaydate = date("Y-m-d");
         $objData = $connection->createCommand('Select c.id,f.followupdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
-                        from `Crm` c 
+                        from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                          LEFT join `followup` f on f.crm_id = c.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 2 . ' ')->queryAll();

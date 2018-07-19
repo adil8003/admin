@@ -11,6 +11,7 @@ $(document).ready(function () {
 }); // end document.ready
 
 function Updateform(id, remark, followupdate) {
+    getFollowbycustomerdetaisbyid();
     $('#ufollowupdate').datetimepicker({
         format: 'Y-m-d H:i',
         step: 15
@@ -245,7 +246,7 @@ function validateFollowupupdate() {
     } else {
         $('#err-uremark').html('');
     }
-      $('#uremark').keypress(function (e) {
+    $('#uremark').keypress(function (e) {
         var regex = new RegExp("^[a-zA-Z]+$");
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
         if (regex.test(str)) {
@@ -263,7 +264,7 @@ function validateFollowupupdate() {
     } else {
         $('#err-ufollowupdate').html('');
     }
-   
+
 
 
     return flag;
@@ -281,7 +282,7 @@ function validateFollowup() {
     } else {
         $('#err-remark').html('');
     }
-      $('#remark').keypress(function (e) {
+    $('#remark').keypress(function (e) {
         var regex = new RegExp("^[a-zA-Z]+$");
         var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
         if (regex.test(str)) {
@@ -299,7 +300,7 @@ function validateFollowup() {
     } else {
         $('#err-followupdate').html('');
     }
-    
+
 
 
     return flag;

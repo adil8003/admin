@@ -8,14 +8,14 @@ $this->title = Yii::t('app', 'Login');
                 <div class="col-lg-12 col-md-12">
                     <div class="login-card card">
                         <div class="header text-center">
-                            <h4 class="title"><img src="images/kwings.png" /></h4>
+                            <h4 class="title"><img src="images/logo.png" /></h4>
                         </div>
                         <div class="content">
                             <form id="form-login" method="POST" action="index.php?r=site/verification">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group" >
-                                            <label style="color: #fff !important">Username:<span class="asterik">*</span>
+                                            <label >Username:<span class="asterik">*</span>
                                                 <span  class="errmsg" id="err-fullname"></span> </label>
                                             <input  type="email" class="form-control border-input" placeholder="Email" name="email"  id="email" required>
                                         </div>
@@ -24,8 +24,8 @@ $this->title = Yii::t('app', 'Login');
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group" >
-                                            <label style="color: #fff !important">Password:<span class="asterik">*</span>
-                                                <span class="errmsg" style="color: #fff !important" id="err-password"></span> </label>
+                                            <label >Password:<span class="asterik">*</span>
+                                                <span class="errmsg"  id="err-password"></span> </label>
                                             <input  type="password" class="form-control border-input" onblur="checkPassword();" placeholder="Password" id="password" name="password"  required>  
                                         </div>
                                     </div>

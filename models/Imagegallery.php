@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "imggallery".
+ * This is the model class for table "imagegallery".
  *
  * @property integer $id
  * @property integer $residentialid
@@ -13,17 +13,18 @@ use Yii;
  * @property integer $resaleid
  * @property string $image
  * @property integer $type
+ * @property string $imgtype
  * @property integer $statusid
  * @property string $addeddate
  */
-class Imggallery extends \yii\db\ActiveRecord
+class Imagegallery extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'imggallery';
+        return 'imagegallery';
     }
 
     /**
@@ -33,9 +34,10 @@ class Imggallery extends \yii\db\ActiveRecord
     {
         return [
             [['residentialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
-            [['image', 'type', 'statusid'], 'required'],
+            [['image', 'type', 'imgtype', 'statusid'], 'required'],
             [['addeddate'], 'safe'],
-            [['image'], 'string', 'max' => 700]
+            [['image'], 'string', 'max' => 700],
+            [['imgtype'], 'string', 'max' => 200]
         ];
     }
 
@@ -51,6 +53,7 @@ class Imggallery extends \yii\db\ActiveRecord
             'resaleid' => 'Resaleid',
             'image' => 'Image',
             'type' => 'Type',
+            'imgtype' => 'Imgtype',
             'statusid' => 'Statusid',
             'addeddate' => 'Addeddate',
         ];

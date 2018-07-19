@@ -59,8 +59,8 @@ class mail {
     }
 
     public function getEmailHeader() {
-        $logoURL = 'http://kiwings.com/images/kwings.png';
-        $headURL = 'http://kiwings.com';
+        $logoURL = 'http://uniquepaf.tglobalsolutions.com/images/logo.png';
+        $headURL = 'http://uniquepaf.tglobalsolutions.com/';
         $header = " Unique proprty ";
         $emailCss = $this->getCSS();
         $headHtml = "<!DOCTYPE html>
@@ -87,10 +87,10 @@ class mail {
     }
 
     public function getEmailFooter() {
-        $comURL = 'http://kiwings.com/';
-        $companyName = 'Kiwings ';
-        $companyUrl = 'http://kiwings.com/';
-        $comName = 'Kiwings';
+        $comURL = 'http://uniquepaf.tglobalsolutions.com/images/logo.png/';
+        $companyName = 'Unique proprty';
+        $companyUrl = 'http://uniquepaf.tglobalsolutions.com/images/logo.png/';
+        $comName = 'Unique property';
         $email = 'sadil8003@gmail.com';
         $footer = "<div style= 'background-color : #FFE4AA' class='header nullTopCorner' >
                         </div>

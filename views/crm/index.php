@@ -34,7 +34,29 @@ $this->title = Yii::t('app', 'CRM');
 
                 </div>
             </div>
+            <div class="card" style="padding: 5px;">
+                <div class="card shadow" id="customerDetails">
+                  
+                </div>
+            </div>
         </div>
+
     </div>
 </div> 
 <script src="js/crm/index.js"></script>
+<style>
+    .cus-data{
+    color: #100e0e;
+    font-family: sans-serif;
+    background-color: #47525d66;
+    }
+     .shadow{-webkit-box-shadow:  -18px 17px 9px -17px rgba(212,26,26,1);
+            -moz-box-shadow: -18px 17px 9px -17px rgba(212,26,26,1);
+            box-shadow: -16px 16px 7px -17px rgba(212,26,26,1);
+            /*height: 20px !important;*/
+            min-height: 100px;
+            margin: 14px;
+            padding: 6px;
+            word-wrap: break-word;
+    }
+</style>
