@@ -44,7 +44,7 @@ AppAsset::register($this);
                             </li>
                             <li class="sub-menu">
                                 <a href="index.php?r=crm">
-                                    <i class="ti-id-badge"></i>
+                                    <i class="ti-user"></i>
                                     <p>C-R-M</p>
                                 </a>
                             </li>

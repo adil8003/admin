@@ -32,7 +32,7 @@ class AppAsset extends AssetBundle {
         "vendor/assets/css/course.css",
         "https://fonts.googleapis.com/css?family=Muli:400,300",
         "vendor/datatable-1.10.9/css/dataTables.bootstrap.min.css",
-        "vendor/assets/css/jquery.dataTables.yadcf",
+        "vendor/assets/css/jquery.dataTables.yadcf.css",
         "vendor/datatable-1.10.9/css/dataTables.bootstrap.min.css",
         "vendor/dropzone/dropzone.css",
         "vendor/dropzone/min/dropzone.min.css",
@@ -59,7 +59,7 @@ class AppAsset extends AssetBundle {
         "vendor/datatable-1.10.9/js/jquery.dataTables.min.js",
         "vendor/datatable-1.10.9/js/dataTables.bootstrap.min.js",
 //        "http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js",
-        "vendor/assets/js/jquery.dataTables.yadcf",
+        "vendor/assets/js/jquery.dataTables.yadcf.js",
         //alertify js
         "vendor/alertifyjs/alertify.js",
         "vendor/assets/select2/select2.min.js",

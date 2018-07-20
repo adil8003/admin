@@ -390,7 +390,7 @@ class CrmController extends Controller {
         $request = Yii::$app->request;
         $this->layout = "";
         if ($request->isPost) {
-            $Tomail = $request->post('tomail');
+            $Tomail = $request->post('to');
             $From = $request->post('from');
             $Message = $request->post('message');
             ////////////////////MAiL fUNCTION////////////////////////////////
