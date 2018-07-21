@@ -1,3 +1,12 @@
 ALTER TABLE `crm` ADD FOREIGN KEY (`propertytypeid`) REFERENCES propertytype(`id`)
 ALTER TABLE `residential` ADD FOREIGN KEY (`propertytypeid`) REFERENCES propertytype(`id`)
 ALTER TABLE `residential` ADD FOREIGN KEY (`statusid`) REFERENCES status(`id`)
+
+truncate -
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE table resale; 
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+resale --
+ALTER TABLE `resale` ADD FOREIGN KEY (`statusid`) REFERENCES status(`id`)

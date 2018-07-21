@@ -1,39 +1,81 @@
 <?php
-$this->title = Yii::t('app', 'CRM');
-?>
+$this->title = Yii::t('app', 'Resale');
 
+function getExpectedPriceinString($digit) {
+    $strReturn = $digit;
+    $lengthNum = strlen($digit);
+    if ($lengthNum != 0 && $lengthNum != NULL) {
+        switch ($lengthNum) {
+            case 3:
+                $val = $digit / 100;
+                $val = round($val, 2);
+                $strReturn = $val . " Thundred";
+                break;
+            case 4:
+                $val = $digit / 1000;
+                $val = round($val, 2);
+                $strReturn = $val . " Thousand";
+                break;
+            case 5:
+                $val = $digit / 1000;
+                $val = round($val, 2);
+                $strReturn = $val . " Thousand";
+                break;
+            case 6:
+                $val = $digit / 100000;
+                $val = round($val, 2);
+                $strReturn = $val . " Lakh";
+                break;
+            case 7:
+                $val = $digit / 100000;
+                $val = round($val, 2);
+                $strReturn = $val . " Lakh";
+                break;
+            case 8:
+                $val = $digit / 10000000;
+                $val = round($val, 2);
+                $strReturn = $val . " Crore";
+                break;
+            case 9:
+                $val = $digit / 10000000;
+                $val = round($val, 2);
+                $strReturn = $val . " Crore";
+                break;
+        }
+    }
+    return $strReturn;
+}
+?>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h4 class="title">CRM - Customer List 
+                <h4 class="title">Resale Project List
                     <!--<form><input type="text" onblur="seacrhCustomer();" name="search" id="search" placeholder="Enter location"></form>-->
                     <span>
                         <div class="btn-group pull-right">
-                            <a href="index.php?r=resale/add" type="button" class="btn btn-info btn-wd btn-fill btn-xs ">Add Customer</a>
-                            <a href="index.php?r=crm/callnow" type="button" class="btn btn-info btn-wd btn-fill btn-xs ">Call Now</a>
-                            <a href="index.php?r=crm/inactivecustomer" type="button" class="btn btn-info btn-wd btn-fill btn-xs">Inactive Customer</a>
-                        </div>
+                            <a href="index.php?r=resale/add" type="button" class="btn btn-info btn-wd btn-fill btn-xs ">Add Property </a>
+                            </div>
                     </span>
                 </h4>
                 <hr>
                 <div class="content table-responsive table-full-width">
-                    <table class="table table-striped" id="tblCrmCustomer">
+                    <table class="table table-striped" id="tblResale">
                         <thead>
                             <tr>
                                 <td>Minimum price:</td>
-                                <td><input type="text" class="form-control border-input input-xm small" id="cusmin" name="min"></td>
+                                <td><input type="text" class="form-control border-input input-xm small" id="resmin" name="min"></td>
                             </tr>
                             <tr>
                                 <td>Maximum price:</td>
-                                <td><input type="text" class="form-control border-input input-sm" id="cusmax" name="max"></td>
+                                <td><input type="text" class="form-control border-input input-sm" id="resmax" name="max"></td>
                             </tr>
-                        <th>Name</th>
-                        <th>Type</ th>
+                        <th>Owner Name</th>
+                        <th> Type</th>
                         <th>Location</th>
-                        <th>Phone</th>
-                        <th>Email</th>
                         <th>Price</th>
+                        <th>Phone</th>
+                        <th>Status</th>
                         <th>Action</th>
                         </thead>
                         <tbody>
@@ -43,15 +85,14 @@ $this->title = Yii::t('app', 'CRM');
                 </div>
             </div>
             <div class="card" style="padding: 5px;">
-                <div class="card shadow" id="customerDetails">
+                <div class="card shadow" id="propertyDetails">
 
                 </div>
             </div>
         </div>
-
     </div>
 </div> 
-<script src="js/crm/index.js"></script>
+<script src="js/resale/index.js"></script>
 <style>
     .cus-data{
         color: #100e0e;
@@ -67,7 +108,7 @@ $this->title = Yii::t('app', 'CRM');
             padding: 6px;
             word-wrap: break-word;
     }
-     .dataTables_length{
+    .dataTables_length{
         display: none;
     }
 </style>
