@@ -52,6 +52,7 @@ class CronController extends Controller {
                          LEFT join `followup` f on f.crm_id = c.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 2 . ' ')->queryAll();
 
+
         $abhishek_sir = "sadil8003@gmail.com";
         // $kadam_sir = "ckadam@uniquepaf.com";
         // $umesh_sir = "umeshs@uniquepaf.com";
@@ -59,23 +60,89 @@ class CronController extends Controller {
         if (count($objData)) {
             $body = "";
             $body .= "<table border=2>";
-            $body .= "<tr><td><b>Customer Name</b></td><td><b>Customer Phone</b></td><td><b>First Discussion By</b></td><td><b>First Remark</b></td><td><b>Attended By</b></td><td><b>Attended Remark</b></td></tr>";
             foreach ($objData AS $objrow) {
-                $M = date('m', strtotime($objrow['followupdate']));
-                $D = date('d', strtotime($objrow['followupdate']));
-                if ($TodayM == $M && $TodayD === $D) {
-                    $arrTemp = array();
-                    $arrTemp['status'] = TRUE;
-                    $arrTemp['id'] = $objrow['id'];
-                    $arrTemp['cname'] = $objrow['cname'];
-                    $arrTemp['cphone'] = $objrow['cphone'];
-                    $arrTemp['price'] = $objrow['price'];
-                    $arrTemp['location'] = $objrow['location'];
-                    $arrTemp['ptype'] = $objrow['ptype'];
-                    $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
-                    $arrReturn[] = $arrTemp;
+                if ($objrow['followupdate'] != ' ' && $objrow['followupdate'] != NULL) {
+                    $M = date('m', strtotime($objrow['followupdate']));
+                    $D = date('d', strtotime($objrow['followupdate']));
+                    if ($TodayM == $M && $TodayD === $D) {
+                        $arrTemp = array();
+                        $arrTemp['status'] = TRUE;
+                        $arrTemp['cname'] = $objrow['cname'];
+                        $arrTemp['cphone'] = $objrow['cphone'];
+                        $arrTemp['price'] = $objrow['price'];
+                        $arrTemp['location'] = $objrow['location'];
+                        $arrTemp['ptype'] = $objrow['ptype'];
+                        $arrReturn[] = $arrTemp;
+                    }
                 }
             }
+
+           
+            foreach ($objData AS $objrow) {
+                if ($objrow['followupdate'] != ' ' && $objrow['followupdate'] != NULL) {
+                    $M = date('m', strtotime($objrow['followupdate']));
+                    $D = date('d', strtotime($objrow['followupdate']));
+                    if ($TodayM == $M && $TodayD === $D) {
+                        $digit = $objrow['price'];
+                                            $lengthNum = strlen($digit);
+                                            if ($lengthNum == 0 && $lengthNum == NULL) {
+                                                return ' ';
+                                            } else {
+                                                $lengthNum = strlen($digit);
+//                                $n =  strlen($no); // 7
+                                                switch ($lengthNum) {
+                                                    case 3:
+                                                        $val = $digit / 100;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." hundred";
+                                                        break;
+                                                    case 4:
+                                                        $val = $digit / 1000;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." thousand";
+                                                        break;
+                                                    case 5:
+                                                        $val = $digit / 1000;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." thousand";
+                                                        break;
+                                                    case 6:
+                                                        $val = $digit / 100000;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." lakh";
+                                                        break;
+                                                    case 7:
+                                                        $val = $digit / 100000;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." lakh";
+                                                        break;
+                                                    case 8:
+                                                        $val = $digit / 10000000;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." crore";
+                                                        break;
+                                                    case 9:
+                                                        $val = $digit / 10000000;
+                                                        $val = round($val, 2);
+                                        $finalval =  $val ." crore";
+                                                        break;
+
+                                                    default:
+                                                        $val = 0;
+                                                }
+                                            }
+
+                        $body .= "<tr>"
+                                . "<td><b>Customer Name :" . $objrow['cname'] . "</b></td>"
+                                . "<td><b>Customer Phone :" . $objrow['cphone'] . "</b></td>"
+                                . "<td><b>Budget :" . $finalval . "</b></td>"
+                                . "<td><b>location :" . $objrow['location'] . "</b></td>"
+                                . "<td><b>property type:" . $objrow['ptype'] . "</b></td>"
+                                . "</tr>";
+                    }
+                }
+            }
+
 
             $body .= "</table><br>";
 

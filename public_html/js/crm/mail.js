@@ -18,6 +18,7 @@ function getFollowbycustomerdetaisbyid() {
             console.log(data);
             if (data.status == true) {
                 $('#mailto').val(data.data.cemail);
+                $('#cname').val(data.data.cname);
                 createHTML(data);
 
             }
@@ -43,6 +44,7 @@ function sendMail() {
     var obj = new Object();
     obj.to = $('#mailto').val();
     obj.from = $('#from').val();
+    obj.cname = $('#cname').val();
     obj.message = nicE.getContent();
     $.ajax({
         url: "index.php?r=crm/mailsend",

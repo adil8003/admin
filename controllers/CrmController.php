@@ -393,6 +393,7 @@ class CrmController extends Controller {
             $Tomail = $request->post('to');
             $From = $request->post('from');
             $Message = $request->post('message');
+            $CusstomerName = $request->post('cname');
             ////////////////////MAiL fUNCTION////////////////////////////////
             $date = date('Y-m-d');
             if($Tomail || $From || $Message){
@@ -402,14 +403,13 @@ class CrmController extends Controller {
             $header = 'Unique property';
             $logo = 'http://uniquepaf.tglobalsolutions.com/images/logo.png';
             $comURL = 'http://uniquepaf.tglobalsolutions.com/';
-            $companyemail = 'sadil8003@gmail';
+            $companyemail = 'abhishekk@uniquepaf.com';
             // to customer mail body
             $body = "  
                     <div class='jumbotron'>
-                            <p  class= 'headSetFont'>Thank you for Registering with us.<br></p>
-                            <p  class= 'setPOne fontBold'><b>Hi</b> " . $Message . ",<br></p>
-                            <p  class= 'setPOne fontBold'><b>Username:</b> " . 'ss' . "<br></p>
-                            <p  class= 'setPOne fontBold'><b>Password:</b> " . 'dd' . "<br></p>
+                            <p  class= 'headSetFont'>Thanks for being a part of the Unique property & finance family.<br></p>
+                            <p  class= 'setPOne fontBold'><b>Dear: </b> " . $CusstomerName . ",<br></p>
+                            <p  class= 'setPOne fontBold'><b>Message:</b> " . $Message . "<br></p><hr>
                             <p  class= 'setPOne fontBold'><b>Url:</b> " . $comURL . "<br></p>
                             <p  class= 'setPOne fontBold'><b>Thank you.</b> <br></p>
                             <p  class= 'setPOne'>Please feel free to contact us for any queries: <br></p>

@@ -2,5 +2,5 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'basePath' => 'C:\wamp64\www\admin/',
+    'basePath' => '/home/tglobalsolutions/domains/uniquepaf.tglobalsolutions.com/',
 ];

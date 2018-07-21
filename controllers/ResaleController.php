@@ -33,24 +33,28 @@ class ResaleController extends Controller {
     public function actionEdit() {
         $request = Yii::$app->request;
         $id = $request->get('id');
-//        $objProductstatus = Productstatus::find()->all();
-//        $objStatus = Status::find()->all();
-//        $objNewarrivalproduct = Newarrivalproduct::findOne($id);
+        $objStatus = \app\models\Status :: find()->all();
+        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objPropertytype = \app\models\Propertytype::find()->all();
+        $objResidential = \app\models\Residential::findOne($id);
         return $this->render('edit', [
-//                    'objProductstatus' => $objProductstatus,
-//                    'objStatus' => $objStatus,
-//                    'objNewarrivalproduct' => $objNewarrivalproduct
+                    'objBuyTpe' => $objBuyTpe,
+                    'objPropertytype' => $objPropertytype,
+                    'objResidential' => $objResidential,
+                    'objStatus' => $objStatus
         ]);
     }
 
     public function actionAdd() {
-//        $request = Yii::$app->request;
-//        $id = $request->get('id');
-//        $objProductstatus = Productstatus::find()->all();
-//        $objStatus = Status::find()->all();
+        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objStatus = \app\models\Status :: find()->all();
+        $objMeetingtype = \app\models\meetingtype :: find()->all();
+        $objPropertytype = \app\models\Propertytype::find()->all();
         return $this->render('add', [
-//                    'objProductstatus' => $objProductstatus,
-//                    'objStatus' => $objStatus
+                    'objBuyTpe' => $objBuyTpe,
+                    'objMeetingtype' => $objMeetingtype,
+                    'objPropertytype' => $objPropertytype,
+                    'objStatus' => $objStatus
         ]);
     }
 

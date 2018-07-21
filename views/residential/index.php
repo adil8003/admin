@@ -77,7 +77,6 @@ function getExpectedPriceinString($digit) {
                         <th>Location</th>
                         <th>Price</th>
                         <th>Property for</th>
-                        <th>Date</th>
                         <th>Action</th>
                         </thead>
                         <tbody>

@@ -5,6 +5,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
 <input type="hidden" id="crm_id" value="<?php echo $id; ?>" />
 <input type="hidden" id="listpage" value="1" />
 <input type="hidden" id="follow_id" value=" " />
+<input type="hidden" id="cname" value=" " />
 <div class="row">
     <div class="col-lg-4 col-md-5">
         <div class="card card-user" id="addForm">

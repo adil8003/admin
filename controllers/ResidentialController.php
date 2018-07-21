@@ -12,6 +12,10 @@ use app\models\Status;
 use app\models\Newarrivalproduct;
 use app\models\Productstatus;
 use app\models\Keylocation;
+use app\models\buytype;
+use app\models\Propertytype;
+use app\models\Residential;
+use app\models\Imagegallery;
 
 class ResidentialController extends Controller {
 
@@ -42,9 +46,11 @@ class ResidentialController extends Controller {
     }
 
     public function actionImage() {
-        $objimages = \app\models\Imagegallery::find()->all();
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+//        $objimages = \app\models\Imagegallery::find()->all();
         return $this->render('image', [
-                    'objimages' => $objimages
+//                    'objimages' => $objimages
         ]);
     }
 
@@ -52,7 +58,7 @@ class ResidentialController extends Controller {
         $request = Yii::$app->request;
         $id = $request->get('id');
         $objStatus = \app\models\Status :: find()->all();
-        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objBuyTpe = \app\models\Buytype :: find()->all();
         $objPropertytype = \app\models\Propertytype::find()->all();
         $objResidential = \app\models\Residential::findOne($id);
         return $this->render('edit', [
@@ -64,9 +70,9 @@ class ResidentialController extends Controller {
     }
 
     public function actionAdd() {
-        $objBuyTpe = \app\models\buytype :: find()->all();
+        $objBuyTpe = \app\models\Buytype :: find()->all();
         $objStatus = \app\models\Status :: find()->all();
-        $objMeetingtype = \app\models\meetingtype :: find()->all();
+        $objMeetingtype = \app\models\Meetingtype :: find()->all();
         $objPropertytype = \app\models\Propertytype::find()->all();
         return $this->render('add', [
                     'objBuyTpe' => $objBuyTpe,
@@ -81,20 +87,6 @@ class ResidentialController extends Controller {
         ]);
     }
 
-//    public function actionGetimages() {
-//        $arrReturn = array();
-//        $arrReturn['status'] = FALSE;
-//        $request = Yii::$app->request;
-//        $this->layout = "";
-//        $id = $request->post('id');
-//        $objImagegallery = \app\models\Imagegallery:: find()->where(['residentialid' => $id])->all();
-//        if ($id != '') {
-//            $arrReturn['status'] = TRUE;
-//            $arrReturn['data'] = $objImagegallery;
-//        }
-//        echo json_encode($arrReturn);
-//        die;
-//    }
     public function actionGetimages() {
         $arrResidential['status'] = FALSE;
         $arrJSON = array();
@@ -130,6 +122,7 @@ class ResidentialController extends Controller {
         header('Content-type: resources/png');
         readfile($file);
     }
+
     public function actionLinkuserimageamenities() {
         $request = Yii::$app->request;
         $id = $request->get('id');
@@ -138,6 +131,7 @@ class ResidentialController extends Controller {
         header('Content-type: resources/png');
         readfile($file);
     }
+
     public function actionLinkuserimageother() {
         $request = Yii::$app->request;
         $id = $request->get('id');
@@ -173,6 +167,7 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
     public function actionUploadresidentialotherimag() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -199,6 +194,7 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
     public function actionUploadresidentialflorplan() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -375,7 +371,7 @@ class ResidentialController extends Controller {
                         from `residential` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
-                        LEFT join `Amenities` a on c.id = a.residentialid 
+                        LEFT join `amenities` a on c.id = a.residentialid 
                         where c.id =' . $id . ' ')->queryOne();
         if ($objData) {
             $arrReturn['status'] = TRUE;
