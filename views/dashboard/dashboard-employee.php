@@ -18,7 +18,7 @@ $this->title = Yii::t('app', 'Dashboard');
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p> your Organisations</p>
+                                            <p>ss</p>
                                             30
                                         </div>
                                     </div>

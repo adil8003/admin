@@ -38,13 +38,13 @@ class AppAsset extends AssetBundle {
         "vendor/dropzone/min/dropzone.min.css",
         "vendor/alertifyjs/css/alertify.css",
         "vendor/alertifyjs/css/themes/default.css",
-        "vendor/assets/select2/select2.css",
         "//cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css",
         "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css",
         "https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css",
 //        "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/css/britecharts.css",
         "https://cdn.jsdelivr.net/npm/britecharts/dist/css/britecharts.min.css",
         "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css",
+        "vendor/assets/select2/select2.css",
         "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css",
     ];
     public $js = [

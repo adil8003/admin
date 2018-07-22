@@ -172,11 +172,11 @@ function checkUniqueEmail() {
         url: 'index.php?r=crm/checkuniqueemail',
         type: 'POST',
         data: {
-            cname: input_value,
+            cemail: input_value,
         },
         success: function (response) {
             data = JSON.parse(response);
-            if (data.status == false) {
+            if (data.status === true) {
                 $('#err-cemail').text("Already exist,try different !");
                 $('#cemail').focus();
             } else {

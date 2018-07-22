@@ -330,14 +330,14 @@ class CrmController extends Controller {
         $connection = Yii::$app->db;
         $TodayM = date("m");
         $TodayD = date("d");
-        $objData = $connection->createCommand('Select c.id,f.followupdate ffadte,f.addeddate as fdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+        $objData = $connection->createCommand('Select c.id,f.followupdate,f.addeddate as fdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
                         from `crm` c 
                         LEFT join `propertytype` p on c.propertytypeid = p.id 
                          LEFT join `followup` f on f.crm_id = c.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 2 . ' ')->queryAll();
         foreach ($objData AS $objrow) {
-            $M = date('m', strtotime($objrow['ffadte']));
-            $D = date('d', strtotime($objrow['ffadte']));
+            $M = date('m', strtotime($objrow['followupdate']));
+            $D = date('d', strtotime($objrow['followupdate']));
             if ($TodayM == $M && $TodayD == $D) {
                 $arrTemp = array();
                 $arrTemp['status'] = TRUE;
