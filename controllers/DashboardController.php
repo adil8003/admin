@@ -105,7 +105,7 @@ class DashboardController extends Controller {
         $ResCount = count($objResidential);
         $CrmCount = count($objCrm);
         $ResaleCount = count($objResale);
-        
+
 //        active acount
         $objResaleActive = count($objResaleActive);
         $objResidentialActive = count($objResidentialActive);
@@ -114,7 +114,7 @@ class DashboardController extends Controller {
         $objResaleInactive = count($objResaleInactive);
         $objResidentialInactive = count($objResidentialInactive);
         $objCrmInactive = count($objCrmInactive);
-        if ($ResCount || $ResCount ) {
+        if ($ResCount || $ResCount) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
             $arrTemp['rescount'] = $ResCount;
@@ -131,7 +131,8 @@ class DashboardController extends Controller {
         $arrJSON['data'] = $arrCount;
         echo json_encode($arrJSON);
     }
-     public function actionGetalltodaycallcustomerlist() {
+
+    public function actionGetalltodaycallcustomerlist() {
         $arrTodaycustomerList['status'] = FALSE;
         $arrJSON = array();
         $arrTodaycustomerList = array();
