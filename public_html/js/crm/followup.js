@@ -34,6 +34,7 @@ function  updateFollowup() {
                     obj.id = follow_id;
                     obj.remark = $('#uremark').val();
                     obj.followupdate = $('#ufollowupdate').val();
+                    obj.customerstatusid = $('#ustatusid').val();
 
                     $.ajax({
                         url: 'index.php?r=crm/updatefollowup',
@@ -133,7 +134,6 @@ function getCourseHorizontalCard(dataAll) {
         var startRecord = (intCurrPage - 1) * intRecordsPerpage;
         var endRecord = intCurrPage * intRecordsPerpage;
         if (startRecord <= k && k < endRecord) {
-
             var today = new Date();
             var dd = today.getDate();
             var mm = today.getMonth() + 1; //January is 0!
@@ -154,7 +154,7 @@ function getCourseHorizontalCard(dataAll) {
                 html += '<strong style="color:red">' + v.followupdate + '</strong><span><a class="iconPencil hide" href="#" onclick="Updateform(`' + v.id + '`,`' + v.remark + '`,`' + v.followupdate + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
                 html += '</div>';
                 html += '<p class="card-text text-info">' + v.remark + '</p>';
-                html += '<p class="card-text text-danger"><span><p class="text-center text-danger">' + Expired + '</p> </span></p>';
+                html += '<p class="card-text text-danger"><span><p class="text-center text-danger">' + Expired + ' </p> </span></p>';
                 html += '</div>';
                 $('#editIcon').hide();
 
@@ -168,8 +168,9 @@ function getCourseHorizontalCard(dataAll) {
                             <span class="pull-right blink text-danger">' + callCustomer + '</span> \n\
                             <i  class="ti-pencil teal-text pull-right ">&nbsp;</i></a></span> ';
                     html += '</div>';
-                    html += '<p class="card-text text-info">' + v.remark + '</p>';
+                    html += '<p class="card-text text-info">' + v.remark + ' </p>';
                     html += '</div>';
+
                 } else {
                     html += '<div class="card shadow">';
                     html += '<div class="alert alert-info">';
@@ -178,8 +179,9 @@ function getCourseHorizontalCard(dataAll) {
                             <span class="pull-right blink text-danger"></span> \n\
                             <i  class="ti-pencil teal-text pull-right ">&nbsp;</i></a></span> ';
                     html += '</div>';
-                    html += '<p class="card-text text-info">' + v.remark + '</p>';
+                    html += '<p class="card-text text-info">' + v.remark + ' </p>';
                     html += '</div>';
+
                 }
                 function blink_text() {
                     $('.blink').fadeOut(500);
@@ -214,6 +216,7 @@ function saveFollowup() {
                     obj.crm_id = crmid;
                     obj.remark = $('#remark').val();
                     obj.followupdate = $('#followupdate').val();
+                    obj.customerstatusid = $('#statusid').val();
 
                     $.ajax({
                         url: 'index.php?r=crm/savefollowup',
@@ -246,18 +249,7 @@ function validateFollowupupdate() {
     } else {
         $('#err-uremark').html('');
     }
-    $('#uremark').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-uremark').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
+
     if (followupdate == '') {
         $('#err-ufollowupdate').html('Date required');
         flag = false;
@@ -282,18 +274,7 @@ function validateFollowup() {
     } else {
         $('#err-remark').html('');
     }
-    $('#remark').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-remark').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
+
     if (followupdate == '') {
         $('#err-followupdate').html('Date required');
         flag = false;

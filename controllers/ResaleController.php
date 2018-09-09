@@ -244,7 +244,7 @@ class ResaleController extends Controller {
         $id = $request->get('id');
         $objData = $connection->createCommand('Select r.id,r.propertyfacing,r.furniture,r.ownername,r.added_date,
                                         r.contact,r.location,r.remarks,r.carpetarea,r.floornumber,
-                                        r.flatnumber,r.wing,r.buildingname,
+                                        r.flatnumber,r.wing,r.buildingname,r.address,
                                         r.societyname,r.age,
                                         r.price,p.name as ptype ,r.location,s.name as stype
                         from `resale` r 

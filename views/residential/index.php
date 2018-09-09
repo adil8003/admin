@@ -54,7 +54,7 @@ function getExpectedPriceinString($digit) {
                     <!--<form><input type="text" onblur="seacrhCustomer();" name="search" id="search" placeholder="Enter location"></form>-->
                     <span>
                         <div class="btn-group pull-right">
-                            <a href="index.php?r=residential/add" type="button" class="btn btn-info btn-wd btn-fill btn-xs ">Add Proprty</a>
+                            <a href="index.php?r=residential/add" type="button" class="btn btn-info btn-wd btn-fill btn-xs ">Add property</a>
                             <!--<a href="index.php?r=residential/edit" type="button" class="btn btn-info btn-wd btn-fill btn-xs ">Call Now</a>-->
                             <!--<a href="index.php?r=crm/inactivecustomer" type="button" class="btn btn-info btn-wd btn-fill btn-xs">Inactive Customer</a>-->
                         </div>

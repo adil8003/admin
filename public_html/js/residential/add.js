@@ -1,9 +1,23 @@
 $(document).ready(function () {
+    $('.js-example-basic-multiple').select2({
+        placeholder: "Select ",
+    });
     $('#possesiondate').datetimepicker({
         format: 'Y-m-d',
     });
 });
 
+function resetdata() {
+    $('#pname').val(' ');
+    $('#dname').val(' ');
+    $('#location').val(' ');
+    $('#pland').val(' ');
+    $('#landmark').val(' ');
+    $('#address').val(' ');
+    $('#price').val(' ');
+    $("#propertytypeid").select2().select2('val', 'asp');
+    $("#saveBtn").attr("disabled", false);
+}
 
 function saveProperty() {
     var price = $('#price').val();
@@ -28,10 +42,8 @@ function saveProperty() {
                 obj.landmark = $('#landmark').val();
                 obj.address = $('#address').val();
                 obj.price = amt;
-                obj.carpetarea = $('#carpetarea').val();
-                obj.reraid = $('#reraid').val();
-                obj.possesiondate = $('#possesiondate').val();
                 obj.statusid = $('#statusid').val();
+                obj.landtypeid = $('#landtypeid').val();
                 $.ajax({
                     url: 'index.php?r=residential/saveproperty',
                     async: false,
@@ -39,7 +51,7 @@ function saveProperty() {
                     type: 'POST',
                     success: function (data) {
                         showMessage('success', 'Property added successfully.');
-//                            $('#fees').val();
+                        $("#saveBtn").attr("disabled", true);
                     },
                     error: function (data) {
                         showMessage('danger', 'Please try again.');
@@ -48,6 +60,7 @@ function saveProperty() {
             });
 //    }
 }
+
 function validateProperty() {
     var flag = true;
     var cname = $('#cname').val();

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('.js-example-basic-multiple').select2({
+        placeholder: "Select "
+    });
     var crmid = $('#crm_id').val();
 }); // end document.ready
 function eidtCustomer() {

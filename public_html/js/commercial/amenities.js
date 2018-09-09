@@ -1,0 +1,262 @@
+$(document).ready(function () {
+    allAmenities();
+    GetResdetailsbyid();
+    var com_id = $('#com_id').val();
+    $('#updateForm').hide();
+}); // end document.ready
+
+function getPriceinString(digit) {
+    var strReturn = digit;
+    var lengthNum = digit.length;
+    if (lengthNum != 0 && lengthNum != ' ') {
+        switch (lengthNum) {
+            case 3:
+                var val = digit / 100;
+                var strReturn = val + " Thundred";
+                break;
+            case 4:
+                var val = digit / 1000;
+                var strReturn = val + " Thousand";
+                break;
+            case 5:
+                var val = digit / 1000;
+                var strReturn = val + " Thousand";
+                break;
+            case 6:
+                var val = digit / 100000;
+                var strReturn = val + " Lakh";
+                break;
+            case 7:
+                var val = digit / 100000;
+                var strReturn = val + " Lakh";
+                break;
+            case 8:
+                var val = digit / 10000000;
+                var strReturn = val + " Crore";
+                break;
+            case 9:
+                var val = digit / 10000000;
+                var strReturn = val + " Crore";
+                break;
+        }
+    }
+    return strReturn;
+}
+
+function UpdateAmenities (id,aname ,type,cdetails) {
+    $('#addForm').hide();
+    $('#propertyDetails').show();
+    $('#updateForm').show();
+    $('#uaname').val(aname);
+    $('#utypeid').val(type);
+    var cdetail = (cdetails == null ? '' :  cdetails )
+    $('#ucdetails').val(cdetail);
+    $('#amenities_id').val(id);
+}
+function  updateAmenities() {
+    var amenities_id = $('#amenities_id').val();
+    var com_id = $('#com_id').val();
+    if (validateFollowupupdate()) {
+        alertify.confirm("Are you sure you want update this?",
+                function () {
+                    var obj = new Object();
+                    obj.commercialid = com_id;
+                    obj.id = amenities_id;
+                    obj.aname = $('#uaname').val();
+                    obj.type = $('#utypeid').val();
+                    obj.cdetails = $('#ucdetails').val();
+                    $.ajax({
+                        url: 'index.php?r=commercial/updateamenities',
+                        async: false,
+                        data: obj,
+                        type: 'POST',
+                        success: function (data) {
+                            showMessage('success', 'Update successfully.');
+                            allAmenities();
+                            $('#addForm').show();
+                            $('#updateForm').hide();
+                        },
+                        error: function (data) {
+                            showMessage('danger', 'Please try again.');
+                        }
+                    });
+                });
+    }
+}
+function GetResdetailsbyid() {
+    var com_id = $('#com_id').val();
+    var obj = new Object();
+    obj.id = com_id;
+    $.ajax({
+        url: "index.php?r=commercial/getcommercialid",
+        async: false,
+        data: obj,
+        type: 'GET',
+        success: function (data) {
+            var data = JSON.parse(data);
+            console.log(data);
+            if (data.status == true) {
+                createHTML(data);
+
+            }
+        }
+    });
+}
+function createHTML(data) {
+    var html = '';
+    html += '<div class="card " style="min-height: 240px;">';
+    html += '<div class="alert alert-info text-info">';
+    html += '<strong> Project Name:   <a href="index.php?r=residential/edit&amp;id=' + data.data.id + '">    ' + data.data.cname + ' </a></strong>';
+    html += '</div>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Developer name.:- ' + data.data.dname + '</p>';
+    html += '<p class="text-bold" style="font-size: 17px;padding:2px">Price. :- ' + getPriceinString(data.data.price) + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px"> Property type:- ' + data.data.ptype + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Property For:-  ' + data.data.btype + '</p>';
+    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Location:-  ' + data.data.location + '</p>';
+    html += '</div>';
+    $('#propertyDetails').html(html);
+}
+
+function allAmenities(id) {
+    var com_id = $('#com_id').val();
+    var obj = new Object();
+    obj.commercialid = com_id;
+    obj.page = $('#listpage').val();
+    $.ajax({
+        url: "index.php?r=commercial/getallamenities",
+        async: false,
+        data: obj,
+        type: 'GET',
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.data == '') {
+                $('#notAvailable').html("<h5>Key features not available </h5>");
+            } else {
+                if (data.data[0].status === true) {
+                    window.listCourse = data;
+                    var htm = '';
+                    htm = getAmenitiesCard(data);
+                    $('#amenitiesList').html(htm);
+
+                }
+            }
+        }
+    });
+}
+
+//follow up layout-
+function searchPage(page) {
+    $('#listpage').val(page);
+    allAmenities();
+}
+function getAmenitiesCard(dataAll) {
+    dataAll = window.listCourse;
+    var intRecords = dataAll.data.length;
+    var intRecordsPerpage = 5;
+    var intRecordsMaxpage = Math.ceil(dataAll.data.length / intRecordsPerpage);
+    var intCurrPage = $('#listpage').val();
+    var html = '';
+
+    $.each(dataAll.data, function (k, v) {
+        var url = window.location.href;
+        var startRecord = (intCurrPage - 1) * intRecordsPerpage;
+        var endRecord = intCurrPage * intRecordsPerpage;
+        if (startRecord <= k && k < endRecord) {
+            if(v.cdetails == null){
+                
+            html += '<div class="card shadow" >';
+            html += '<div class="alert alert-info">';
+            html += '<strong style="color:red">' + v.aname + '</strong><span><a class="iconPencil " href="#" onclick="UpdateAmenities(`' + v.id + '`,`' + v.aname + '`,`'+ v.type + '`,`'+ v.cdetails + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
+            html += '</div>';
+//            html += '<p class="">' + v.cdetails + '</p>';
+//            html += '<p class="card-text text-danger"><span><p class="text-center text-danger"></p> </span></p>';
+            html += '</div>';
+            }else{
+            html += '<div class="card shadow" >';
+            html += '<div class="alert alert-info">';
+            html += '<strong style="color:red">' + v.aname + '</strong><span><a class="iconPencil " href="#" onclick="UpdateAmenities(`' + v.id + '`,`' + v.aname + '`,`'+ v.type +'`,`'+ v.cdetails +'`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
+            html += '</div>';
+            html += '<p style="padding:5px">' + v.cdetails + '</p>';
+//            html += '<p class="card-text text-danger"><span><p class="text-center text-danger"></p> </span></p>';
+            html += '</div>';
+                
+            }
+        }
+    });
+
+    html += '<div id="pagination">';
+    html += '<span class="all-pages">Page ' + intCurrPage + ' of ' + intRecordsMaxpage + '</span>';
+    for (var i = 1; i <= intRecordsMaxpage; i++) {
+        if (i != intCurrPage) {
+            html += '<span onclick="searchPage(' + i + ');" class="page-num">' + i + '</span>';
+        } else {
+            html += '<span class="current page-num">' + i + '</span>';
+        }
+    }
+    html += '</div><br>';
+    return html;
+}
+
+
+
+function saveKeyfeatures() {
+    var com_id = $('#com_id').val();
+    if (validateFeature()) {
+        alertify.confirm("Are you sure you want add this?",
+                function () {
+                    var obj = new Object();
+                    obj.commercialid = com_id;
+                    obj.aname = $('#aname').val();
+                    obj.cdetails = $('#cdetails').val();
+                    obj.type = $('#typeid').val();
+                    $.ajax({
+                        url: 'index.php?r=commercial/saveamenities',
+                        async: false,
+                        data: obj,
+                        type: 'POST',
+                        success: function (data) {
+                            showMessage('success', 'added successfully.');
+                            allAmenities();
+                            $('#aname').val(' ');
+                        },
+                        error: function (data) {
+                            showMessage('danger', 'Please try again.');
+                        }
+                    });
+                });
+    }
+}
+function validateFollowupupdate() {
+    var flag = true;
+    var remark = $('#uremark').val();
+    var followupdate = $('#ufollowupdate').val();
+
+
+
+    if (remark == '') {
+        $('#err-uremark').html('Remark required');
+        flag = false;
+    } else {
+        $('#err-uremark').html('');
+    }
+    if (followupdate == '') {
+        $('#err-ufollowupdate').html('Date required');
+        flag = false;
+    } else {
+        $('#err-ufollowupdate').html('');
+    }
+
+
+    return flag;
+}
+function validateFeature() {
+    var flag = true;
+    var aname = $('#aname').val();
+    if (aname == '') {
+        $('#err-aname').html('Required this field');
+        flag = false;
+    } else {
+        $('#err-aname').html('');
+    }
+    return flag;
+}

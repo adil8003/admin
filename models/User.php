@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property integer $id
- * @property string $fullname
  * @property string $username
  * @property string $email
  * @property string $password
@@ -17,12 +16,9 @@ use Yii;
  * @property integer $status_id
  * @property integer $role_id
  * @property string $reg_date
- * @property integer $isverify
- * @property integer $mobverify
  *
  * @property Status $status
  * @property Roles $role
- * @property Userroles[] $userroles
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -40,11 +36,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status_id', 'role_id', 'isverify', 'mobverify'], 'integer'],
+            [['username', 'email', 'password', 'phone', 'image', 'status_id', 'role_id'], 'required'],
+            [['status_id', 'role_id'], 'integer'],
             [['reg_date'], 'safe'],
-            [['fullname'], 'string', 'max' => 500],
-            [['username', 'email', 'password', 'image'], 'string', 'max' => 700],
-            [['phone'], 'string', 'max' => 50]
+            [['username'], 'string', 'max' => 500],
+            [['email', 'password', 'phone', 'image'], 'string', 'max' => 700]
         ];
     }
 
@@ -55,7 +51,6 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fullname' => 'Fullname',
             'username' => 'Username',
             'email' => 'Email',
             'password' => 'Password',
@@ -64,8 +59,6 @@ class User extends \yii\db\ActiveRecord
             'status_id' => 'Status ID',
             'role_id' => 'Role ID',
             'reg_date' => 'Reg Date',
-            'isverify' => 'Isverify',
-            'mobverify' => 'Mobverify',
         ];
     }
 
@@ -83,13 +76,5 @@ class User extends \yii\db\ActiveRecord
     public function getRole()
     {
         return $this->hasOne(Roles::className(), ['id' => 'role_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUserroles()
-    {
-        return $this->hasMany(Userroles::className(), ['user_id' => 'id']);
     }
 }

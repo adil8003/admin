@@ -50,20 +50,34 @@ AppAsset::register($this);
                             </li>
                             <li class="sub-menu">
                                 <a href="index.php?r=residential">
-                                    <i class="ti-blackboard"></i>
+                                    <!--<i class="ti-blackboard"></i>-->
+                                    <i class="fa fa-building" aria-hidden="true"></i>
                                     <p>Residential project</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
+                                <a href="index.php?r=commercial">
+                                    <!--<i class="ti-blackboard"></i>-->
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                    <p>Commercial project</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
                                 <a href="index.php?r=resale">
-                                    <i class="ti-blackboard"></i>
+                                    <i class="ti-exchange-vertical"></i>
                                     <p>RESALE</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
                                 <a href="index.php?r=rent">
-                                    <i class="ti-blackboard"></i>
+                                    <i class="ti-key"></i>
                                     <p>RENT</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=website">
+                                    <i class="ti-image"></i>
+                                    <p>website</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
@@ -76,6 +90,12 @@ AppAsset::register($this);
                                 <a href="index.php?r=settings">
                                     <i class="ti-settings"></i>
                                     <p>Settings</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=task">
+                                    <i class="ti-settings"></i>
+                                    <p>Task</p>
                                 </a>
                             </li>
                             <li class="sub-menu">

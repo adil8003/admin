@@ -8,9 +8,9 @@ function checkPassword() {
         data: {
             password: input_value
         },
-        success: function (response) {
-            data = JSON.parse(response);
-            if (data.status == true) {
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.status === true) {
             } else {
                 $('#err-password').text('Required valid password');
 //                $('#loginButton').attr('disabled', 'disabled');
@@ -26,9 +26,9 @@ function checkEmail() {
         data: {
             email: input_value
         },
-        success: function (response) {
-            data = JSON.parse(response);
-            if (data.status == true) {
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.status === true) {
             } else {
                 $('#err-email').text('Required valid email');
                 $('#email').focus();

@@ -32,7 +32,6 @@ $this->title = Yii::t('app', 'CRM');
                         <th>Type</ th>
                         <th>Location</th>
                         <th>Phone</th>
-                        <th>Email</th>
                         <th>Price</th>
                         <th>Action</th>
                         </thead>

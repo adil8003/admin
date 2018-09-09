@@ -15,7 +15,7 @@
         $('#alert-msg').html('<span class="success" >' + msg + '</span>').addClass(classmode);
         setTimeout(function () {
             $('#alert-msg').removeClass(classmode).html('');
-        }, 3000)
+        }, 5000)
     }
 
     getCourseCountPerPage = function (mode) {

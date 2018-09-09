@@ -39,7 +39,6 @@ class ProfileController extends Controller {
         $objData = User:: findOne(['id' => Yii::$app->session['userid']]);
         if ($objData) {
             $arrReturn['status'] = TRUE;
-            $arrReturn['fullname'] = $objData->fullname;
             $arrReturn['username'] = $objData->username;
             $arrReturn['email'] = $objData->email;
             $arrReturn['phone'] = $objData->phone;
@@ -58,14 +57,13 @@ class ProfileController extends Controller {
             $id = $request->post('id');
             if ($id != 0) {
                 $objUser = User::find()->where(['id' => $id])->one();
-                $objUser->fullname = $request->post('fullname');
                 $objUser->username = $request->post('username');
                 $objUser->email = $request->post('email');
                 $objUser->phone = $request->post('phone');
                 if ($objUser->save()) {
                     $arrReturn['status'] = TRUE;
                     $arrReturn['id'] = $objUser->id;
-                    Yii::$app->session['fullname'] = $objUser->fullname;
+                    Yii::$app->session['username'] = $objUser->username;
                 }
             }
             echo json_encode($arrReturn);

@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $residentialid
+ * @property integer $commercialid
  * @property integer $rentid
  * @property integer $resaleid
  * @property string $image
@@ -33,7 +34,7 @@ class Imagegallery extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['residentialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
+            [['residentialid', 'commercialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
             [['image', 'type', 'imgtype', 'statusid'], 'required'],
             [['addeddate'], 'safe'],
             [['image'], 'string', 'max' => 700],
@@ -49,6 +50,7 @@ class Imagegallery extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'residentialid' => 'Residentialid',
+            'commercialid' => 'Commercialid',
             'rentid' => 'Rentid',
             'resaleid' => 'Resaleid',
             'image' => 'Image',

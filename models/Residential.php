@@ -12,16 +12,14 @@ use Yii;
  * @property string $pname
  * @property string $location
  * @property integer $buytypeid
- * @property double $pland
+ * @property string $pland
  * @property string $landmark
  * @property string $address
- * @property integer $propertytypeid
- * @property double $carpetarea
- * @property double $price
- * @property string $reraid
- * @property string $possesiondate
- * @property string $addeddate
+ * @property string $price
  * @property integer $statusid
+ * @property integer $landtypeid
+ * @property string $image
+ * @property string $addeddate
  */
 class Residential extends \yii\db\ActiveRecord
 {
@@ -39,13 +37,12 @@ class Residential extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dname', 'pname', 'location', 'buytypeid', 'pland', 'landmark', 'address', 'propertytypeid', 'carpetarea', 'price', 'reraid', 'possesiondate', 'statusid'], 'required'],
-            [['buytypeid', 'propertytypeid', 'statusid'], 'integer'],
-            [['pland', 'carpetarea', 'price'], 'number'],
-            [['possesiondate', 'addeddate'], 'safe'],
-            [['dname', 'pname', 'location', 'landmark'], 'string', 'max' => 200],
-            [['address'], 'string', 'max' => 700],
-            [['reraid'], 'string', 'max' => 100]
+            [['dname', 'pname', 'location', 'buytypeid', 'pland', 'landmark', 'address', 'price', 'statusid', 'landtypeid'], 'required'],
+            [['buytypeid', 'price', 'statusid', 'landtypeid'], 'integer'],
+            [['image'], 'string'],
+            [['addeddate'], 'safe'],
+            [['dname', 'pname', 'location', 'pland', 'landmark'], 'string', 'max' => 200],
+            [['address'], 'string', 'max' => 700]
         ];
     }
 
@@ -63,13 +60,11 @@ class Residential extends \yii\db\ActiveRecord
             'pland' => 'Pland',
             'landmark' => 'Landmark',
             'address' => 'Address',
-            'propertytypeid' => 'Propertytypeid',
-            'carpetarea' => 'Carpetarea',
             'price' => 'Price',
-            'reraid' => 'Reraid',
-            'possesiondate' => 'Possesiondate',
-            'addeddate' => 'Addeddate',
             'statusid' => 'Statusid',
+            'landtypeid' => 'Landtypeid',
+            'image' => 'Image',
+            'addeddate' => 'Addeddate',
         ];
     }
 }

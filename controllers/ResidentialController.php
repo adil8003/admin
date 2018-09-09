@@ -16,6 +16,8 @@ use app\models\buytype;
 use app\models\Propertytype;
 use app\models\Residential;
 use app\models\Imagegallery;
+use app\models\Pespropertytype;
+use app\models\Proupdate;
 
 class ResidentialController extends Controller {
 
@@ -54,23 +56,38 @@ class ResidentialController extends Controller {
         ]);
     }
 
+    public function actionProjectupdate() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        return $this->render('projectupdate', [
+        ]);
+    }
+
     public function actionEdit() {
         $request = Yii::$app->request;
         $id = $request->get('id');
         $objStatus = \app\models\Status :: find()->all();
         $objBuyTpe = \app\models\Buytype :: find()->all();
+        $objLandtype = \app\models\Landtype:: find()->all();
         $objPropertytype = \app\models\Propertytype::find()->all();
         $objResidential = \app\models\Residential::findOne($id);
+        $connection = Yii::$app->db;
+        $objSelectedptype = $connection->createCommand('Select p.id, pt.propertytypeid , p.name from `propertytype` p '
+                        . 'LEFT JOIN `respropertytype` pt on p.id = pt.propertytypeid '
+                        . 'LEFT JOIN `residential` c on c.id = pt.residentialid where c.id =' . $id)->queryAll();
         return $this->render('edit', [
                     'objBuyTpe' => $objBuyTpe,
                     'objPropertytype' => $objPropertytype,
                     'objResidential' => $objResidential,
-                    'objStatus' => $objStatus
+                    'objStatus' => $objStatus,
+                    'objLandtype' => $objLandtype,
+                    'objSelectedptype' => $objSelectedptype,
         ]);
     }
 
     public function actionAdd() {
         $objBuyTpe = \app\models\Buytype :: find()->all();
+        $objLandtype = \app\models\Landtype:: find()->all();
         $objStatus = \app\models\Status :: find()->all();
         $objMeetingtype = \app\models\Meetingtype :: find()->all();
         $objPropertytype = \app\models\Propertytype::find()->all();
@@ -78,13 +95,35 @@ class ResidentialController extends Controller {
                     'objBuyTpe' => $objBuyTpe,
                     'objMeetingtype' => $objMeetingtype,
                     'objPropertytype' => $objPropertytype,
-                    'objStatus' => $objStatus
+                    'objStatus' => $objStatus,
+                    'objLandtype' => $objLandtype,
         ]);
     }
 
     public function actionError() {
         return $this->render('error', [
         ]);
+    }
+
+    public function actionDeleteimage() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $basePath = Yii::$app->params['basePath'];
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            $residentialid = $request->post('residentialid');
+            if ($id != 0) {
+                $objImagegallery = Imagegallery::find()->where(['id' => $id])->andWhere(['residentialid' => $residentialid])->one();
+                $objImagegallery->delete();
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
     }
 
     public function actionGetimages() {
@@ -147,7 +186,7 @@ class ResidentialController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/residential/';
-            $image_name = md5(date('Ymdhis'));
+            $image_name = md5(date('Ymdhis')). rand(10000000000,9999999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -174,7 +213,7 @@ class ResidentialController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/residential/';
-            $image_name = md5(date('Ymdhis'));
+            $image_name = md5(date('Ymdhis')). rand(10000000000,9999999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -201,7 +240,7 @@ class ResidentialController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/residential/';
-            $image_name = md5(date('Ymdhis'));
+            $image_name = md5(date('Ymdhis')). rand(10000000000,9999999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -230,9 +269,10 @@ class ResidentialController extends Controller {
         $connection = Yii::$app->db;
         $objData = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
                         from `residential` r 
-                        LEFT join `propertytype` p on r.propertytypeid = p.id 
+                        LEFT join `respropertytype` rp on r.id = rp.residentialid    
+                        LEFT join `propertytype` p on rp.propertytypeid = p.id 
                         LEFT join `buytype` bt on r.buytypeid = bt.id 
-                       where r.statusid = ' . 2 . '  ORDER BY `addeddate` DESC ')->queryAll();
+                       where r.statusid = ' . 2 . ' || r.statusid = ' . 3 . ' || r.statusid = ' . 4 . '  GROUP BY r.id   ORDER BY `addeddate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
@@ -261,23 +301,27 @@ class ResidentialController extends Controller {
                 $objResidential->pname = $request->post('pname');
                 $objResidential->dname = $request->post('dname');
                 $objResidential->location = $request->post('location');
-                $objResidential->propertytypeid = $request->post('propertytypeid');
                 $objResidential->buytypeid = $request->post('buytypeid');
                 $objResidential->price = $request->post('price');
                 $objResidential->landmark = $request->post('landmark');
                 $objResidential->address = $request->post('address');
                 $objResidential->pland = $request->post('pland');
-                $objResidential->possesiondate = $request->post('possesiondate');
-                $objResidential->reraid = $request->post('reraid');
-                $objResidential->carpetarea = $request->post('carpetarea');
                 $objResidential->statusid = $request->post('statusid');
+                $objResidential->landtypeid = $request->post('landtypeid');
 
                 if ($objResidential->save()) {
                     $arrReturn['status'] = TRUE;
                     $arrReturn['id'] = $objResidential->id;
                     $arrReturn['msg'] = 'save successfully.';
+
+                    foreach ($request->post('propertytypeid') as $key => $value) {
+                        $objPtype = new \app\models\Respropertytype ();
+                        $objPtype->residentialid = $objResidential->id;
+                        $objPtype->propertytypeid = $value;
+                        $objPtype->save();
+                    }
                 } else {
-                    $arrReturn['crmerr'][] = $objResidential->getErrors();
+                    $arrReturn['reserr'][] = $objResidential->getErrors();
                 }
                 $transaction->commit();
                 yii::info('all modal saved');
@@ -360,6 +404,84 @@ class ResidentialController extends Controller {
         echo json_encode($arrReturn);
     }
 
+    public function actionUpdatewings() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $possesiondate = date('y-m-d H:m:s', strtotime($request->post('possesiondate')));
+        $yearofconstruct = date('y-m-d H:m:s', strtotime($request->post('yearofconstruct')));
+        $date1 = $possesiondate == $possesiondate ? $possesiondate : $request->post('yearofconstruct');
+        $date = $yearofconstruct == $yearofconstruct ? $yearofconstruct : $request->post('yearofconstruct');
+//        if($yearofconstruct == ){
+        $id = $request->post('id');
+        if ($request->isPost) {
+            try {
+                if ($id != ' ') {
+                    $objRupdate = \app\models\Proupdate:: find()->where(['id' => $id])->one();
+                    $objRupdate->residentialid = $request->post('residentialid');
+                    $objRupdate->wing = $request->post('wing');
+                    $objRupdate->status = $request->post('status');
+                    $objRupdate->possesiondate = $date1;
+                    $objRupdate->yearofconstruct = $date;
+                    $objRupdate->salablearea = $request->post('salablearea');
+                    $objRupdate->carpetarea = $request->post('carpetarea');
+                    $objRupdate->reraid = $request->post('reraid');
+                    if ($objRupdate->save()) {
+                        $arrReturn['status'] = TRUE;
+                        $arrReturn['id'] = $objRupdate->id;
+                        $arrReturn['msg'] = 'save successfully.';
+                    }
+                } else {
+                    $arrReturn['crmerr'][] = $objRupdate->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+//    }else{
+
+        echo json_encode($arrReturn);
+    }
+
+    public function actionSavewings() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            try {
+                $objRupdate = new \app\models\Proupdate();
+                $objRupdate->residentialid = $request->post('residentialid');
+                $objRupdate->wing = $request->post('wing');
+                $objRupdate->status = $request->post('status');
+                $objRupdate->possesiondate = $request->post('possesiondate');
+                $objRupdate->yearofconstruct = $request->post('yearofconstruct');
+                $objRupdate->salablearea = $request->post('salablearea');
+                $objRupdate->carpetarea = $request->post('carpetarea');
+                $objRupdate->reraid = $request->post('reraid');
+                if ($objRupdate->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objRupdate->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                } else {
+                    $arrReturn['reserr'][] = $objRupdate->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
     public function actionGetresdetailsbyid() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -367,16 +489,24 @@ class ResidentialController extends Controller {
         $connection = Yii::$app->db;
         $request = Yii::$app->request;
         $id = $request->get('id');
-        $objData = $connection->createCommand('Select c.carpetarea,c.id,c.reraid,c.possesiondate,c.pland,c.dname,c.location,c.price,c.pname ,p.name as ptype,bt.name as btype,c.landmark
-                        from `residential` c 
-                        LEFT join `propertytype` p on c.propertytypeid = p.id 
+        $objData = $connection->createCommand('Select c.address,c.id,c.pland,c.dname,c.location,
+            c.price,c.pname ,p.name as ptype,bt.name as btype, lt.name as landtype ,c.landmark
+                        from `residential` c  
+                        LEFT join `respropertytype` rp on c.id = rp.residentialid     
+                        LEFT join `propertytype` p on rp.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
                         LEFT join `amenities` a on c.id = a.residentialid 
+                        LEFT join `landtype` lt on c.landtypeid = lt.id 
                         where c.id =' . $id . ' ')->queryOne();
         if ($objData) {
             $arrReturn['status'] = TRUE;
             $arrReturn['data'] = $objData;
         }
+        $objSelectedptype = $connection->createCommand('Select p.id, pt.propertytypeid, p.name from `propertytype` p 
+                         LEFT JOIN `respropertytype` pt on p.id = pt.propertytypeid
+                         LEFT JOIN `residential` c on c.id = pt.residentialid where c.id =' . $id)->queryAll();
+        $arrReturn['ptypename'] = $objSelectedptype;
+
         echo json_encode($arrReturn);
         die;
     }
@@ -391,7 +521,7 @@ class ResidentialController extends Controller {
         $id = $request->get('residentialid');
         $objData = $connection->createCommand('Select a.id,a.aname,a.statusid,a.type,a.addeddate
                         from `amenities` a 
-                        where a.residentialid =' . $id . ' ORDER BY `addeddate` ASC ')->queryAll();
+                        where a.residentialid =' . $id . ' ORDER BY `addeddate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
@@ -400,6 +530,35 @@ class ResidentialController extends Controller {
             $arrfollow[] = $arrTemp;
         }
         $arrJSON['data'] = $arrfollow;
+        echo json_encode($arrJSON);
+    }
+
+    public function actionGetallwings() {
+        $arrPupdate['status'] = FALSE;
+        $arrJSON = array();
+        $arrPupdate = array();
+        $this->layout = "";
+        $connection = Yii::$app->db;
+        $request = Yii::$app->request;
+        $id = $request->get('residentialid');
+        $objData = $connection->createCommand('Select a.id,a.wing,a.status,a.addeddate,a.possesiondate,
+            a.yearofconstruct,a.reraid,a.carpetarea,a.salablearea
+                        from `proupdate` a 
+                        where a.residentialid =' . $id . ' ORDER BY `addeddate` DESC ')->queryAll();
+        foreach ($objData AS $objrow) {
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['wing'] = $objrow['wing'];
+            $arrTemp['status1'] = $objrow['status'];
+            $arrTemp['reraid'] = $objrow['reraid'];
+            $arrTemp['carpetarea'] = $objrow['carpetarea'];
+            $arrTemp['salablearea'] = $objrow['salablearea'];
+            $arrTemp['possesiondate'] = date('M-d,Y', strtotime($objrow['possesiondate']));
+            $arrTemp['yearofconstruct'] = date('M-d,Y', strtotime($objrow['yearofconstruct']));
+            $arrPupdate[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrPupdate;
         echo json_encode($arrJSON);
     }
 
@@ -457,6 +616,31 @@ class ResidentialController extends Controller {
         echo json_encode($arrReturn);
     }
 
+    public function actionUploadbanner() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+        if (!empty($_FILES)) {
+            $uploaddir = 'resources/residential/';
+            $image_name = md5(date('Ymdhis'));
+            $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
+            $file = $_FILES["file"]['tmp_name'];
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+                $objSubbanner = Subbanner:: findOne(1);
+                $objSubbanner->subimg = $uploadfile;
+                $objSubbanner->title = 'd';
+                $objSubbanner->subtitle = 'k';
+                $objSubbanner->num = 1;
+                if ($objSubbanner->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objSubbanner->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                }
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
     public function actionSavekeylocation() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -503,21 +687,27 @@ class ResidentialController extends Controller {
                     $objResidential->pname = $request->post('pname');
                     $objResidential->dname = $request->post('dname');
                     $objResidential->location = $request->post('location');
-                    $objResidential->propertytypeid = $request->post('propertytypeid');
                     $objResidential->buytypeid = $request->post('buytypeid');
-                    $objResidential->price = $request->post('price');
+                    $objResidential->pland = $request->post('pland');
                     $objResidential->landmark = $request->post('landmark');
                     $objResidential->address = $request->post('address');
-                    $objResidential->pland = $request->post('pland');
-                    $objResidential->possesiondate = $request->post('possesiondate');
-                    $objResidential->reraid = $request->post('reraid');
-                    $objResidential->carpetarea = $request->post('carpetarea');
+                    $objResidential->price = $request->post('price');
                     $objResidential->statusid = $request->post('statusid');
+                    $objResidential->landtypeid = $request->post('landtypeid');
 
                     if ($objResidential->save()) {
                         $arrReturn['status'] = TRUE;
                         $arrReturn['id'] = $objResidential->id;
                         $arrReturn['msg'] = 'save successfully.';
+
+                        $query = Yii::$app->db->createCommand()
+                                        ->delete('respropertytype', 'residentialid=:id', array(':id' => $objResidential->id))->execute();
+                        foreach ($request->post('propertytypeid') as $key => $value) {
+                            $objRespropertytype = new \app\models\Respropertytype ();
+                            $objRespropertytype->residentialid = $objResidential->id;
+                            $objRespropertytype->propertytypeid = $value;
+                            $objRespropertytype->save();
+                        }
                     }
                 } else {
                     $arrReturn['crmerr'][] = $objResidential->getErrors();

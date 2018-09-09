@@ -10,3 +10,90 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 resale --
 ALTER TABLE `resale` ADD FOREIGN KEY (`statusid`) REFERENCES status(`id`)
+
+
+25-
+ALTER TABLE `crm` CHANGE `cname` `cname` VARCHAR(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `cphone` `cphone` VARCHAR(700) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `cemail` `cemail` VARCHAR(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `propertytypeid` `propertytypeid` INT(2) NULL;
+ALTER TABLE `crm` CHANGE `buytypeid` `buytypeid` INT(2) NULL;
+ALTER TABLE `crm` CHANGE `price` `price` INT(11) NULL;
+ALTER TABLE `crm` CHANGE `location` `location` VARCHAR(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `meetingstatus` `meetingstatus` VARCHAR(500) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `meetingtypeid` `meetingtypeid` INT(2) NULL;
+ALTER TABLE `crm` CHANGE `detailsofproperty` `detailsofproperty` VARCHAR(700) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `postremark` `postremark` VARCHAR(700) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `finalstatus` `finalstatus` VARCHAR(700) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `reffrom` `reffrom` VARCHAR(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+ALTER TABLE `crm` CHANGE `statusid` `statusid` INT(2) NULL;
+
+alter -
+ALTER TABLE `ptype` ADD FOREIGN KEY (`crm_id`) REFERENCES crm(`id`)
+ALTER TABLE `ptype` ADD FOREIGN KEY (`propertytypeid`) REFERENCES propertytype(`id`)
+
+
+
+
+
+
+crm-
+ALTER TABLE `crm` CHANGE `statusid` `customerstatusid` INT(2) NULL DEFAULT NULL;
+
+ALTER TABLE `crm` ADD `meetingtypeid` INT(5) NULL AFTER `buytypeid
+
+ALTER TABLE `crm` ADD FOREIGN KEY (`customerstatusid`) REFERENCES customerstatus(`id`)
+
+
+
+===========8/1/18
+new  user tbl
+ALTER TABLE `user` ADD FOREIGN KEY (`status_id`) REFERENCES status(`id`)
+ALTER TABLE `user` ADD FOREIGN KEY (`role_id`) REFERENCES roles(`id`);
+
+-------------24/8
+ALTER TABLE `residential` ADD `landtypeid` INT(2) NOT NULL AFTER `statusid`;
+ALTER TABLE `residential` ADD FOREIGN KEY (`landtypeid`) REFERENCES landtype(`id`);
+
+--------------------------- commertial alter -------------
+ALTER TABLE `amenities` ADD `commercialid` INT NULL AFTER `residentialid`;
+ALTER TABLE `amenities` ADD `cdetails` TEXT NULL AFTER `type`;
+ALTER TABLE `imagegallery` ADD `commercialid` INT NULL AFTER `residentialid`;
+
+ALTER TABLE `imagegallery` ADD FOREIGN KEY (`commercialid`) REFERENCES commercial(`id`);
+
+ALTER TABLE `amenities` ADD FOREIGN KEY (`commercialid`) REFERENCES commercial(`id`)
+
+
+-----------------------respropertytype --------------
+
+
+
+ALTER TABLE `respropertytype` ADD FOREIGN KEY (`residentialid`) REFERENCES residential(`id`);
+
+
+ALTER TABLE `respropertytype` ADD FOREIGN KEY (`propertytypeid`) REFERENCES propertytype(`id`);
+
+ALTER TABLE `residential` ADD `salablearea` VARCHAR(200) NOT NULL AFTER `carpetarea`;
+
+truncate - 
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE table 	amenities; 
+TRUNCATE table 	commercial; 
+TRUNCATE table 	crm; 
+TRUNCATE table 	followup; 
+TRUNCATE table 	imagegallery; 
+TRUNCATE table 	keylocation; 
+TRUNCATE table 	ptype; 
+TRUNCATE table 	rent; 
+TRUNCATE table 	resale; 
+TRUNCATE table 	residential; 
+TRUNCATE table 	respropertytype; 
+TRUNCATE table 	proupdate; 
+SET FOREIGN_KEY_CHECKS = 1;
+
+8/9/18
+
+
+

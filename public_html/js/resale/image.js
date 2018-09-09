@@ -77,19 +77,23 @@ function getResaleImagebyid(resaleid) {
                 $.each(data.data, function (k, v) {
                     if (v.imgtype === 'amenities') {
                         amenities += '<div class="dz-error-mark"><span id="delete_image"  ><i class="ti ti-trash"></i></span></div>';
-                        amenities += '<img id="imageId" class="img-thumbnail card-img-top" src="index.php?r=resale/linkuserimageamenities&id=' + v.id + '" alt="Card image cap">';
+                        amenities += '<img id="imageId" class="img-thumbnail card-img-top" src="index.php?r=resale/linkuserimageamenities&id=' + v.id + '" alt="Card image cap"><hr>';
                         $('#amenitiesList').html(amenities);
                     }
-                     var florplan = '';
+                });
+                var florplan = '';
+                $.each(data.data, function (k, v) {
                     if (v.imgtype === 'florplan') {
                         florplan += '<div class="dz-error-mark"><span id="delete_image"  ><i class="ti ti-trash"></i></span></div>';
-                        florplan += '<img id="" class="img-thumbnail card-img-top" src="index.php?r=resale/linkuserimageflorplan&id=' + v.id + '" alt="Card image cap">';
+                        florplan += '<img id="" class="img-thumbnail card-img-top" src="index.php?r=resale/linkuserimageflorplan&id=' + v.id + '" alt="Card image cap"><hr>';
                         $('#florPlanList').html(florplan);
                     }
-                     var other = '';
+                });
+                var other = '';
+                $.each(data.data, function (k, v) {
                     if (v.imgtype === 'other') {
                         other += '<div class="dz-error-mark"><span id="delete_image"  ><i class="ti ti-trash"></i></span></div>';
-                        other += '<img id="" class="img-thumbnail card-img-top" src="index.php?r=resale/linkuserimageother&id=' + v.id + '" alt="Card image cap">';
+                        other += '<img id="" class="img-thumbnail card-img-top" src="index.php?r=resale/linkuserimageother&id=' + v.id + '" alt="Card image cap"><hr>';
                         $('#other').html(other);
                     }
                 });

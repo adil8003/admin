@@ -9,9 +9,9 @@
 // ];
 
 return [
-        'class' => 'yii\db\Connection',
+    'class' => 'yii\db\Connection',
 //    'host' => 'localhost',
-   'dsn' => 'mysql:host=localhost;dbname=uniqueadmin',
+    'dsn' => 'mysql:host=localhost;dbname=uniqueadmin',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

@@ -15,7 +15,7 @@ use Yii;
  * @property integer $type
  * @property integer $statusid
  * @property string $addeddate
- * @property integer $distance
+ * @property string $distance
  */
 class Keylocation extends \yii\db\ActiveRecord
 {
@@ -33,10 +33,11 @@ class Keylocation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['residentialid', 'resaleid', 'rentid', 'type', 'statusid', 'distance'], 'integer'],
+            [['residentialid', 'resaleid', 'rentid', 'type', 'statusid'], 'integer'],
             [['kname', 'type', 'statusid', 'distance'], 'required'],
             [['addeddate'], 'safe'],
-            [['kname'], 'string', 'max' => 500]
+            [['kname'], 'string', 'max' => 500],
+            [['distance'], 'string', 'max' => 200]
         ];
     }
 

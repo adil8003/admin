@@ -66,6 +66,7 @@ $(document).ready(function () {
                     htmlAction += '<a href="index.php?r=residential/amenities&amp;id=' + data + '" title="Amenities" class="teal-text"  ><i   class="ti-home teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=residential/keylocation&amp;id=' + data + '" title="Key location" class="teal-text"  ><i   class="ti-car teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=residential/image&amp;id=' + data + '" title="Image gallery" class="teal-text"  ><i   class="ti-gallery teal-text "></i></a>&nbsp;&nbsp;'
+                    htmlAction += '<a href="index.php?r=residential/projectupdate&amp;id=' + data + '" title="Project update" class="teal-text"  ><i   class="fa fa-link teal-text "></i></a>&nbsp;&nbsp;'
                     return htmlAction;
                 }
             }
@@ -168,7 +169,6 @@ function getResidentialprojectDetails(res_id) {
         success: function (data) {
             data = JSON.parse(data);
             if (data.status == true) {
-
                 var today = new Date();
                 var dd = today.getDate();
                 var mm = today.getMonth() + 1; //January is 0!
@@ -184,36 +184,58 @@ function getResidentialprojectDetails(res_id) {
 
                 var html = '';
                 html += '<div class="alert cus-data">';
-                html += '<strong>Project name:-  ' + data.data.pname + '</strong><span> <i  class="ti-trash teal-text text-danger pull-right" style="cursor:pointer" onclick="hideDetails();" id="editIcon"></i></span>';
+                html += '<strong>Project name:-  ' + data.data.pname + '</strong><span><a href="#top" ><i  class="ti-trash teal-text text-danger pull-right"  onclick="hideDetails();" id="editIcon"></i></a></span>';
                 html += '</div>';
                 html += ' <div class="row">';
                 html += ' <div class="col-md-6">';
                 html += '<p class="card-text"><b>Location:-</b> ' + data.data.location + '</p>';
                 html += '<p class="card-text "><b>Landmark:-</b>     ' + data.data.landmark + '</p>';
-                html += '<p class="card-text "><b>Proprty type:-</b>     ' + data.data.ptype + '</p>';
-                html += '<p class="card-text "><b>Purchase / Sell / Rent:-</b>  ' + data.data.btype + '</p>';
                 html += '<p class="card-text "><b>Budget:-</b>  ' + getPriceinString(data.data.price) + '</p>';
-                html += '<p class="card-text"><b>Rera no.:-</b> ' + data.data.reraid + '</p>';
+                html += '<p class="card-text "><b>Proprty type:-</b> </p>';
+                  html += '<span style="display:inline">';
+                $.each(data.ptypename, function (k, v) {
+                    html += '<p class="" style="display:inline"> ' + v.name + ' </p>';
+                });
+                html += '</span> </p>';
                 html += '</div>';
                 html += '<div class="col-md-6">';
-                html += '<p class="card-text"><b>Possesion date:-</b> ' + data.data.possesiondate + '</p>';
                 html += '<p class="card-text "><b>Developer name:-</b> ' + formattedText(data.data.dname) + '</p>';
-                html += '<p class="card-text "><b>Carpet area:-</b>  ' + formattedText(data.data.carpetarea) + ' sqft</p>';
-                html += '<p class="card-text"><b>Project total land area:-</b> ' + data.data.pland + ' sqft</p>';
-                html += '<p class="card-text "><b>Address:-</b>  ' + formattedText(data.data.address) + '</p>';
+                html += '<p class="card-text "><b>Purchase / Sell / Rent:-</b>  ' + data.data.btype + '</p>';
+                html += '<p class="card-text"><b>Project total land area:-</b> ' + data.data.pland + ':' + data.data.landtype + '</p>';
+                html += '<p class="card-text " id="target"><b>Address:-</b>  ' + formattedText(data.data.address) + '</p>';
                 html += '</div>';
                 html += '</div>';
                 $('#propertyDetails').html(html);
 
             }
+
         },
         error: function (data) {
             showMessage('danger', 'Please try again.');
         }
 
     });
+
+   
 }
 function hideDetails() {
     $('#propertyDetails').fadeOut('slow');
 }
+//$('a[href^="#"]').on('click', function(event) {
+//    alert(1)
+//    var target = $(this.getAttribute('href'));
+//    if( target.length ) {
+//        event.preventDefault();
+//        $('html, body').stop().animate({
+//            scrollTop: target.offset().top
+//        }, 1000);
+//    }
+//});
+//$("#res_id").click(function() {
+//     alert(1)
+//    $('html, body').animate({
+//        scrollTop: parseInt($("#target").offset().top)
+//    }, 2000);
+//});
+
 

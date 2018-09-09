@@ -39,15 +39,20 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group" >
-                            <label>Property type:<span class="asterik">*</span><span  class="errmsg" id="err-propertytypeid"></span> </label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="propertytypeid" name="propertytypeid" placeholder="- Select Customer Status -">
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label for="Branch">Property type:
+                                <span class="asterik">*</span>
+                                <span class="errmsg" id="err-propertytypeid"></span>
+                            </label>
+                            <select class="js-example-basic-multiple form-control border-input input-sm" placeholder="Select department" id="propertytypeid" name="propertytypeid" multiple="multiple">
                                 <?php
-                                foreach ($objPropertytype as $key => $value) {
-                                    if ($value->id == $objCrm->propertytypeid) {
-                                        echo "<option selected value='$value->id' >" . $value->name . "</option>";
-                                    } else {
+                                $sel = "selected";
+                                foreach ($objSelectedptype as $opt) {
+                                    if (!empty($opt)) {
+                                        echo "<option value='" . $opt['id'] . "'" . $sel . ">" . $opt['name'] . "</option>";
+                                    }
+                                    foreach ($objPropertytype as $key => $value) {
                                         echo "<option value='$value->id' >" . $value->name . "</option>";
                                     }
                                 }
@@ -55,6 +60,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group" >
                             <label>buy type:<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
@@ -232,8 +238,8 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             <label>Status :</label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">
                                 <?php
-                                foreach ($objStatus as $key => $value) {
-                                    if ($value->id == $objCrm->statusid) {
+                                foreach ($objCustomerstatus as $key => $value) {
+                                    if ($value->id == $objCrm->customerstatusid) {
                                         echo "<option selected value='$value->id' >" . $value->name . "</option>";
                                     } else {
                                         echo "<option value='$value->id' >" . $value->name . "</option>";

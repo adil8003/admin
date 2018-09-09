@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('.js-example-basic-multiple').select2({
+        placeholder: "Select "
+    });
 });
 
 function saveCustomer() {
@@ -66,18 +69,6 @@ function validateCustomer() {
     } else {
         $('#err-cname').html('');
     }
-    $('#cname').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-cname').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
     if (cemail == '') {
         $('#err-cemail').html('Email required');
         flag = false;
@@ -88,20 +79,6 @@ function validateCustomer() {
             flag = false;
         }
     }
-    $('#remark').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-remark').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
-
-
     if (cphone == '') {
         $('#err-cphone').html('Phone required');
         flag = false;
@@ -135,18 +112,6 @@ function validateCustomer() {
     } else {
         $('#err-location').html('');
     }
-    $('#location').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-location').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
 
     if (meetingtypeid == '') {
         $('#err-meetingtypeid').html('Metting type required');
@@ -174,13 +139,32 @@ function checkUniqueEmail() {
         data: {
             cemail: input_value,
         },
-        success: function (response) {
-            data = JSON.parse(response);
+        success: function (data) {
+            data = JSON.parse(data);
             if (data.status === true) {
                 $('#err-cemail').text("Already exist,try different !");
                 $('#cemail').focus();
-            } else {
-                $('#err-cemail').text('');
+             } else {
+                   $('#err-cemail').hide('hide');
+            }
+        }
+    });
+}
+function checkUniqueContact() {
+    var input_value = $('#cphone').val();
+    $.ajax({
+        url: 'index.php?r=crm/checkuniquecontact',
+        type: 'POST',
+        data: {
+            cphone: input_value,
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.status === true) {
+                $('#err-cphone').text("Already exist,try different !");
+                $('#cphone').focus();
+            } else  {
+                $('#err-cphone').hide('hide');
             }
         }
     });

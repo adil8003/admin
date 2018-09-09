@@ -206,8 +206,8 @@ function getResidentialprojectDetails(resaleid) {
                 html += '<p class="card-text "><b>Furniture:-</b>  ' + formattedText(data.data.furniture) + '</p>';
                 html += '<p class="card-text "><b>Property facing:-</b>  ' + formattedText(data.data.propertyfacing) + '</p>';
                 html += '<p class="card-text "><b>Carpet area:-</b>  ' + formattedText(data.data.carpetarea) + ' sqft</p>';
-                html += '<p class="card-text "><b>Address:-</b>  ' + formattedText(data.data.address) + '</p>';
                 html += '<p class="card-text "><b>Remarks:-</b>  ' + formattedText(data.data.remarks) + '</p>';
+                html += '<p class="card-text "><b>Address:-</b>  ' + formattedText(data.data.address) + '</p>';
                 html += '</div>';
                 html += '</div>';
                 $('#propertyDetails').html(html);

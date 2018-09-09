@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#customerDetails').hide();
-       'use strict';
+    'use strict';
     function getPriceinString(digit) {
         var strReturn = digit;
         var lengthNum = digit.length;
@@ -46,14 +46,13 @@ $(document).ready(function () {
             {"data": "id",
                 "render": function (data, type, full, meta) {
                     var htmlAction = '';
-                    return '<a href="#"><b onclick="getCustomerdetails(`' + full.id + '`)">' + full.cname + '</b></a>';
+                    return '<a href="#"><b class="scroll" id="customer_id" onclick="getCustomerdetails(`' + full.id + '`)">' + full.cname + '</b></a>';
                     return htmlAction;
                 }
             },
             {"data": "ptype"},
             {"data": "location"},
             {"data": "cphone"},
-            {"data": "cemail"},
             {"data": "price",
                 "render": function (data, type, row, meta) {
                     return '<b>' + getPriceinString(data) + '</b>';
@@ -63,7 +62,7 @@ $(document).ready(function () {
                 "render": function (data, type, full, meta) {
                     var htmlAction = '';
                     htmlAction += '<a href="index.php?r=crm/edit&amp;id=' + data + '" title="Edit" class="teal-text"  ><i  class="ti-pencil teal-text "></i></a>&nbsp;&nbsp;'
-                    htmlAction += '<a href="#" title="Customer details" class="teal-text" id="customer_id" onclick="getCustomerdetails(`' + data + '`)" ><i   class="ti-user teal-text "></i></a>&nbsp;&nbsp;'
+//                    htmlAction += '<a href="#" title="Customer details" class="teal-text" id="customer_id" onclick="getCustomerdetails(`' + data + '`)" ><i   class="ti-user teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/followup&amp;id=' + data + '" title="Follow up" class="teal-text"  ><i   class="ti-blackboard teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/mail&amp;id=' + data + '" title="Mail" class="teal-text"  ><i   class="ti-email teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/mail&amp;id=' + data + '" title="Mail" class="teal-text"  ><i   class="ti-comments-smiley teal-text "></i></a>&nbsp;&nbsp;'
@@ -97,7 +96,7 @@ $(document).ready(function () {
             function (settings, data, dataIndex) {
                 var min = parseInt($('#cusmin').val(), 10);
                 var max = parseInt($('#cusmax').val(), 10);
-                var price = (parseFloat(data[3]) || 0); // use data for the age column
+                var price = (parseFloat(data[4]) || 0); // use data for the age column
 
                 if ((isNaN(min) && isNaN(max)) ||
                         (isNaN(min) && price <= max) ||
@@ -122,6 +121,7 @@ function formattedText(text) {
 }
 
 function getCustomerdetails(customer_id) {
+
     function getPriceinString(digit) {
         var strReturn = digit;
         var lengthNum = digit.length;
@@ -171,7 +171,11 @@ function getCustomerdetails(customer_id) {
         success: function (data) {
             data = JSON.parse(data);
             if (data.status == true) {
-
+//                  $('html, body').animate({
+//        scrollTop: $("#featured").offset()
+//    }, 2000);
+                scrollTop: $("#featured").offset();
+//            ($("#featured").scrollTop());
                 var today = new Date();
                 var dd = today.getDate();
                 var mm = today.getMonth() + 1; //January is 0!
@@ -186,17 +190,28 @@ function getCustomerdetails(customer_id) {
 
 
                 var html = '';
-                html += '<div class="alert cus-data">';
+                html += '<div class="alert cus-data" id="featured">';
                 html += '<strong>Customer name:-  ' + data.data.cname + '</strong><span> <i  class="ti-trash teal-text text-danger pull-right" style="cursor:pointer" onclick="hideDetails();" id="editIcon"></i></span>';
                 html += '</div>';
                 html += ' <div class="row">';
                 html += ' <div class="col-md-6">';
                 html += '<p class="card-text"><b>Phone:-</b> ' + data.data.cphone + '</p>';
                 html += '<p class="card-text"><b>Location:-</b> ' + data.data.location + '</p>';
-                html += '<p class="card-text "><b>Required proprty type:-</b>     ' + data.data.ptype + '</p>';
+
+
+
+                html += '<p class="card-text "><b>Required proprty type:-</b>';
+
+                html += '<span style="display:inline">';
+                $.each(data.ptypename, function (k, v) {
+                    html += '<p class="" style="display:inline"> ' + v.name + ' </p>';
+                });
+                html += '</span> </p>';
+
                 html += '<p class="card-text "><b>Purchase / Sell / Rent:-</b>  ' + data.data.btype + '</p>';
                 html += '<p class="card-text "><b>Budget:-</b>  ' + getPriceinString(data.data.price) + '</p>';
-                html += '<p class="card-text "><b>Remark:-</b> ' + formattedText(data.data.remark) + '</p>';
+                html += '<p class="card-text "><b>Post remark:-</b> ' + formattedText(data.data.postremark) + '</p>';
+                html += '<p class="card-text "><b>Follow up remark:-</b> ' + formattedText(data.data.remark) + '</p>';
                 html += '</div>';
                 html += '<div class="col-md-6">';
                 html += '<p class="card-text"><b>Email:-</b> ' + data.data.cemail + '</p>';
@@ -216,7 +231,7 @@ function getCustomerdetails(customer_id) {
 //                              var callCustomer = 'Cull this customer <i class="ti-bell teal-text"></i>';
 //                        html += '<p class="card-text "><b>Folloing date:-</b> ' + (formattedText(data.fdateshow)) + ' '+ callCustomer+ '</p>';
 //                         }else{
-                    html += '<p class="card-text "><b>Folloing date:-</b> ' + (formattedText(data.fdateshow)) + ' </p>';
+                    html += '<p class="card-text "><b>Following date:-</b> ' + (formattedText(data.fdateshow)) + ' </p>';
 
 //                         }
 

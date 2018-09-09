@@ -34,13 +34,12 @@ class SiteController extends Controller {
     public function actionVerification() {
         $request = Yii::$app->request;
         $this->layout = "";
-        if ($request->isPost) {
+               if ($request->isPost) {
             $model = new User();
             $objUser = $model->findOne(['email' => $request->post('email'), 'status_id' => 2]);
-            if ($objUser && md5($request->post('password')) == $objUser->password) {
+            if ($objUser && ($request->post('password')) == $objUser->password) {
                 Yii::$app->session['isLoggedIn'] = true;
                 Yii::$app->session['userid'] = $objUser->id;
-                Yii::$app->session['fullname'] = $objUser->fullname;
                 Yii::$app->session['username'] = $objUser->username;
                 Yii::$app->session['email'] = $objUser->email;
                 Yii::$app->session['status'] = $objUser->status->name;
@@ -71,8 +70,8 @@ class SiteController extends Controller {
         $arrReturn['status'] = FALSE;
         $request = Yii::$app->request;
         $this->layout = "";
-        $password = ($request->post('password'));
-        $objUser = User::findOne(['password' => md5($password)]);
+        $password = $request->post('password');
+        $objUser = User::findOne(['password' => $password]);
         if ($objUser) {
             $arrReturn['status'] = TRUE;
         }
@@ -110,7 +109,7 @@ class SiteController extends Controller {
             $password = ($request->post('password'));
             if ($email != '') {
                 $objUser = User::findOne(['email' => $email]);
-                $objUser->password = md5($password);
+                $objUser->password = $password;
                 $objUser->save();
                 $arrReturn['status'] = TRUE;
                 $arrReturn['msg'] = 'password change successfully.';

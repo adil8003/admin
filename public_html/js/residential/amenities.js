@@ -108,7 +108,6 @@ function createHTML(data) {
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px"> Property type:- ' + data.data.ptype + '</p>';
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Property For:-  ' + data.data.btype + '</p>';
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Location:-  ' + data.data.location + '</p>';
-    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Carpet Area:-  ' + data.data.carpetarea + ' sqft</p>';
     html += '</div>';
     $('#propertyDetails').html(html);
 }

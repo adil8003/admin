@@ -1,11 +1,44 @@
 $(document).ready(function () {
+      $('.js-example-basic-multiple').select2({
+        placeholder: "Select "
+    });
     var res_id = $('#res_id').val();
     $('#possesiondate').datetimepicker({
         format: 'Y-m-d',
     });
 });
 
-
+function saveAddtwo() {
+    if (validateBanner()) {
+        var formData = new FormData();
+        formData.append('file', $('#file2')[0].files[0]);
+        alertify.confirm("Are you sure you want add this Add image?",
+                function () {
+                    $.ajax({
+                        url: "index.php?r=residential/projectbanner",
+                        async: false,
+                        type: 'POST',
+                        data: formData,
+                        processData: false, // tell jQuery not to process the data
+                        contentType: false, // tell jQuery not to set contentType
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status == true) {
+                                showMessage('success', 'Add 2 added successfully.');
+                                $('#title2').val('');
+                                $('#subtitle2').val('');
+                                getImagebyid2();
+                            } else if (data) {
+                                $('#err-file2').html('image size must be 600 x 300 pixels.');
+                            }
+                        },
+                        error: function (data) {
+                            showMessage('danger', 'Please try again.');
+                        }
+                    });
+                });
+    }
+}
 function updateProperty() {
     var price = $('#price').val();
     var priceFormat = $('#price-format').val();
@@ -30,10 +63,8 @@ function updateProperty() {
                 obj.landmark = $('#landmark').val();
                 obj.address = $('#address').val();
                 obj.price = amt;
-                obj.carpetarea = $('#carpetarea').val();
-                obj.reraid = $('#reraid').val();
-                obj.possesiondate = $('#possesiondate').val();
                 obj.statusid = $('#statusid').val();
+                obj.landtypeid = $('#landtypeid').val();
                 $.ajax({
                     url: 'index.php?r=residential/updateproprty',
                     async: false,

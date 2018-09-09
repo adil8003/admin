@@ -9,10 +9,12 @@ use Yii;
  *
  * @property integer $id
  * @property integer $residentialid
+ * @property integer $commercialid
  * @property integer $rentid
  * @property integer $resaleid
  * @property string $aname
  * @property integer $type
+ * @property string $cdetails
  * @property string $addeddate
  * @property integer $statusid
  */
@@ -32,8 +34,9 @@ class Amenities extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['residentialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
+            [['residentialid', 'commercialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
             [['aname', 'type', 'statusid'], 'required'],
+            [['cdetails'], 'string'],
             [['addeddate'], 'safe'],
             [['aname'], 'string', 'max' => 300]
         ];
@@ -47,10 +50,12 @@ class Amenities extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'residentialid' => 'Residentialid',
+            'commercialid' => 'Commercialid',
             'rentid' => 'Rentid',
             'resaleid' => 'Resaleid',
             'aname' => 'Aname',
             'type' => 'Type',
+            'cdetails' => 'Cdetails',
             'addeddate' => 'Addeddate',
             'statusid' => 'Statusid',
         ];

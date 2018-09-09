@@ -20,12 +20,31 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                                 </div>
                             </div>
                         </div>
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group" >
                                     <label>Follow up date and time:<span class="asterik">*</span><span  class="errmsg" id="err-followupdate"></span> </label>
                                     <input type="text"  class="form-control border-input input-sm" name="followupdate" id="followupdate" placeholder=" Follow up date "
                                            required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group ">
+                                    <label>Status :</label>
+                                    <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">
+                                        <?php
+                                        foreach ($objCustomerstatus as $key => $value) {
+                                            if ($value->id == $objCrm->customerstatusid) {
+                                                echo "<option selected value='$value->id' >" . $value->name . "</option>";
+                                            } else {
+                                                echo "<option value='$value->id' >" . $value->name . "</option>";
+                                            }
+                                        }
+                                        ?>
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -63,6 +82,25 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                                 </div>
                             </div>
                         </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group ">
+                                    <label>Status :</label>
+                                    <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="ustatusid" name="ustatusid" placeholder="- Select Customer Status -">
+                                        <?php
+                                        foreach ($objCustomerstatus as $key => $value) {
+                                            if ($value->id == $objCrm->customerstatusid) {
+                                                echo "<option selected value='$value->id' >" . $value->name . "</option>";
+                                            } else {
+                                                echo "<option value='$value->id' >" . $value->name . "</option>";
+                                            }
+                                        }
+                                        ?>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="text-center">
                             <button type="button" onclick="updateFollowup();" class="btn btn-info btn-fill btn-wd">Update</button>
@@ -86,6 +124,9 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
             </div><hr>
             <div id="updateprofile">
                 <div class="content" style="    padding: 0px 9px 10px 10px;">
+                     <div class="text-danger" id="notAvailable1" style="    text-align: center;">
+
+                        </div>
                     <div class="row " id="followuplist">
                         <div class="text-danger" id="notAvailable" style="    text-align: center;">
 

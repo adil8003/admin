@@ -31,16 +31,19 @@ $this->title = Yii::t('app', ' CRM');
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Contact No:<span class="asterik">*</span><span  class="errmsg" id="err-cphone"></span> </label>
-                            <input type="text" name="cphone" id="cphone"  class="form-control border-input input-sm"
+                            <input type="text" name="cphone" id="cphone" onblur="checkUniqueContact();"  class="form-control border-input input-sm"
                                    placeholder="Customer no.">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Property type :<span class="asterik">*</span><span  class="errmsg" id="err-propertytypeid"></span> </label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="propertytypeid" name="propertytypeid" placeholder="- Select Customer type -">
+                        <div class="form-group">
+                            <label for="Branch">Property type:
+                                <span class="asterik">*</span>
+                                <span class="errmsg" id="err-propertytypeid"></span>
+                            </label>
+                            <select class="js-example-basic-multiple" placeholder="Select department" id="propertytypeid" name="propertytypeid" multiple="multiple" style='width:316px'>
                                 <?php
                                 foreach ($objPropertytype as $key => $value) {
                                     echo "<option value='$value->id' >" . $value->name . "</option>";
@@ -49,6 +52,7 @@ $this->title = Yii::t('app', ' CRM');
                             </select>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="form-group ">
                             <label>Type :<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
@@ -62,15 +66,10 @@ $this->title = Yii::t('app', ' CRM');
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Meeting Place :</label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="meetingtypeid" name="meetingtypeid" placeholder="- Select Customer Status -">
-                                <?php
-                                foreach ($objMeetingtype as $key => $value) {
-                                    echo "<option value='$value->id' >" . $value->name . "</option>";
-                                }
-                                ?>
-                            </select>
+                        <div class="form-group">
+                            <label>Meeting Done with Client or Not:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
+                            <input type="text" name="meetingstatus" id="meetingstatus"  class="form-control border-input input-sm"
+                                   placeholder="Meeting Done with Client or Not">
                         </div>
                     </div>
                 </div>
@@ -78,7 +77,7 @@ $this->title = Yii::t('app', ' CRM');
                     <div class="col-md-7">
                         <div class="row">
                             <!--<div class="col-sm-2">-->
-                            <label for="price"  class="">Price<span class="text-danger text-center" id="err-price" style="margin: 126px;">*</span></label>
+                            <label for="price"  class="">Price<span class="text-danger text-center" id="err-price" style="margin: 126px;"></span></label>
                             <div class="col-sm-6"> 
 
                                 <div class="form-control">
@@ -113,12 +112,18 @@ $this->title = Yii::t('app', ' CRM');
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Meeting Done with Client or Not:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
-                            <input type="text" name="meetingstatus" id="meetingstatus"  class="form-control border-input input-sm"
-                                   placeholder="Meeting Done with Client or Not">
+                        <div class="form-group ">
+                            <label>Meeting Place :</label>
+                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="meetingtypeid" name="meetingtypeid" placeholder="- Select Customer Status -">
+                                <?php
+                                foreach ($objMeetingtype as $key => $value) {
+                                    echo "<option value='$value->id' >" . $value->name . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Details of Property Shown to him:<span class="asterik">*</span><span  class="errmsg" id="err-detailsofproperty"></span> </label>
@@ -158,7 +163,7 @@ $this->title = Yii::t('app', ' CRM');
                             <label>Status :</label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">
                                 <?php
-                                foreach ($objStatus as $key => $value) {
+                                foreach ($objCustomerstatus as $key => $value) {
                                     echo "<option value='$value->id' >" . $value->name . "</option>";
                                 }
                                 ?>

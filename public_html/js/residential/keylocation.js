@@ -112,7 +112,6 @@ function createHTML(data) {
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px"> Property type:- ' + data.data.ptype + '</p>';
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Property For:-  ' + data.data.btype + '</p>';
     html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Location:-  ' + data.data.location + '</p>';
-    html += '<p class=" text-danger" style="font-size: 13px;padding:2px">Carpet Area:-  ' + data.data.carpetarea + ' sqft</p>';
     html += '</div>';
     $('#propertyDetails').html(html);
 
@@ -259,18 +258,7 @@ function validateLocation() {
     } else {
         $('#err-kname').html('');
     }
-      $('#kname').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-kname').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
+    
     if (distance == '') {
         $('#err-distance').html('Distance required');
         flag = false;

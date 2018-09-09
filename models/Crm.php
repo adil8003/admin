@@ -11,18 +11,17 @@ use Yii;
  * @property string $cname
  * @property string $cphone
  * @property string $cemail
- * @property integer $propertytypeid
  * @property integer $buytypeid
+ * @property integer $meetingtypeid
  * @property integer $price
  * @property string $location
  * @property string $meetingstatus
- * @property integer $meetingtypeid
  * @property string $detailsofproperty
  * @property string $postremark
  * @property string $finalstatus
  * @property string $addeddate
  * @property string $reffrom
- * @property integer $statusid
+ * @property integer $customerstatusid
  */
 class Crm extends \yii\db\ActiveRecord
 {
@@ -40,8 +39,7 @@ class Crm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'cphone', 'cemail', 'propertytypeid', 'buytypeid', 'price', 'location', 'meetingstatus', 'meetingtypeid', 'detailsofproperty', 'postremark', 'finalstatus', 'reffrom', 'statusid'], 'required'],
-            [['propertytypeid', 'buytypeid', 'price', 'meetingtypeid', 'statusid'], 'integer'],
+            [['buytypeid', 'meetingtypeid', 'price', 'customerstatusid'], 'integer'],
             [['addeddate'], 'safe'],
             [['cname', 'cemail', 'location', 'meetingstatus'], 'string', 'max' => 500],
             [['cphone', 'detailsofproperty', 'postremark', 'finalstatus'], 'string', 'max' => 700],
@@ -59,18 +57,17 @@ class Crm extends \yii\db\ActiveRecord
             'cname' => 'Cname',
             'cphone' => 'Cphone',
             'cemail' => 'Cemail',
-            'propertytypeid' => 'Propertytypeid',
             'buytypeid' => 'Buytypeid',
+            'meetingtypeid' => 'Meetingtypeid',
             'price' => 'Price',
             'location' => 'Location',
             'meetingstatus' => 'Meetingstatus',
-            'meetingtypeid' => 'Meetingtypeid',
             'detailsofproperty' => 'Detailsofproperty',
             'postremark' => 'Postremark',
             'finalstatus' => 'Finalstatus',
             'addeddate' => 'Addeddate',
             'reffrom' => 'Reffrom',
-            'statusid' => 'Statusid',
+            'customerstatusid' => 'Customerstatusid',
         ];
     }
 }

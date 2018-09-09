@@ -49,15 +49,30 @@ $this->title = Yii::t('app', ' Add residential');
                 <div class="row">
 
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Possesion date:</label>
-                            <input type="text" name="possesiondate" id="possesiondate"  class="form-control border-input input-sm"
-                                   placeholder="Possesion date">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label>Land area:</label>
+                                    <select class="form-control border-input input-sm" style=" padding: 8px 18px; height: 40px;margin-top: -5px;" id="landtypeid" name="landtypeid" placeholder="- Select Customer Status -">
+                                        <?php
+                                        foreach ($objLandtype as $key => $value) {
+                                            echo "<option value='$value->id' >" . $value->name . "</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label></label>
+                                    <input type="text" name="plan" id="pland"  class="form-control border-input input-sm"
+                                           placeholder="Project's total land area">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <!--<div class="col-sm-2">-->
                             <label for="price" class="">Price<span class="text-danger">*</span></label>
                             <div class="col-sm-6"> 
 
@@ -85,19 +100,7 @@ $this->title = Yii::t('app', ' Add residential');
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group ">
-                            <label>Property type :<span class="asterik">*</span><span  class="errmsg" id="err-propertytypeid"></span> </label>
-                            <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="propertytypeid" name="propertytypeid" placeholder="- Select Customer type -">
-                                <?php
-                                foreach ($objPropertytype as $key => $value) {
-                                    echo "<option value='$value->id' >" . $value->name . "</option>";
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group ">
                             <label>Property for:<span class="asterik">*</span><span  class="errmsg" id="err-buytypeid"></span> </label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="buytypeid" name="buytypeid" placeholder="- Select Customer Status -">
@@ -109,7 +112,25 @@ $this->title = Yii::t('app', ' Add residential');
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="Branch">Property type:
+                                <span class="asterik">*</span>
+                                <span class="errmsg" id="err-propertytypeid"></span>
+                            </label>
+                            <select class="js-example-basic-multiple"  placeholder="Select department" id="propertytypeid" name="propertytypeid" multiple="multiple" style='width:481px'>
+                                <?php
+                                foreach ($objPropertytype as $key => $value) {
+                                    echo "<option value='$value->id' >" . $value->name . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
                         <div class="form-group ">
                             <label>Status :</label>
                             <select class="form-control border-input input-sm" style=" padding: 7px 18px; height: 40px;" id="statusid" name="statusid" placeholder="- Select Customer Status -">
@@ -121,42 +142,25 @@ $this->title = Yii::t('app', ' Add residential');
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Project's total land area:</label>
-                            <input type="text" name="plan" id="pland"  class="form-control border-input input-sm"
-                                   placeholder="Project's total land area">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Carpet area:<span class="asterik">*</span><span  class="errmsg" id="err-detailsofproperty"></span> </label>
-                            <input type="text" name="carpetarea" id="carpetarea"  class="form-control border-input input-sm"
-                                   placeholder="Carpet area">
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Rera ID:<span class="asterik">*</span><span  class="errmsg" id="err-orgadminphone"></span> </label>
-                            <input type="text" name="reraid" id="reraid"  class="form-control border-input input-sm"
-                                   placeholder="Rera no.">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
+                  
+                    <div class="col-md-7">
                         <div class="form-group">
                             <label>Address: <span class="asterik">*</span><span  class="errmsg" id="err-price"></span> </label>
                             <input type="text" name="address" id="address"   class="form-control border-input input-sm"
                                    placeholder="Address">
                         </div>
                     </div>
-
+                      <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Image: <span class="asterik">*</span><span  class="errmsg" id="err-price"></span> </label>
+                            <input type="file" name="file" id="file"   class="form-control border-input input-sm"
+                                   placeholder="Address">
+                        </div>
+                    </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" onclick="saveProperty();" class="btn btn-info btn-fill btn-wd">Save Property</button>
+                    <button type="button" onclick="saveProperty();" id="saveBtn" class="btn btn-info btn-fill btn-wd">Save Property</button>
+                    <button type="button" onclick="resetdata();" class="btn btn-info btn-fill btn-wd">Reset</button>
                 </div>
                 <div class="clearfix"></div><br>
             </form>

@@ -25,7 +25,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                                 <progress id="progressimage" class="hide progress" value="0" max="100">0%</progress>
                             </div>
                             <div class="" id="amenitiesList">
-                                <img id="imageId" class="img-thumbnail card-img-top" src="images/logo.png" alt="Card image cap">
+                                <img id="imageId22" class="img-thumbnail card-img-top" src="images/not_found.png" alt="amenities image ">
                             </div>
                         </div>
                     </div>
@@ -35,10 +35,11 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             <li>Upload only one image.</li>
                             <div class="card-block">
                                 <h4 class="card-title">Drop Image Or <button type="button" id="clickiflorplan" class="btn btn-secondary btn-sm">Click here</button></h4>
-                                <progress id="progressimage" class="hide progress" value="0" max="100">0%</progress>
+                                <progress id="progressimage1" class="hide progress" value="0" max="100">0%</progress>
                             </div>
                             <div class="" id="florPlanList">
-                                <img id="imageId" class="img-thumbnail card-img-top" src="images/logo.png" alt="Card image cap">
+                                <div id="imgNotAvailable"></div>
+                                <img id="imageId" class="img-thumbnail card-img-top" src="images/not_found.png" alt="Card image cap">
                             </div>
                         </div>
 
@@ -50,10 +51,10 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             <li>Upload only one image.</li>
                             <div class="card-block">
                                 <h4 class="card-title">Drop Image Or <button type="button" id="clickother" class="btn btn-secondary btn-sm">Click here</button></h4>
-                                <progress id="progressimage" class="hide progress" value="0" max="100">0%</progress>
+                                <progress id="progressimage2" class="hide progress" value="0" max="100">0%</progress>
                             </div>
                             <div class="" id="other">
-                                <img id="imageId" class="img-thumbnail card-img-top" src="images/logo.png" alt="Card image cap">
+                                <img id="imageId" class="img-thumbnail card-img-top" src="images/not_found.png" alt="Card image cap">
                             </div>
                         </div>
 
