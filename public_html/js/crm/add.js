@@ -39,7 +39,7 @@ function saveCustomer() {
                         type: 'POST',
                         success: function (data) {
                             showMessage('success', 'Customer added successfully.');
-//                            $('#fees').val();
+                             $("#saveBtn").attr("disabled", true);
                         },
                         error: function (data) {
                             showMessage('danger', 'Please try again.');
@@ -130,6 +130,20 @@ function validateCustomer() {
         }
     }
     return flag;
+}
+function resetdata() {
+    $('#cname').val(' ');
+    $('#cemail').val(' ');
+    $('#cphone').val(' ');
+    $('#location').val(' ');
+    $('#propertytypeid').val(' ');
+    $('#finalstatus').val(' ');
+    $('#reffrom').val(' ');
+    $('#detailsofproperty').val(' ');
+    $('#meetingstatus').val(' ');
+    $('#price').val(' ');
+    $("#propertytypeid").select2().select2('val', 'asp');
+    $("#saveBtn").attr("disabled", false);
 }
 function checkUniqueEmail() {
     var input_value = $('#cemail').val();

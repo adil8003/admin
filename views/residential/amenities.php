@@ -15,13 +15,13 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             <div class="col-md-12">
                                 <div class="form-group" >
                                     <label>Amenities Name:<span class="asterik">*</span><span  class="errmsg" id="err-aname"></span> </label>
-                                    <input type="text" class="form-control border-input input-sm"  name="aname" id="aname" placeholder="  Amenities "
-                                           required/>
+                                    <textarea onchange="saveAmenities();"  class="form-control border-input input-sm"  name="aname" id="aname" placeholder="  Amenities ">
+                                    </textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="saveAmenities();" class="btn btn-info btn-fill btn-wd">Save</button>
+                            <button type="button"   class="btn btn-info btn-fill btn-wd">Save</button>
                         </div>
                         <div class="clearfix"></div><br>
                     </form>
@@ -45,7 +45,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="updateAmenities();" class="btn btn-info btn-fill btn-wd">Update</button>
+                            <button type="button"  onclick="updateAmenities();" class="btn btn-info btn-fill btn-wd">Update</button>
                         </div>
                         <div class="clearfix"></div><br>
                     </form>

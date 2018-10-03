@@ -65,7 +65,8 @@ $(document).ready(function () {
 //                    htmlAction += '<a href="#" title="Customer details" class="teal-text" id="customer_id" onclick="getCustomerdetails(`' + data + '`)" ><i   class="ti-user teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/followup&amp;id=' + data + '" title="Follow up" class="teal-text"  ><i   class="ti-blackboard teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/mail&amp;id=' + data + '" title="Mail" class="teal-text"  ><i   class="ti-email teal-text "></i></a>&nbsp;&nbsp;'
-                    htmlAction += '<a href="index.php?r=crm/mail&amp;id=' + data + '" title="Mail" class="teal-text"  ><i   class="ti-comments-smiley teal-text "></i></a>&nbsp;&nbsp;'
+                    htmlAction += '<a href="#"  title="Mail" class="teal-text"  ><i onclick="inactive(' + data + ')" id="crmid"  class="ti-trash teal-text "></i></a>&nbsp;&nbsp;'
+//                    htmlAction += '<a href="index.php?r=crm/mail&amp;id=' + data + '" title="Mail" class="teal-text"  ><i   class="ti-comments-smiley teal-text "></i></a>&nbsp;&nbsp;'
                     return htmlAction;
                 }
             }
@@ -116,6 +117,34 @@ $(document).ready(function () {
         table.draw();
     });
 }); // end document.ready
+function inactive(tid) {
+    $('#crmid').val(tid);
+    var obj = new Object();
+    obj.id = $('#crmid').val();
+    alertify.confirm("Are you sure you want to delete?",
+            function () {
+                $.ajax({
+                    url: 'index.php?r=crm/inactivecus',
+                    async: false,
+                    data: obj,
+                    type: 'POST',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.status == false) {
+
+                        } else if (data.status == true) {
+                            showMessage('success', 'Successfully deleted');
+                            var mytbl = $("#tblCrmCustomer").datatable();
+                            mytbl.ajax.reload;
+                        }
+                    },
+                    error: function (data) {
+                        showMessage('danger', 'Please try again.');
+                    }
+
+                });
+            });
+}
 function formattedText(text) {
     return (text == null || text == '') ? '' : text.trim();
 }

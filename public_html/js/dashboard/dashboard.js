@@ -1,7 +1,7 @@
 $(document).ready(function () {
- $('.js-example-basic-multiple').select2({
-        placeholder: "Select "
-    });
+// $('.js-example-basic-multiple').select2({
+//        placeholder: "Select "
+//    });
     getAllCountStats();
     todayAllCallList();
     $("#panel").hide();
@@ -24,20 +24,25 @@ function getAllCountStats() {
         type: 'GET',
         success: function (data) {
             data = JSON.parse(data)
-            console.log(data.data[0].status);
+            console.log(data.data);
             if (data.data[0].status == true) {
                 $('#rescount').html('<p id="rescount">' + data.data[0].rescount + '</p>')
                 $('#resalecount').html('<p id="resalecount">' + data.data[0].resalecount + '</p>')
                 $('#cusCount').html('<p id="cusCount">' + data.data[0].crmcount + '</p>')
+                $('#resMostPopular').html('<p id="resMostPopular">' + data.data[0].mostpopular + '</p>')
+                $('#resMostvaluable').html('<p id="resMostvaluable">' + data.data[0].mostvaluable + '</p>')
+                $('#feturedprojects').html('<p id="feturedprojects">' + data.data[0].feturedprojects + '</p>')
 
-                $('#resactive').html('<i id="resactive" class="fa fa-circle text-success"></i>Active ' + data.data[0].resactive + '');
-                $('#resinactive').html('<i id="resactive" class="fa fa-circle text-danger"></i>Inactive ' + data.data[0].resinactive + '');
+//                $('#resactive').html('<i id="resactive" class="fa fa-circle text-success"></i>Active ' + data.data[0].resactive + '');
+//                $('#resinactive').html('<i id="resactive" class="fa fa-circle text-danger"></i>Inactive ' + data.data[0].resinactive + '');
 
                 $('#resaleactive').html('<i id="resaleactive" class="fa fa-circle text-success"></i>Active ' + data.data[0].resaleactive + '');
                 $('#resaleinactive').html('<i id="resaleinactive" class="fa fa-circle text-danger"></i>Inactive ' + data.data[0].resaleinactive + '');
 
                 $('#cusactive').html('<i id="cusactive" class="fa fa-circle text-success"></i>Active ' + data.data[0].crmactive + '');
                 $('#cusinactive').html('<i id="cusinactive" class="fa fa-circle text-danger"></i>Inactive ' + data.data[0].crminactive + '');
+//                $('#resMostPopular').html('<i id="cusactive" class="fa fa-circle text-success"></i>Active ' + data.data[0].mostpopular + '');
+//                $('#resMostvaluable').html('<i id="cusinactive" class="fa fa-circle text-danger"></i>Inactive ' + data.data[0].crminactive + '');
             }
         },
         error: function (data) {

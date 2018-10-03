@@ -1,5 +1,6 @@
 $(document).ready(function () {
     // Dropzone class:
+    getResbyid();
     getResidentialImagebyid();
     var id = $('#res_id').val();
     var myDropzone = new Dropzone("#imageamaneti", {
@@ -18,6 +19,7 @@ $(document).ready(function () {
         $('#progressimage').addClass('hide');
         getResidentialImagebyid(id);
     });
+     getResidentialImagebyid(id);
 });
 $(document).ready(function () {
     // Dropzone class:
@@ -59,7 +61,70 @@ $(document).ready(function () {
         getResidentialImagebyid(id);
     });
 });
-
+$(document).ready(function () {
+    // Dropzone class:
+    var id = $('#res_id').val();
+    var myDropzone = new Dropzone("#propertybannerimg", {
+        url: "index.php?r=residential/uploadpropertybanner&id=" + id + "",
+        clickable: '#clicpropertybanner',
+        previewTemplate: '<div style="display:none"></div>'
+    });
+    myDropzone.on("addedfile", function (file) {
+        $('#progressimage3').removeClass('hide');
+    });
+    myDropzone.on("uploadprogress", function (file, progress, bytesSent) {
+        $('#progressimage3').attr('value', progress);
+        $('#progressimage3').html(bytesSent + ' bytes');
+    });
+    myDropzone.on("complete", function (file) {
+        $('#progressimage3').addClass('hide');
+        getResbyid(id);
+    });
+});
+function deletePropertyBaner() {
+    var obj = new Object();
+    obj.id = $('#res_id').val();
+    alertify.confirm("Are you sure you want to delete this image?",
+            function () {
+                $.ajax({
+                    url: "index.php?r=residential/deletepropertybannerimg",
+                    async: false,
+                    data: obj,
+                    type: 'POST',
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        getResbyid(obj.id);
+                        if (data.status) {
+                            showMessage('success', 'Project image is deleted.');
+                        } else {
+                            showMessage('danger', 'Please try again.');
+                        }
+                    }
+                });
+            });
+}
+function getResbyid(id) {
+    var id = $('#res_id').val();
+    var obj = new Object();
+    obj.id = id;
+    $.ajax({
+        url: "index.php?r=residential/getresbyid",
+        async: false,
+        data: obj,
+        type: 'POST',
+        success: function (data) {
+            data = JSON.parse(data);
+            $('#propertybanner').attr('src', 'index.php?r=residential/linkrespropertybannerimg&id=' + data.data.id);
+            if (data.data.image === '/resources/propertybannera/not_found.png') {
+                $('#picid').hide();
+                $('#picid').css('display', 'none');
+            } else {
+                $('#picid').show();
+                $('#picid').css('color', '#1f1d1d');
+            }
+        }
+    });
+}
 function getResidentialImagebyid(id) {
     var id = $('#res_id').val();
     var obj = new Object();
@@ -75,7 +140,7 @@ function getResidentialImagebyid(id) {
                 var amenities = '';
                 $.each(data.data, function (k, v) {
                     if (v.imgtype === 'amenities') {
-                        amenities += '<div class="dz-error-mark"><span id="resimg_id" style=" cursor:pointer;" ><i onclick="getImageId(`'+ v.id +'`)" class="ti ti-trash"></i></span></div>';
+                        amenities += '<div class="dz-error-mark"><span id="resimg_id" style=" cursor:pointer;" ><i onclick="getImageId(`' + v.id + '`)" class="ti ti-trash"></i></span></div>';
                         amenities += '<img id="imageId" class="img-thumbnail card-img-top" src="index.php?r=residential/linkuserimageamenities&id=' + v.id + '" alt="amenities image"><hr>';
                         $('#amenitiesList').html(amenities);
                     }
@@ -83,23 +148,23 @@ function getResidentialImagebyid(id) {
                 var florplan = '';
                 $.each(data.data, function (k, v) {
                     if (v.imgtype === 'florplan') {
-                        florplan += '<div class="dz-error-mark"><span id="resimg_id" style=" cursor:pointer;"  ><i onclick="getImageId(`'+ v.id +'`)"  class="ti ti-trash"></i></span></div>';
+                        florplan += '<div class="dz-error-mark"><span id="resimg_id" style=" cursor:pointer;"  ><i onclick="getImageId(`' + v.id + '`)"  class="ti ti-trash"></i></span></div>';
                         florplan += '<img id="" class="img-thumbnail card-img-top" src="index.php?r=residential/linkuserimageflorplan&id=' + v.id + '" alt="Florplan image"><hr>';
                         $('#florPlanList').html(florplan);
-                    }else{
+                    } else {
 //                        florplan += '<img id="" class="img-thumbnail card-img-top" src="images/not_found.png" alt="Florplan image"><hr>';
-                        
+
                     }
                 });
                 var other = '';
                 $.each(data.data, function (k, v) {
                     if (v.imgtype === 'other') {
-                        other += '<div class="dz-error-mark"><span id="resimg_id" style=" cursor:pointer;" ><i onclick="getImageId(`'+ v.id +'`)"  class="ti ti-trash"></i></span></div>';
+                        other += '<div class="dz-error-mark"><span id="resimg_id" style=" cursor:pointer;" ><i onclick="getImageId(`' + v.id + '`)"  class="ti ti-trash"></i></span></div>';
                         other += '<img id="" class="img-thumbnail card-img-top" src="index.php?r=residential/linkuserimageother&id=' + v.id + '" alt="Other image"><hr>';
                         $('#other').html(other);
                     }
                 });
-            } else if(data.data == ''){
+            } else if (data.data == '') {
                 $('#imgNotAvailable').text('Image not available.')
             }
 
@@ -107,7 +172,7 @@ function getResidentialImagebyid(id) {
     });
 }
 function getImageId(imgid) {
-     var id = $('#res_id').val();
+    var id = $('#res_id').val();
     var obj = new Object();
     obj.id = imgid;
     obj.residentialid = id;
@@ -132,6 +197,6 @@ function getImageId(imgid) {
                 });
             });
 }
-function NoImage(){
-     $('#imageId22').html('<img id="imageId" class="img-thumbnail card-img-top" src="images/not_found.png" alt="amenities image ">')
+function NoImage() {
+    $('#imageId22').html('<img id="imageId" class="img-thumbnail card-img-top" src="images/not_found.png" alt="amenities image ">')
 }

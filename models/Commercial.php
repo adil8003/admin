@@ -15,10 +15,11 @@ use Yii;
  * @property string $location
  * @property string $landmark
  * @property string $address
- * @property integer $price
+ * @property string $price
  * @property string $reraid
  * @property integer $statusid
  * @property string $addeddate
+ * @property integer $protype
  */
 class Commercial extends \yii\db\ActiveRecord
 {
@@ -36,8 +37,8 @@ class Commercial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'dname', 'buytypeid', 'ctypeid', 'location', 'landmark', 'address', 'price', 'statusid'], 'required'],
-            [['buytypeid', 'ctypeid', 'price', 'statusid'], 'integer'],
+            [['cname', 'dname', 'buytypeid', 'ctypeid', 'location', 'landmark', 'address', 'price', 'statusid', 'protype'], 'required'],
+            [['buytypeid', 'ctypeid', 'price', 'statusid', 'protype'], 'integer'],
             [['address'], 'string'],
             [['addeddate'], 'safe'],
             [['cname', 'dname', 'location', 'landmark'], 'string', 'max' => 500],
@@ -63,6 +64,7 @@ class Commercial extends \yii\db\ActiveRecord
             'reraid' => 'Reraid',
             'statusid' => 'Statusid',
             'addeddate' => 'Addeddate',
+            'protype' => 'Protype',
         ];
     }
 }

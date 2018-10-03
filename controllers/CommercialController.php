@@ -252,6 +252,7 @@ class CommercialController extends Controller {
                 $objCommercial->address = $request->post('address');
                 $objCommercial->reraid = $request->post('reraid');
                 $objCommercial->statusid = $request->post('statusid');
+                $objCommercial->protype = 3;
 
                 if ($objCommercial->save()) {
                     $arrReturn['status'] = TRUE;

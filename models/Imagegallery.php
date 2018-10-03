@@ -36,8 +36,8 @@ class Imagegallery extends \yii\db\ActiveRecord
         return [
             [['residentialid', 'commercialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
             [['image', 'type', 'imgtype', 'statusid'], 'required'],
+            [['image'], 'string'],
             [['addeddate'], 'safe'],
-            [['image'], 'string', 'max' => 700],
             [['imgtype'], 'string', 'max' => 200]
         ];
     }

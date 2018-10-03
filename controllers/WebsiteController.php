@@ -27,11 +27,21 @@ class WebsiteController extends Controller {
         ]);
     }
 
+    public function actionWeb() {
+        return $this->render('web', [
+        ]);
+    }
+    public function actionProject() {
+        return $this->render('project', [
+        ]);
+    }
+
     public function actionError() {
         return $this->render('error', [
         ]);
     }
-     public function actionDeleteimage() {
+
+    public function actionDeleteimage() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $request = Yii::$app->request;
@@ -77,6 +87,97 @@ class WebsiteController extends Controller {
         echo json_encode($arrJSON);
     }
 
+    public function actionAllcustomers() {
+        $arrResidential['status'] = FALSE;
+        $arrJSON = array();
+        $arrResidential = array();
+        $this->layout = "";
+        $request = Yii::$app->request;
+        $id = $request->post('id');
+        $connection = Yii::$app->db;
+        $objData = $connection->createCommand('Select *
+                        from `customers` s 
+                        ORDER BY `addeddate` DESC ')->queryAll();
+        foreach ($objData AS $objrow) {
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['name'] = $objrow['name'];
+            $arrTemp['email'] = $objrow['email'];
+            $arrTemp['phone'] = $objrow['phone'];
+            $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
+            $arrResidential[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrResidential;
+        echo json_encode($arrJSON);
+    }
+    public function actionAllproject() {
+        $arrResidential['status'] = FALSE;
+        $arrJSON = array();
+        $arrResidential = array();
+        $this->layout = "";
+        $request = Yii::$app->request;
+        $id = $request->post('id');
+        $connection = Yii::$app->db;
+        $objData = $connection->createCommand('Select *
+                        from `postproperty` p 
+                        ORDER BY `addeddate` DESC ')->queryAll();
+        foreach ($objData AS $objrow) {
+            if($objrow['builderid'] == 1){
+                $a = 'Builder';
+            } elseif ($objrow['ownerid'] == 1) {
+                $a = 'owner';
+            }else{
+                $a = 'Agent';
+            }
+            if($objrow['rentid'] == 1){
+                $b = 'Rent';
+            } else { 
+                $b = 'Sale';
+            }
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['who'] = $a;
+            $arrTemp['for'] = $b;
+//            $arrTemp['builderid'] = $objrow['builderid'];
+//            $arrTemp['ownerid'] = $objrow['ownerid'];
+//            $arrTemp['agentid'] = $objrow['agentid'];
+            $arrTemp['rentid'] = $objrow['rentid'];
+            $arrTemp['saleid'] = $objrow['saleid'];
+            $arrTemp['contact'] = $objrow['contact'];
+            $arrTemp['email'] = $objrow['email'];
+            $arrTemp['location'] = $objrow['location'];
+            $arrTemp['totalarea'] = $objrow['totalarea'];
+            $arrTemp['expectedprice'] = $objrow['expectedprice'];
+            $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
+            $arrResidential[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrResidential;
+        echo json_encode($arrJSON);
+    }
+
+//    public function actionInactivecus() {
+//        $arrReturn = array();
+//        $arrReturn['status'] = FALSE;
+//        $request = Yii::$app->request;
+//        $this->layout = "";
+//        if ($request->isPost) {
+//            $id = $request->post('id');
+//            if ($id != 0) {
+//                $objCrm = \app\models\Customers::find()->where(['id' => $id])->One();
+//                $objCrm->customerstatusid = 3;
+//                $objCrm->save();
+//                $arrReturn['id'] = $id;
+//                $arrReturn['status'] = TRUE;
+//                $arrReturn['msg'] = 'Deleted successfully.';
+//            } else {
+//                $arrReturn['msg'] = 'Please try again';
+//            }
+//        }
+//        echo json_encode($arrReturn);
+//    }
+
     public function actionLinkuserimageflorplan() {
         $request = Yii::$app->request;
         $id = $request->get('id');
@@ -111,7 +212,7 @@ class WebsiteController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/website/';
-            $image_name = md5(date('Ymdhis')). rand(10000000, 9999999);
+            $image_name = md5(date('Ymdhis')) . rand(10000000, 9999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -135,7 +236,7 @@ class WebsiteController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/website/';
-            $image_name = md5(date('Ymdhis')). rand(10000000, 9999999);
+            $image_name = md5(date('Ymdhis')) . rand(10000000, 9999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -159,7 +260,7 @@ class WebsiteController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/website/';
-            $image_name = md5(date('Ymdhis')). rand(10000000, 9999999);
+            $image_name = md5(date('Ymdhis')) . rand(10000000, 9999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -177,6 +278,7 @@ class WebsiteController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
 }
 
 // end of WebsiteController.php

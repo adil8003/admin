@@ -91,9 +91,23 @@ TRUNCATE table 	resale;
 TRUNCATE table 	residential; 
 TRUNCATE table 	respropertytype; 
 TRUNCATE table 	proupdate; 
+TRUNCATE table 	postproperty; 
+TRUNCATE table 	customers; 
 SET FOREIGN_KEY_CHECKS = 1;
 
 8/9/18
+ resale -
+20/9
+ALTER TABLE `resale` ADD `image` VARCHAR(700) NOT NULL AFTER `contact`;
+ALTER TABLE `residential` ADD `ptype` INT(2) NOT NULL AFTER `addeddate`;
+ALTER TABLE `resale` ADD `ptype` INT(2) NOT NULL AFTER `added_date`;
+ALTER TABLE `commercial` ADD `ptype` INT(2) NOT NULL AFTER `addeddate`;
+
+ALTER TABLE `resale` CHANGE `ptype` `protype` INT(2) NOT NULL;
+ALTER TABLE `commercial` CHANGE `ptype` `protype` INT(2) NOT NULL;
+ALTER TABLE `residential` CHANGE `ptype` `protype` INT(2) NOT NULL;
+ALTER TABLE `commercial` CHANGE `price` `price` BIGINT(20) NOT NULL;
+
 
 
 

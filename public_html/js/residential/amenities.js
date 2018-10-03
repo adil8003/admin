@@ -185,8 +185,8 @@ function getAmenitiesCard(dataAll) {
 function saveAmenities() {
     var res_id = $('#res_id').val();
     if (validateFollowup()) {
-        alertify.confirm("Are you sure you want add this amenities?",
-                function () {
+//        alertify.confirm("Are you sure you want add this amenities?",
+//                function () {
                     var obj = new Object();
                     obj.residentialid = res_id;
                     obj.aname = $('#aname').val();
@@ -204,7 +204,7 @@ function saveAmenities() {
                             showMessage('danger', 'Please try again.');
                         }
                     });
-                });
+//                });
     }
 }
 function validateFollowupupdate() {

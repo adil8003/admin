@@ -41,7 +41,7 @@ class DashboardController extends Controller {
         ]);
     }
 
-    public function actionGetallprojectandcustomercount() {
+    public function actionGetallprojectandcustomercount() { 
         $arrCount['status'] = FALSE;
         $arrJSON = array();
         $arrCount = array();
@@ -50,20 +50,17 @@ class DashboardController extends Controller {
         $request = Yii::$app->request;
 
         //  Count list
-        $objResidential = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
+        $objResidential = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price
                         from `residential` r 
-                        LEFT join `propertytype` p on r.propertytypeid = p.id 
                         LEFT join `buytype` bt on r.buytypeid = bt.id 
                          ')->queryAll();
-        $objCrm = $connection->createCommand('Select c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+        $objCrm = $connection->createCommand('Select c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname 
                         from `crm` c 
-                        LEFT join `propertytype` p on c.propertytypeid = p.id 
                         LEFT join `buytype` bt on c.buytypeid = bt.id 
                           ')->queryAll();
         $objResale = $connection->createCommand('Select r.id,r.ownername,r.added_date,r.contact,r.location,
-                                    r.price,p.name as ptype ,r.location,s.name as stype
+                                    r.price
                         from `resale` r 
-                        LEFT join `propertytype` p on r.propertytypeid = p.id 
                         LEFT join `status` s on s.id = r.statusid 
                         ')->queryAll();
 
@@ -74,38 +71,49 @@ class DashboardController extends Controller {
                         LEFT join `propertytype` p on r.propertytypeid = p.id 
                         LEFT join `status` s on s.id = r.statusid 
                        where r.statusid = ' . 1 . '  ORDER BY `added_date` DESC ')->queryAll();
-        $objResidentialInactive = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
+        $objResidentialInactive = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price
                         from `residential` r 
-                        LEFT join `propertytype` p on r.propertytypeid = p.id 
                         LEFT join `buytype` bt on r.buytypeid = bt.id 
                          where r.statusid = ' . 1 . '  ORDER BY `addeddate` DESC ')->queryAll();
-        $objCrmInactive = $connection->createCommand('Select c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+        $objCrmInactive = $connection->createCommand('Select *
                         from `crm` c 
-                        LEFT join `propertytype` p on c.propertytypeid = p.id 
-                        LEFT join `buytype` bt on c.buytypeid = bt.id 
-                        where c.statusid = ' . 1 . '  ORDER BY `addeddate` DESC ')->queryAll();
+                        where c.customerstatusid = ' . 3 . '   ')->queryAll();
 //         --- Active list
         $objResaleActive = $connection->createCommand('Select r.id,r.ownername,r.added_date,r.contact,r.location,
                                     r.price,p.name as ptype ,r.location,s.name as stype
                         from `resale` r 
                         LEFT join `propertytype` p on r.propertytypeid = p.id 
                         LEFT join `status` s on s.id = r.statusid 
-                       where r.statusid = ' . 2 . '   ')->queryAll();
-        $objResidentialActive = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
+                        where r.statusid = ' . 2 . '   ')->queryAll();
+        
+        $objResidentialActive = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price
                         from `residential` r 
-                        LEFT join `propertytype` p on r.propertytypeid = p.id 
-                        LEFT join `buytype` bt on r.buytypeid = bt.id 
-                         where r.statusid = ' . 2 . '   ')->queryAll();
-        $objCrmActive = $connection->createCommand('Select c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+                        where r.statusid = ' . 2 . '  ')->queryAll();
+        
+        $objResMostPopular = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price
+                        from `residential` r 
+                        where r.statusid = ' . 3 . '  ')->queryAll();
+        
+        $objResFeturedProjects = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price
+                        from `residential` r 
+                        where r.statusid = ' . 4 . '  ')->queryAll();
+        
+        $objResMostvaluable = $connection->createCommand('Select r.id,r.pname,r.addeddate,r.pland,r.location,r.price
+                        from `residential` r 
+                        where r.statusid = ' . 5 . '  ')->queryAll();
+        
+        $objCrmActive = $connection->createCommand('Select c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price
                         from `crm` c 
-                        LEFT join `propertytype` p on c.propertytypeid = p.id 
-                        LEFT join `buytype` bt on c.buytypeid = bt.id 
-                        where c.statusid = ' . 2 . '  ORDER BY `addeddate` DESC ')->queryAll();
+                        where c.customerstatusid = ' . 2 . ' || c.customerstatusid = ' . 1 . '   ORDER BY `addeddate` DESC ')->queryAll();
 
         $ResCount = count($objResidential);
         $CrmCount = count($objCrm);
         $ResaleCount = count($objResale);
-
+        $objMostPopularCount = count($objResMostPopular);
+        $objResFeturedProjectsCount = count($objResFeturedProjects);
+        $objResMostvaluableCount = count($objResMostvaluable);
+        
+      
 //        active acount
         $objResaleActive = count($objResaleActive);
         $objResidentialActive = count($objResidentialActive);
@@ -114,7 +122,7 @@ class DashboardController extends Controller {
         $objResaleInactive = count($objResaleInactive);
         $objResidentialInactive = count($objResidentialInactive);
         $objCrmInactive = count($objCrmInactive);
-        if ($ResCount || $ResCount) {
+//        if ($ResCount != 0 || $ResCount != 0 ) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
             $arrTemp['rescount'] = $ResCount;
@@ -126,8 +134,11 @@ class DashboardController extends Controller {
             $arrTemp['resaleinactive'] = $objResaleInactive;
             $arrTemp['resinactive'] = $objResidentialInactive;
             $arrTemp['crminactive'] = $objCrmInactive;
+            $arrTemp['mostpopular'] = $objMostPopularCount;
+            $arrTemp['feturedprojects'] = $objResFeturedProjectsCount;
+            $arrTemp['mostvaluable'] = $objResMostvaluableCount;
             $arrCount[] = $arrTemp;
-        }
+//        }
         $arrJSON['data'] = $arrCount;
         echo json_encode($arrJSON);
     }
@@ -140,11 +151,14 @@ class DashboardController extends Controller {
         $connection = Yii::$app->db;
         $TodayM = date("m");
         $TodayD = date("d");
-        $objData = $connection->createCommand('Select c.id,f.followupdate,f.addeddate as fdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
+        $objData = $connection->createCommand('Select c.id,f.followupdate,f.addeddate as fdate,c.finalstatus,
+            c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
                         from `crm` c 
-                        LEFT join `propertytype` p on c.propertytypeid = p.id 
+                          LEFT JOIN  `ptype` pt on pt.crm_id = c.id
                          LEFT join `followup` f on f.crm_id = c.id 
-                        LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 2 . ' ')->queryAll();
+                         LEFT JOIN `propertytype` p on p.id = pt.propertytypeid    
+                         LEFT join `customerstatus` cs on cs.id = c.customerstatusid 
+                        LEFT join `buytype` bt on c.buytypeid = bt.id where c.customerstatusid = ' . 2 . '  ||  c.customerstatusid = ' . 1 . '   GROUP BY f.id ')->queryAll();
         foreach ($objData AS $objrow) {
             $M = date('m', strtotime($objrow['followupdate']));
             $D = date('d', strtotime($objrow['followupdate']));

@@ -143,17 +143,10 @@ $this->title = Yii::t('app', ' Add residential');
                         </div>
                     </div>
                   
-                    <div class="col-md-7">
+                    <div class="col-md-9">
                         <div class="form-group">
                             <label>Address: <span class="asterik">*</span><span  class="errmsg" id="err-price"></span> </label>
                             <input type="text" name="address" id="address"   class="form-control border-input input-sm"
-                                   placeholder="Address">
-                        </div>
-                    </div>
-                      <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Image: <span class="asterik">*</span><span  class="errmsg" id="err-price"></span> </label>
-                            <input type="file" name="file" id="file"   class="form-control border-input input-sm"
                                    placeholder="Address">
                         </div>
                     </div>

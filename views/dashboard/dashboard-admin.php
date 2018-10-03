@@ -1,13 +1,61 @@
 <?php
 $this->title = Yii::t('app', 'Dashboard');
 ?>
-<input type="hidden" id="orgid"  value="<?php // echo $objUserroles->org_id            ?>"/>
+<input type="hidden" id="orgid"  value="<?php ?>"/>
 <div class="row">
     <div class="col-md-12">
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6">
+                     <div class="col-lg-4 col-sm-6">
+                        <div class="card" style="min-height:150px">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-10">
+                                       <div>Res Most Popular </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <p id="resMostPopular">0</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                       <div>Res fetured projects </div>
+                                    </div>
+                                     <div class="col-xs-2">
+                                        <p id="feturedprojects">0</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                       <div>Res Most valuable </div>
+                                    </div>
+                                     <div class="col-xs-2">
+                                        <p id="resMostvaluable">0</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                       <div>Total active </div>
+                                    </div>
+                                     <div class="col-xs-2">
+                                        <p id="resactive">0</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                       <div>Total inactive </div>
+                                    </div>
+                                     <div class="col-xs-2">
+                                        <p id="resinactive">0</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                       <div>ALL </div>
+                                    </div>
+                                     <div class="col-xs-2">
+                                        <p id="rescount">0</p>
+                                    </div>
+                                </div>
+                                <!--<hr />-->
+<!--                                <div class="stats">
+                                    <i id="resMostPopular" class=""></i>  
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-sm-6">
                         <div class="card" style="min-height:150px">
                             <div class="content">
                                 <div class="row">
@@ -18,20 +66,45 @@ $this->title = Yii::t('app', 'Dashboard');
                                     </div>
                                     <div class="col-xs-8">
                                         <div class="numbers">
-                                            <p>Residential project</p>
-                                            <p id="rescount">30</p>
+                                            <p>.......</p>
+                                            <p id="s">0</p>
                                         </div>
                                     </div>
                                 </div>
                                 <hr />
                                 <div class="stats">
-                                    <i id="resactive" class=""></i>  
-                                    <i id="resinactive" class=""></i>
+                                    <i id="ss" class=""></i>  
+                                    <i id="ss" class=""></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                   
+<!--                    <div class="col-lg-2 col-sm-6">
+                        <div class="card" style="min-height:150px">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="icon-big icon-warning text-center">
+                                            <i class="ti-home"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div class="numbers">
+                                            <p>Res Most valuable</p>
+                                            <p id="resMostvaluable">30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="stats">
+                                    <i id="resMostvaluable" class=""></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="col-lg-2 col-sm-6">
                         <div class="card" style="min-height:150px">
                             <div class="content">
                                 <div class="row">
@@ -55,19 +128,19 @@ $this->title = Yii::t('app', 'Dashboard');
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-2 col-sm-6">
                         <div class="card" style="min-height:150px">
                             <div class="content">
                                 <div class="row">
-                                    <div class="col-xs-5">
+                                    <div class="col-xs-4">
                                         <div class="icon-big icon-danger text-center">
-                                            <i class="ti-user"></i>
+                                            <i class="ti-"></i>
                                         </div>
                                     </div>
-                                    <div class="col-xs-7">
+                                    <div class="col-xs-8">
                                         <div class="numbers">
                                             <p>Customers</p>
-                                            <p id="cusCount"></p>
+                                            <p id="cusCount">0</p>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +152,7 @@ $this->title = Yii::t('app', 'Dashboard');
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-2 col-sm-6">
                         <div class="card" style="min-height:150px">
                             <div class="content">
                                 <div class="row">
@@ -173,7 +246,7 @@ $this->title = Yii::t('app', 'Dashboard');
                         </div>
                         <hr>
                         <div class="stats" id="customerCallList">
-                            
+
                         </div>
                     </div>
                 </div>

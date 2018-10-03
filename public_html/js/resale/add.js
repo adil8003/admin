@@ -40,6 +40,7 @@ function saveResale() {
                         type: 'POST',
                         success: function (data) {
                             showMessage('success', 'Property save successfully.');
+                             $("#saveBtn").attr("disabled", true);
                         },
                         error: function (data) {
                             showMessage('danger', 'Please try again.');

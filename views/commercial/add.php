@@ -132,7 +132,8 @@ $this->title = Yii::t('app', ' Add commercial');
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" onclick="saveProperty();" class="btn btn-info btn-fill btn-wd">Save Property</button>
+                    <button type="button" onclick="saveProperty();" id="saveBtn" class="btn btn-info btn-fill btn-wd">Save Property</button>
+                 <button type="reset" onclick="reset();" id="reset" class="btn btn-info btn-fill btn-wd">Reset</button>
                 </div>
                 <div class="clearfix"></div><br>
             </form>

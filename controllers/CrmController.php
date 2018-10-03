@@ -297,7 +297,7 @@ class CrmController extends Controller {
                     $objFollowup->followupdate = $followupdate;
                     if ($objFollowup->save()) {
                         $arrReturn['status'] = TRUE;
-                        $arrReturn['id'] = $objFollowup->id;
+                        $arrReturn['id'] = $objFollowup->crm_id;
                         $arrReturn['msg'] = 'save successfully.';
 
                         $objCrm = \app\models\Crm:: find()->where(['id' => $request->post('crm_id')])->one();
@@ -549,6 +549,46 @@ class CrmController extends Controller {
         }
         $arrJSON['data'] = $arrfollow;
         echo json_encode($arrJSON);
+    }
+    public function actionInactivecus() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            if ($id != 0) {
+                $objCrm = Crm::find()->where(['id' => $id])->One();
+                $objCrm->customerstatusid = 3;
+                $objCrm->save();
+                $arrReturn['id'] = $id;
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+    public function actionActivecustome() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            if ($id != 0) {
+                $objCrm = Crm::find()->where(['id' => $id])->One();
+                $objCrm->customerstatusid = 1;
+                $objCrm->save();
+                $arrReturn['id'] = $id;
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
     }
 
 }

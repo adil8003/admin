@@ -20,6 +20,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                         <div id="imageamaneti" class="card">
                             <li>Upload image for <b>Key features images </b>.</li>
                             <li>Upload only one image.</li>
+                             <li>Size should be 850-900 * 380-420.</li>
                             <div class="card-block">
                                 <h4 class="card-title">Drop Image Or <button type="button" id="clickimageamaneti" class="btn btn-secondary btn-sm">Click here</button></h4>
                                 <progress id="progressimage" class="hide progress" value="0" max="100">0%</progress>
@@ -49,6 +50,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                         <div id="imageother" class="card">
                             <li>Upload image <b>other</b>.</li>
                             <li>Upload only one image.</li>
+                            <li>Size should be 250 * 190-200.</li>
                             <div class="card-block">
                                 <h4 class="card-title">Drop Image Or <button type="button" id="clickother" class="btn btn-secondary btn-sm">Click here</button></h4>
                                 <progress id="progressimage" class="hide progress" value="0" max="100">0%</progress>

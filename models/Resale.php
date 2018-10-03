@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $ownername
  * @property string $contact
+ * @property string $image
  * @property string $societyname
  * @property string $buildingname
  * @property string $wing
@@ -46,12 +47,12 @@ class Resale extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price', 'carpetarea', 'propertytypeid', 'statusid'], 'required'],
+            [['image', 'price', 'carpetarea', 'propertytypeid', 'statusid'], 'required'],
             [['price'], 'number'],
             [['propertytypeid', 'statusid'], 'integer'],
             [['remarks'], 'string'],
             [['added_date'], 'safe'],
-            [['ownername', 'contact', 'societyname', 'buildingname', 'wing', 'flatnumber', 'floornumber', 'location', 'landmark', 'propertyfacing', 'furniture'], 'string', 'max' => 700],
+            [['ownername', 'contact', 'image', 'societyname', 'buildingname', 'wing', 'flatnumber', 'floornumber', 'location', 'landmark', 'propertyfacing', 'furniture'], 'string', 'max' => 700],
             [['address'], 'string', 'max' => 900],
             [['carpetarea'], 'string', 'max' => 200],
             [['age'], 'string', 'max' => 100]
@@ -67,6 +68,7 @@ class Resale extends \yii\db\ActiveRecord
             'id' => 'ID',
             'ownername' => 'Ownername',
             'contact' => 'Contact',
+            'image' => 'Image',
             'societyname' => 'Societyname',
             'buildingname' => 'Buildingname',
             'wing' => 'Wing',

@@ -111,8 +111,78 @@ class ResaleController extends Controller {
         echo json_encode($arrJSON);
     }
 
+    public function actionUploadpropertybanner() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->get('id');
+        if (!empty($_FILES)) {
+            $uploaddir = 'resources/propertybanner/';
+            $image_name = md5(date('Ymdhis')) . rand(10000, 9999);
+            $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+                $objResale = Resale::findOne(['id' => $id]);
+                $objResale->image = $uploadfile;
+                $objResale->save();
+                $arrReturn['status'] = TRUE;
+            } else {
+                $arrReturn['msg'] = 'Try again.';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionGetresalebyid() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->post('id');
+        $objResale = Resale:: findone(['id' => $id]);
+        if ($id != '') {
+            $arrReturn['status'] = TRUE;
+            $arrReturn['data'] = $objResale->toArray();
+        }
+        echo json_encode($arrReturn);
+        die;
+    }
+
+    public function actionDeletepropertybannerimg() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $basePath = Yii::$app->params['basePath'];
+        if ($request->isPost) {
+            $id = $request->post('id');
+            if ($id != 0) {
+                $objResale = Resale::find()->where(['id' => $id])->one();
+                $objResale->image = $basePath . '/resources/propertybanner/not_found.png';
+                $objResale->save();
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionLinkrespropertybannerimg() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $objResale = Resale::findOne($id);
+        $file = $objResale->image;
+
+        header('Content-type: resources/png');
+        readfile($file);
+    }
+
     public function actionSaveresaleproperty() {
         $transaction = Yii::$app->db->beginTransaction();
+        $basePath = Yii::$app->params['basePath'];
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $request = Yii::$app->request;
@@ -138,6 +208,9 @@ class ResaleController extends Controller {
                 $objResale->age = $request->post('age');
                 $objResale->furniture = $request->post('furniture');
                 $objResale->remarks = $request->post('remarks');
+                $objResale->image = $basePath . '/resources/propertybanner/not_found.png';
+                $objResale->protype = 2;
+
 
                 if ($objResale->save()) {
                     $arrReturn['status'] = TRUE;

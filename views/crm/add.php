@@ -172,7 +172,8 @@ $this->title = Yii::t('app', ' CRM');
                     </div>
                 </div>
                 <div class="text-center">
-                    <button type="button" onclick="saveCustomer();" class="btn btn-info btn-fill btn-wd">Save Customer</button>
+                    <button type="button" id="saveBtn" onclick="saveCustomer();" class="btn btn-info btn-fill btn-wd">Save Customer</button>
+                <button type="button" onclick="resetdata();" class="btn btn-info btn-fill btn-wd">Reset</button>
                 </div>
                 <div class="clearfix"></div><br>
             </form>

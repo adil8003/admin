@@ -69,9 +69,15 @@ AppAsset::register($this);
                                 </a>
                             </li>
                             <li class="sub-menu">
-                                <a href="index.php?r=rent">
-                                    <i class="ti-key"></i>
-                                    <p>RENT</p>
+                                <a href="index.php?r=website/project">
+                                    <i class="ti-help-alt"></i>
+                                    <p>Request Project</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=website/web">
+                                    <i class="ti-user"></i>
+                                    <p>Customers</p>
                                 </a>
                             </li>
                             <li class="sub-menu">

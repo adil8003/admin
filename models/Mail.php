@@ -10,15 +10,16 @@ class mail {
     public function sendEmail($arrMailDetails) {
         $email = 'sadil8003@gmail.com';
         $date = date('d/m/Y');
+        $from = $arrMailDetails['from'];
         $to = $arrMailDetails['toemail'];
         $subject = $arrMailDetails['subject'];
         $body = $this->getEmailHeader();
         $body .= $arrMailDetails['body'];
         $body .= $this->getEmailFooter();
         $header = 'MIME-Version: 1.0' . "\r\n";
-        $header .= 'From:Unique property <sadil8003@gmail.com>' . "\r\n" .
+        $header .= 'From:Unique property <'. $from .'>' . "\r\n" .
                 'Content-type: text/html' . "\r\n" .
-                'Reply-To: sadil8003@gmail.com' . "\r\n" .
+//                'Reply-To: sadil8003@gmail.com' . "\r\n" .
 //                     'CC: asauravsuman@gmail.com ' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
 
@@ -61,7 +62,7 @@ class mail {
     public function getEmailHeader() {
         $logoURL = 'http://uniquepaf.tglobalsolutions.com/images/logo.png';
         $headURL = 'http://uniquepaf.tglobalsolutions.com/';
-        $header = " Unique proprty ";
+        $header = " Unique proprty solutions ";
         $emailCss = $this->getCSS();
         $headHtml = "<!DOCTYPE html>
                 <html lang='en'>
@@ -90,7 +91,7 @@ class mail {
         $comURL = 'http://uniquepaf.tglobalsolutions.com/images/logo.png/';
         $companyName = 'Unique proprty';
         $companyUrl = 'http://uniquepaf.tglobalsolutions.com/images/logo.png/';
-        $comName = 'Unique property';
+        $comName = 'Unique property solutions';
         $email = 'sadil8003@gmail.com';
         $footer = "<div style= 'background-color : #FFE4AA' class='header nullTopCorner' >
                         </div>
@@ -99,7 +100,7 @@ class mail {
                                     You are receiving this email because your email address was used to register at <a href= '" . $comURL . "' class= 'comName'>" . $comName . "</a>.If you have received this email in error please disregard or contact <span class= 'comName'>" . $email . "</span>.
                                                 </p>
                             <p class= 'setPFooter' style= 'font-size : 13.5px;color: #999;font-style: oblique;font-family: serif;'>
-                                Keep <span>contact@kiwings.com</span> in your contacts. <a href= '" . $companyUrl . "' class= 'comName'>" . $companyName . "</a>
+                                Keep <span>abhishekk@uniquepaf.com</span> in your contacts. <a href= '" . $companyUrl . "' class= 'comName'>" . $companyName . "</a>
                             </p>
                         </div>
                         </div>

@@ -16,10 +16,11 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                 </h4>
                 <hr>
                 <div class="row"> 
-                    <div class="col-sm-4  imageScroll">
+                    <div class="col-sm-3  imageScroll">
                         <div id="imageamaneti" class="card">
                             <li>Upload image for <b>amaneties</b>.</li>
                             <li>Upload only one image.</li>
+                             <li>Size should be 850-900 * 380-420.</li>
                             <div class="card-block">
                                 <h4 class="card-title">Drop Image Or <button type="button" id="clickimageamaneti" class="btn btn-secondary btn-sm">Click here</button></h4>
                                 <progress id="progressimage" class="hide progress" value="0" max="100">0%</progress>
@@ -29,7 +30,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4 imageScroll">
+                    <div class="col-sm-3 imageScroll">
                         <div id="florplan" class="card">
                             <li>Upload image for <b>floor plan</b>.</li>
                             <li>Upload only one image.</li>
@@ -39,13 +40,14 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                             </div>
                             <div class="" id="florPlanList">
                                 <div id="imgNotAvailable"></div>
+                                
                                 <img id="imageId" class="img-thumbnail card-img-top" src="images/not_found.png" alt="Card image cap">
                             </div>
                         </div>
 
 
                     </div>
-                    <div class="col-sm-4 imageScroll">
+                    <div class="col-sm-3 imageScroll">
                         <div id="imageother" class="card">
                             <li>Upload image <b>other</b>.</li>
                             <li>Upload only one image.</li>
@@ -57,8 +59,21 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                                 <img id="imageId" class="img-thumbnail card-img-top" src="images/not_found.png" alt="Card image cap">
                             </div>
                         </div>
-
-
+                    </div>
+                    <div class="col-sm-3 ">
+                        <div id="propertybannerimg" class="card">
+                            <li>Upload banner image</b>.</li>
+                            <li>Upload only one image.</li>
+                            <li>Size should be 250 * 190-200.</li>
+                            <div class="card-block">
+                                <h4 class="card-title">Drop Image Or <button type="button" id="clicpropertybanner" class="btn btn-secondary btn-sm">Click here</button></h4>
+                                <progress id="progressimage3" class="hide progress" value="0" max="100">0%</progress>
+                            </div>
+                            <div class="" id="other">
+                                <div id="resimg_id" style=" cursor:pointer;" ><i onclick="deletePropertyBaner()" class="ti ti-trash"></i></div>
+                                <img id="propertybanner" class="img-thumbnail card-img-top" src="" alt="Card image cap">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

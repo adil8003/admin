@@ -125,6 +125,26 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+    public function actionDeletepropertybannerimg() {
+       $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $basePath = Yii::$app->params['basePath'];
+        if ($request->isPost) {
+            $id = $request->post('id');
+            if ($id != 0) {
+                $objResidential = Residential::find()->where(['id' => $id])->one();
+                $objResidential->image = $basePath . '/resources/propertybanner/not_found.png';
+                $objResidential->save();
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
 
     public function actionGetimages() {
         $arrResidential['status'] = FALSE;
@@ -186,7 +206,7 @@ class ResidentialController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/residential/';
-            $image_name = md5(date('Ymdhis')). rand(10000000000,9999999999);
+            $image_name = md5(date('Ymdhis')) . rand(1000, 9999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -213,7 +233,7 @@ class ResidentialController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/residential/';
-            $image_name = md5(date('Ymdhis')). rand(10000000000,9999999999);
+            $image_name = md5(date('Ymdhis')) . rand(10000000000, 9999999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -240,7 +260,7 @@ class ResidentialController extends Controller {
         $basePath = Yii::$app->params['basePath'];
         if (!empty($_FILES)) {
             $uploaddir = 'resources/residential/';
-            $image_name = md5(date('Ymdhis')). rand(10000000000,9999999999);
+            $image_name = md5(date('Ymdhis')) . rand(10000000000, 9999999999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $request = Yii::$app->request;
@@ -272,7 +292,7 @@ class ResidentialController extends Controller {
                         LEFT join `respropertytype` rp on r.id = rp.residentialid    
                         LEFT join `propertytype` p on rp.propertytypeid = p.id 
                         LEFT join `buytype` bt on r.buytypeid = bt.id 
-                       where r.statusid = ' . 2 . ' || r.statusid = ' . 3 . ' || r.statusid = ' . 4 . '  GROUP BY r.id   ORDER BY `addeddate` DESC ')->queryAll();
+                       where r.statusid = ' . 2 . ' || r.statusid = ' . 3 . ' || r.statusid = ' . 4 . ' || r.statusid = ' . 5 . '  GROUP BY r.id   ORDER BY `addeddate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
@@ -288,13 +308,58 @@ class ResidentialController extends Controller {
         $arrJSON['data'] = $arrResidential;
         echo json_encode($arrJSON);
     }
+  public function actionUploadpropertybanner() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $basePath = Yii::$app->params['basePath'];
+          $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->get('id');
+        if (!empty($_FILES)) {
+            $uploaddir = 'resources/propertybanner/';
+            $image_name = md5(date('Ymdhis')). rand(10000, 9999);
+            $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+                $objResidential = Residential::findOne(['id' => $id]);
+                $objResidential->image = $uploadfile;
+                $objResidential->save();
+                $arrReturn['status'] = TRUE;
+            } else {
+                $arrReturn['msg'] = 'Try again.';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+      public function actionGetresbyid() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->post('id');
+        $objResidential = Residential:: findone(['id' => $id]);
+        if ($id != '') {
+            $arrReturn['status'] = TRUE;
+            $arrReturn['data'] = $objResidential->toArray();
+        }
+        echo json_encode($arrReturn);
+        die;
+    }
+      public function actionLinkrespropertybannerimg() {
+        $request = Yii::$app->request;
+        $id = $request->get('id');
+        $objResidential = Residential::findOne($id);
+        $file = $objResidential->image;
 
+        header('Content-type: resources/png');
+        readfile($file);
+    }
     public function actionSaveproperty() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $request = Yii::$app->request;
         $this->layout = "";
+        $basePath = Yii::$app->params['basePath'];
         if ($request->isPost) {
             try {
                 $objResidential = new \app\models\Residential;
@@ -308,7 +373,8 @@ class ResidentialController extends Controller {
                 $objResidential->pland = $request->post('pland');
                 $objResidential->statusid = $request->post('statusid');
                 $objResidential->landtypeid = $request->post('landtypeid');
-
+                $objResidential->image = $basePath . '/resources/propertybanner/not_found.png';
+                $objResidential->protype = 1;
                 if ($objResidential->save()) {
                     $arrReturn['status'] = TRUE;
                     $arrReturn['id'] = $objResidential->id;
