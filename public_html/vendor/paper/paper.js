@@ -28,11 +28,18 @@ lbd = {
          if(!navbar_initialized){ 
             $off_canvas_sidebar = $('nav').find('.navbar-collapse').first().clone(true);
             $sidebar = $('.sidebar');
-            sidebar_bg_color = $sidebar.data('background-color');
-            sidebar_active_color = $sidebar.data('active-color');
+            if($sidebar){
+                sidebar_bg_color = $sidebar.data('background-color');
+                sidebar_active_color = $sidebar.data('active-color');
 
-            $logo = $sidebar.find('.logo').first();
-            logo_content = $logo[0].outerHTML;
+                $logo = $sidebar.find('.logo').first();
+                logo_content = '';
+                if(Array.isArray($logo)){
+                    logo_content = $logo[0].outerHTML;                
+                }
+                
+            }
+
 
             ul_content = '';
 

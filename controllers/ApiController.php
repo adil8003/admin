@@ -661,6 +661,14 @@ class ApiController extends Controller {
             'callback' => $callback
         );
     }
+    public function actionLinkimage($callback = null) {
+        $img_src = "C:\wamp64\www\admin/resources/website/1e64fe01e0724d3d41c167c80bcdf5a110000000.jpg";
+        $imgbinary = fread(fopen($img_src, "r"), filesize($img_src));
+        $img_str = base64_encode($imgbinary);
+
+        header("Content-Type: text/plain");
+        echo 'data:image/jpeg;base64,'.$img_str;
+    }
 
     public function actionGetmostvaluableproject($callback = null) {
         $arrReturn = array();

@@ -219,23 +219,11 @@ function validateUpdateLocation() {
     var kname = $('#ukname').val();
     var distance = $('#udistance').val();
     if (kname == '') {
-        $('#err-kanme').html('Key Location required');
+        $('#err-ukname').html('Key Location required');
         flag = false;
     } else {
-        $('#err-kname').html('');
+        $('#err-ukname').html('');
     }
-      $('#ukname').keypress(function (e) {
-        var regex = new RegExp("^[a-zA-Z]+$");
-        var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-        if (regex.test(str)) {
-            return true;
-        } else
-        {
-            e.preventDefault();
-            $('#err-ukname').html(' Please Enter Alphabate');
-            return false;
-        }
-    });
     if (distance == '') {
         $('#err-udistance').html('Distance required');
         flag = false;

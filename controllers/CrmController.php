@@ -325,7 +325,7 @@ class CrmController extends Controller {
         $connection = Yii::$app->db;
         $objData = $connection->createCommand('Select   c.id,c.cemail,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,p.name as ptype,c.cname ,bt.name as btype,c.cphone
                         from `crm` c  
-                         LEFT JOIN  `ptype` pt on pt.crm_id = c.id
+                        LEFT JOIN  `ptype` pt on pt.crm_id = c.id
                     	LEFT JOIN `propertytype` p on p.id = pt.propertytypeid     
                         LEFT join `buytype` bt on c.buytypeid = bt.id
                         where c.customerstatusid = ' . 2 . ' ||  c.customerstatusid = ' . 1 . '   GROUP BY c.id')->queryAll();

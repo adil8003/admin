@@ -48,12 +48,13 @@ class CronController extends Controller {
         $todaydate = date("Y-m-d");
         $objData = $connection->createCommand('Select c.id,f.followupdate,c.finalstatus,c.addeddate,c.detailsofproperty,c.location,c.price,c.cname ,p.name as ptype,bt.name as btype,c.cphone
                         from `crm` c 
-                        LEFT join `propertytype` p on c.propertytypeid = p.id 
+                          LEFT JOIN  `ptype` pt on pt.crm_id = c.id
                          LEFT join `followup` f on f.crm_id = c.id 
-                        LEFT join `buytype` bt on c.buytypeid = bt.id where c.statusid = ' . 2 . ' ')->queryAll();
+                         LEFT JOIN `propertytype` p on p.id = pt.propertytypeid    
+                         LEFT join `customerstatus` cs on cs.id = c.customerstatusid 
+                        LEFT join `buytype` bt on c.buytypeid = bt.id where c.customerstatusid = ' . 2 . '  ||  c.customerstatusid = ' . 1 . '   GROUP BY f.id  ')->queryAll();
 
-
-        $abhishek_sir = "sadil8003@gmail.com";
+        $abhishek_sir = "abhishekk@uniquepaf.com";
         // $kadam_sir = "ckadam@uniquepaf.com";
         // $umesh_sir = "umeshs@uniquepaf.com";
         // $uniquepaf = "contact@uniquepaf.com";
@@ -154,7 +155,7 @@ class CronController extends Controller {
             $arrMailDetails['toemail'] = $abhishek_sir;
             $arrMailDetails['body'] = $body;
             $objMail = new Mail();
-            $objMail->sendEmail($arrMailDetails);
+            $objMail->sendFollowupEmail($arrMailDetails);
             echo "MAIL SENT SUCCESSFULLY !!";
         } else {
             $body .= "THERE ARE NO FOLLOWUPS ASSIGNED FOR TODAY.";

@@ -8,9 +8,8 @@ use Yii;
 class mail {
 
     public function sendEmail($arrMailDetails) {
-        $email = 'sadil8003@gmail.com';
+        $email = 'abhishekk@uniquepaf.com';
         $date = date('d/m/Y');
-        $from = $arrMailDetails['from'];
         $to = $arrMailDetails['toemail'];
         $subject = $arrMailDetails['subject'];
         $body = $this->getEmailHeader();
@@ -21,6 +20,30 @@ class mail {
                 'Content-type: text/html' . "\r\n" .
 //                'Reply-To: sadil8003@gmail.com' . "\r\n" .
 //                     'CC: asauravsuman@gmail.com ' . "\r\n" .
+                'X-Mailer: PHP/' . phpversion();
+
+        $mail = mail($to, $subject, $body, $header);
+        if ($mail) {
+            $arrReturn['status'] = TRUE;
+        } else {
+            $arrReturn['status'] = FALSE;
+        }
+    }
+    public function sendFollowupEmail($arrMailDetails) {
+//        $from = 'abhishekk@uniquepaf.com';
+        $from = 'contact@uniquepaf.com ';
+        $date = date('d/m/Y');
+        $to = $arrMailDetails['toemail'];
+        $subject = $arrMailDetails['subject'];
+        $body = $this->getEmailHeader();
+        $body .= $arrMailDetails['body'];
+        $body .= $this->getEmailFooter();
+        $header = 'MIME-Version: 1.0' . "\r\n";
+//        $header .= 'From:Unique property <'. contact@uniquepaf.com .'>' . "\r\n" .
+        $header .= 'From:Unique property <'. $from  .'>' . "\r\n" .
+                'Content-type: text/html' . "\r\n" .
+//                'Reply-To: sadil8003@gmail.com' . "\r\n" .
+                     'CC: sadil8003@gmail.com ' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
 
         $mail = mail($to, $subject, $body, $header);
@@ -62,7 +85,7 @@ class mail {
     public function getEmailHeader() {
         $logoURL = 'http://uniquepaf.tglobalsolutions.com/images/logo.png';
         $headURL = 'http://uniquepaf.tglobalsolutions.com/';
-        $header = " Unique proprty solutions ";
+        $header = " Unique property solutions ";
         $emailCss = $this->getCSS();
         $headHtml = "<!DOCTYPE html>
                 <html lang='en'>
@@ -82,17 +105,17 @@ class mail {
                         border-top-left-radius: 8px;
                         border-top-right-radius: 8px;'>
                             <div style= 'background-color : #afaaff' class='header' >
-                                <a href= '" . $headURL . "'><img width='30%' border='0' title='" . $header . "g' alt='" . $header . "' src='" . $logoURL . "'></a>
+                                <a href= '" . $headURL . "'><img width='30%' border='0' title='" . $header . " ' alt='" . $header . "' src='" . $logoURL . "'></a>
                             </div>";
         return $headHtml;
     }
 
     public function getEmailFooter() {
         $comURL = 'http://uniquepaf.tglobalsolutions.com/images/logo.png/';
-        $companyName = 'Unique proprty';
+        $companyName = 'Unique property';
         $companyUrl = 'http://uniquepaf.tglobalsolutions.com/images/logo.png/';
         $comName = 'Unique property solutions';
-        $email = 'sadil8003@gmail.com';
+        $email = 'abhishekk@uniquepaf.com';
         $footer = "<div style= 'background-color : #FFE4AA' class='header nullTopCorner' >
                         </div>
                         <div class='footer' >
