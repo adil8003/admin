@@ -42,7 +42,7 @@ class mail {
 //        $header .= 'From:Unique property <'. contact@uniquepaf.com .'>' . "\r\n" .
         $header .= 'From:Unique property <'. $from  .'>' . "\r\n" .
                 'Content-type: text/html' . "\r\n" .
-//                'Reply-To: sadil8003@gmail.com' . "\r\n" .
+                'Reply-To: '.$to.'' . "\r\n" .
                      'CC: sadil8003@gmail.com ' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
 
