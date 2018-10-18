@@ -26,7 +26,7 @@ $id = (isset($_GET['id'])) ? $_GET['id'] : 0;
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Email:<span class="asterik">*</span><span  class="errmsg" id="err-cemail"></span> </label>
-                            <input type="text" readonly="" value="<?php echo $objCrm->cemail; ?>" name="cemail" id="cemail"  class="form-control border-input input-sm"
+                            <input type="text"  value="<?php echo $objCrm->cemail; ?>" name="cemail" id="cemail"  class="form-control border-input input-sm"
                                    placeholder="Email">
                         </div>
                     </div>

@@ -330,6 +330,7 @@ class CommercialController extends Controller {
             $arrTemp['btype'] = $objrow['btype'];
             $arrTemp['ptype'] = $objrow['ptype'];
             $arrTemp['location'] = $objrow['location'];
+            $arrTemp['landmark'] = $objrow['landmark'];
             $arrTemp['price'] = $objrow['price'];
             $arrTemp['addeddate'] = date('M-d,Y', strtotime($objrow['addeddate']));
             $arrResidential[] = $arrTemp;
@@ -345,7 +346,7 @@ class CommercialController extends Controller {
         $connection = Yii::$app->db;
         $request = Yii::$app->request;
         $id = $request->get('id');
-        $objData = $connection->createCommand('Select c.cname,c.address,c.id,c.reraid,c.dname,c.location,
+        $objData = $connection->createCommand('Select c.cname,c.landmark,c.address,c.id,c.reraid,c.dname,c.location,
             c.price ,p.name as ptype,bt.name as btype
                         from `commercial` c 
                         LEFT join `ctype` p on c.ctypeid = p.id 

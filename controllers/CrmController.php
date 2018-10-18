@@ -570,6 +570,26 @@ class CrmController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+    public function actionActivecustomer() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            if ($id != 0) {
+                $objCrm = Crm::find()->where(['id' => $id])->One();
+                $objCrm->customerstatusid = 1;
+                $objCrm->save();
+                $arrReturn['id'] = $id;
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
     public function actionActivecustome() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;

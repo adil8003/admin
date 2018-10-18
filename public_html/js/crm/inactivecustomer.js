@@ -21,7 +21,7 @@ function AllCallCustomer() {
                     htmlAction += '<a href="index.php?r=crm/edit&amp;id=' + data + '" title="Edit" class="teal-text"  onclick="getCustomerdetails(`' + full.id + '`)" ><i  class="ti-pencil teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/edit&amp;id=' + data + '" title="User list" class="teal-text"  ><i   class="ti-user teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=crm/followup&amp;id=' + data + '" title="Course list" class="teal-text"  ><i   class="ti-blackboard teal-text "></i></a>&nbsp;&nbsp;'
-                    htmlAction += '<a href="#"  title="Mail" class="teal-text"  ><i onclick="active(' + data + ')" id="crmid"  class="ti-thumb-up teal-text "></i></a>&nbsp;&nbsp;'
+                    htmlAction += '<a href="#"  title="Inactive" class="teal-text"  ><i onclick="active(' + data + ')" id="crmid"  class="ti-thumb-up teal-text "></i></a>&nbsp;&nbsp;'
                     return htmlAction;
                 }
             }

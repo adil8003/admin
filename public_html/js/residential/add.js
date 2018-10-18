@@ -29,7 +29,7 @@ function saveProperty() {
     } else if (priceFormat == 'Crore') {
         var amt = price * 10000000;
     }
-//    if (validateProperty()) {
+    if (validateProperty()) {
     alertify.confirm("Are you sure you want add this property?",
             function () {
                 var obj = new Object();
@@ -58,13 +58,13 @@ function saveProperty() {
                     }
                 });
             });
-//    }
+    }
 }
 
 function validateProperty() {
     var flag = true;
     var cname = $('#cname').val();
-    var cphone = $('#cphone').val();
+//    var cphone = $('#cphone').val();
     var propertytypeid = $('#propertytypeid').val();
     var buytypeid = $('#buytypeid').val();
     var price = $('#price').val();
@@ -90,22 +90,22 @@ function validateProperty() {
             return false;
         }
     });
-
-
-    if (cphone == '') {
-        $('#err-cphone').html('Phone required');
-        flag = false;
-    } else {
-        $('#err-cphone').html('');
-        if (((cphone.length) > 10) || ((cphone.length) < 10)) {
-            $('#err-cphone').html('10 Digit mobile number required');
-            flag = false;
-        }
-        if (isNaN(cphone)) {
-            $('#err-cphone').html('Must be numerical');
-            flag = false;
-        }
-    }
+//
+//
+//    if (cphone == '') {
+//        $('#err-cphone').html('Phone required');
+//        flag = false;
+//    } else {
+//        $('#err-cphone').html('');
+//        if (((cphone.length) > 10) || ((cphone.length) < 10)) {
+//            $('#err-cphone').html('10 Digit mobile number required');
+//            flag = false;
+//        }
+//        if (isNaN(cphone)) {
+//            $('#err-cphone').html('Must be numerical');
+//            flag = false;
+//        }
+//    }
     if (propertytypeid == '') {
         $('#err-propertytypeid').html('Property type required');
         flag = false;
@@ -143,7 +143,7 @@ function validateProperty() {
     } else {
         $('#err-price').html('');
         if (isNaN(price)) {
-            $('#err-fees').html('Must be numerical');
+            $('#err-price').html('Must be numerical');
             flag = false;
         }
     }

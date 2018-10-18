@@ -196,10 +196,10 @@ function getResidentialprojectDetails(com_id) {
                 html += '<p class="card-text"><b>Rera no.:-</b> ' + data.data.reraid + '</p>';
                 html += '</div>';
                 html += '<div class="col-md-6">';
-                html += '<p class="card-text"><b>Possesion date:-</b> ' + data.data.possesiondate + '</p>';
+//                html += '<p class="card-text"><b>Possesion date:-</b> ' + data.data.possesiondate + '</p>';
                 html += '<p class="card-text "><b>Developer name:-</b> ' + formattedText(data.data.dname) + '</p>';
                 html += '<p class="card-text "><b>Carpet area:-</b>  ' + formattedText(data.data.carpetarea) + ' sqft</p>';
-                html += '<p class="card-text"><b>Project total land area:-</b> ' + data.data.landtype + ':' + data.data.pland + '</p>';
+//                html += '<p class="card-text"><b>Project total land area:-</b> ' + data.data.landtype + ':' + data.data.pland + '</p>';
                 html += '<p class="card-text " id="target"><b>Address:-</b>  ' + formattedText(data.data.address) + '</p>';
                 html += '</div>';
                 html += '</div>';

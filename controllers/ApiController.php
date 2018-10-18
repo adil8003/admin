@@ -70,6 +70,7 @@ class ApiController extends Controller {
             'callback' => $callback
         );
     }
+
     public function actionSaveenqiry($callback = null) {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -83,7 +84,7 @@ class ApiController extends Controller {
         if ($objCustomers->save()) {
             $arrReturn['status'] = TRUE;
             $arrReturn['id'] = $objCustomers->id;
-               ////////////////////MAiL fUNCTION////////////////////////////////
+            ////////////////////MAiL fUNCTION////////////////////////////////
             $date = date('Y-m-d');
             if ($objCustomers->email != ' ') {
                 $header = 'Unique property';
@@ -294,17 +295,34 @@ class ApiController extends Controller {
     }
 
     public function actionGetbannerimage($callback = null) {
+//        $arrReturn = array();
+//        $arrReturn['status'] = FALSE;
+//        $this->layout = "";
+//        $connection = Yii::$app->db;
+//        $objData = $connection->createCommand('Select *
+//                        from `imagegallery` r 
+//                       where r.type = ' . 4 . ' AND r.statusid = ' . 2 . '   ORDER BY `addeddate` DESC ')->queryAll();
+//        if ($objData) {
+//            $arrReturn['status'] = TRUE;
+//            $arrReturn['data'] = $objData;
+//        }
+
+
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
-        $this->layout = "";
+        $request = Yii::$app->request;
         $connection = Yii::$app->db;
         $objData = $connection->createCommand('Select *
                         from `imagegallery` r 
                        where r.type = ' . 4 . ' AND r.statusid = ' . 2 . '   ORDER BY `addeddate` DESC ')->queryAll();
-        if ($objData) {
-            $arrReturn['status'] = TRUE;
-            $arrReturn['data'] = $objData;
+        $arrReturn['status'] = TRUE;
+        $arrReturn['banner'] = $objData;
+        if (!$arrReturn['banner']) {
+            $arrReturn1 = array();
+            $arrReturn1['path'] = '/resources/website/no-image.jpg';
+            $arrReturn['banner'][] = $arrReturn1;
         }
+
 //            $arrReturn['data'][] = $arrTemp;
 //        echo json_encode($arrReturn);
         // set "fomat" property
@@ -445,6 +463,7 @@ class ApiController extends Controller {
             'callback' => $callback
         );
     }
+
     public function actionGetcomdetailbyid($callback = null) {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -661,13 +680,14 @@ class ApiController extends Controller {
             'callback' => $callback
         );
     }
+
     public function actionLinkimage($callback = null) {
         $img_src = "C:\wamp64\www\admin/resources/website/1e64fe01e0724d3d41c167c80bcdf5a110000000.jpg";
         $imgbinary = fread(fopen($img_src, "r"), filesize($img_src));
         $img_str = base64_encode($imgbinary);
 
         header("Content-Type: text/plain");
-        echo 'data:image/jpeg;base64,'.$img_str;
+        echo 'data:image/jpeg;base64,' . $img_str;
     }
 
     public function actionGetmostvaluableproject($callback = null) {

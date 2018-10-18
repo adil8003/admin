@@ -73,7 +73,7 @@ $this->title = Yii::t('app', ' Add residential');
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <label for="price" class="">Price<span class="text-danger">*</span></label>
+                            <label for="price" class="">Price<span id="err-price" style="font-size: .8em;" class="text-danger pull-right">*</span></label>
                             <div class="col-sm-6"> 
 
                                 <div class="form-control">
@@ -85,7 +85,7 @@ $this->title = Yii::t('app', ' Add residential');
                                         <option value="Lakh">Lakh</option>
                                         <option value="Crore">Crore</option>
                                     </select>
-                                    <p id="err-price" class="text-danger"></p>
+                                    <p class="text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
