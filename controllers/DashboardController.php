@@ -25,19 +25,18 @@ class DashboardController extends Controller {
     }
 
     public function actionIndex() {
-        if ((Yii::$app->session['role'] === 'Admin')) {
-//        $objUserroles = Userroles::find()->where(['user_id' => Yii::$app->session['userid']])->one();
-            return $this->render('dashboard-admin', [
-//                        'objUserroles' => $objUserroles
-            ]);
-        } else if ((Yii::$app->session['role'] === 'Employee')) {
-            return $this->render('dashboard-employee', [
-            ]);
-        } else {
-            return $this->render('calling', [
+//         if ((Yii::$app->session['role'] === 'Admin')) {
+// //        $objUserroles = Userroles::find()->where(['user_id' => Yii::$app->session['userid']])->one();
+//             return $this->render('dashboard-admin', [
+// //                        'objUserroles' => $objUserroles
+//             ]);
+//         } else if ((Yii::$app->session['role'] === 'Employee')) {
+//             return $this->render('dashboard-employee', [
+//             ]);
+//         } else {
+            return $this->render('index', [
             ]);
         }
-    }
 
     public function actionError() {
         return $this->render('error', [

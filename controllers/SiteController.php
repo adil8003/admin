@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\Session;
 use yii\web\View;
-use app\models\User;
+use app\models\Users;
 use app\models\Organisation;
 use app\models\Status;
 
@@ -35,15 +35,15 @@ class SiteController extends Controller {
         $request = Yii::$app->request;
         $this->layout = "";
                if ($request->isPost) {
-            $model = new User();
-            $objUser = $model->findOne(['email' => $request->post('email'), 'status_id' => 2]);
+            $model = new Users();
+            $objUser = $model->findOne(['email' => $request->post('email')]);
             if ($objUser && ($request->post('password')) == $objUser->password) {
                 Yii::$app->session['isLoggedIn'] = true;
                 Yii::$app->session['userid'] = $objUser->id;
-                Yii::$app->session['username'] = $objUser->username;
+                // Yii::$app->session['username'] = $objUser->username;
                 Yii::$app->session['email'] = $objUser->email;
-                Yii::$app->session['status'] = $objUser->status->name;
-                Yii::$app->session['role'] = $objUser->role->name;
+                // Yii::$app->session['status'] = $objUser->status->name;
+                // Yii::$app->session['role'] = $objUser->role->name;
                 return $this->redirect('index.php?r=dashboard');
             }
         }

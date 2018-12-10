@@ -11,7 +11,7 @@
 return [
     'class' => 'yii\db\Connection',
 //    'host' => 'localhost',
-    'dsn' => 'mysql:host=localhost;dbname=uniqueadmin',
+    'dsn' => 'mysql:host=localhost;dbname=demo',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',

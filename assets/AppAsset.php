@@ -21,7 +21,7 @@ class AppAsset extends AssetBundle {
     public $css = [
         //Bootstrap CSS
         "vendor/assets/css/bootstrap.min.css",
-//        "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
+       "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
         "https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.1/jquery.rateyo.min.css",
         "vendor/assets/css/animate.min.css",
         "vendor/assets/css/paper-dashboard.css",

@@ -8,7 +8,7 @@ $this->title = Yii::t('app', 'Login');
                 <div class="col-lg-12 col-md-12">
                     <div class="login-card card">
                         <div class="header text-center">
-                            <h4 class="title"><img width="300" height="200" src="images/logo.jpg" /></h4>
+                            <!-- <h4 class="title"><img width="300" height="200" src="images/logo.jpg" /></h4> -->
                         </div>
                         <div class="content">
                             <form id="form-login" method="POST" action="index.php?r=site/verification">
