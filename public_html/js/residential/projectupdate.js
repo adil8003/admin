@@ -5,12 +5,17 @@ $(document).ready(function () {
     $('#yearofconstruct').datetimepicker({
         format: 'Y-m-d',
     });
+    $('#posdate').datetimepicker({
+        format: 'Y',
+    });
     allWings();
     GetResdetailsbyid();
     var res_id = $('#res_id').val();
     var update_id = $('#update_id').val();
     $('#updateForm').hide();
         $('#addbutton').hide();
+        $('#addDetailsForm').hide();
+        $('#updateDetailsForm').hide();
     
 }); // end document.ready
 
@@ -61,6 +66,8 @@ function Updateform(id,wing, possesiondate,cstatus,yearofconstruct,carpetarea,sa
         step: 15
     });
     $('#addForm').hide();
+    $('#updateDetailsForm').hide();
+    $('#addDetailsForm').hide();
     $('#customerDetails').show();
     $('#updateForm').show();
     $('#update_id').val(id);
@@ -195,7 +202,7 @@ function getkeylocationHtmlCard(dataAll) {
         if (startRecord <= k && k < endRecord) {
             html += '<div class="card shadow" >';
             html += '<div class="alert alert-info">';
-            html += '<span><strong>Year of construct:&nbsp;&nbsp;' + v.yearofconstruct + ' </strong><a class="iconPencil " href="#" onclick="Updateform(`' + v.id + '`,`' + v.wing + '`,`'+ v.possesiondate +'`,`' + v.status1 + '`,`'+ v.yearofconstruct +'`,`'+ v.carpetarea +'`,`'+ v.salablearea +'`,`'+ v.reraid +'`);" id="editForm"> <i  class="ti-pencil teal-text pull-right" id="editIcon"></i></a></span></span> ';
+            html += '<span><strong>Year of construct:&nbsp;&nbsp;' + v.yearofconstruct + ' </strong><a class="iconPencil " href="#" onclick="getAddFrom(`' + v.id + '`,`' + v.wing + '`,`'+ v.possesiondate +'`,`' + v.status1 + '`,`'+ v.yearofconstruct +'`,`'+ v.carpetarea +'`,`'+ v.salablearea +'`,`'+ v.reraid +'`);" id="GetAddForm"> <i  class="ti-plus teal-text pull-right" id="editIcon"></i></a>&nbsp;&nbsp;<a class="iconPencil " href="#" onclick="Updateform(`' + v.id + '`,`' + v.wing + '`,`'+ v.possesiondate +'`,`' + v.status1 + '`,`'+ v.yearofconstruct +'`,`'+ v.carpetarea +'`,`'+ v.salablearea +'`,`'+ v.reraid +'`);" id="editForm"> <i  class="ti-pencil teal-text pull-right" id="editIcon">&nbsp;&nbsp;</i></a></span></span> ';
             html += '</div>';
             html += '<div class="row" style="padding:10px">';
                 html += '<div class="col-md-6">';
@@ -205,7 +212,7 @@ function getkeylocationHtmlCard(dataAll) {
                 html += '<div class="card-text">Possession date: <b>' + v.possesiondate + '</b></div>';
                 html += '</div>';
             html += '</div>';
-            html += '<div class="row" style="padding:10px">';
+            html += '<div class="row" style="padding:10px" id=consDetails>';
                 html += '<div class="col-md-4">';
                 html += '<div class="card-text">Carpet area:<b> ' + v.carpetarea + ' Sqft</b></div>';
                 html += '</div>';
@@ -284,6 +291,7 @@ function saveRwing() {
                 });
     }
 }
+
 function validateUpdateLocation() {
     var flag = true;
     var wing = $('#uwing').val();
@@ -365,5 +373,48 @@ function addFrom(){
     $('#addForm').show();
     $('#updateForm').hide();
     $('#addbutton').hide();
+    $('#updateDetailsForm').hide();
     
+    
+}
+function getAddFrom(){
+    $('#updateForm').hide();
+    $('#addDetailsForm').show();
+    $('#addbutton').hide();
+    $('#addForm').hide();
+    $('#updateDetailsForm').hide();
+    
+}
+function saveConsDetails() {
+    var res_id = $('#res_id').val();
+//    if (validateLocation()) {
+        alertify.confirm("Are you sure you want add this Wing details?",
+                function () {
+                    var obj = new Object();
+                    obj.residentialid = res_id;
+                    obj.posdate = $('#posdate').val();
+                    obj.postype = $('#postype').val();
+                    obj.price = $('#price').val();
+                    obj.carpetarea = $('#wcarpetarea').val();
+                    obj.wstatus = $('#wstatus').val();
+                    obj.reraid = $('#wreraid').val();
+                    $.ajax({
+                        url: 'index.php?r=residential/savewingsdetails',
+                        async: false,
+                        data: obj,
+                        type: 'POST',
+                        success: function (data) {
+                            showMessage('success', 'Added successfully.');
+//                            allWings();
+//                            $('#wing').val(' ');
+//                            $('#possesiondate').val(' ');
+//                            $('#yearofconstruct').val(' ');
+//                            $('#cstatus').val(' ');
+                        },
+                        error: function (data) {
+                            showMessage('danger', 'Please try again.');
+                        }
+                    });
+                });
+//    }
 }

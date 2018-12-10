@@ -10,7 +10,11 @@ $this->title = Yii::t('app', ' CRM');
                 <span>
                     <a href="index.php?r=crm"  <button class="btn btn-info btn-fill btn-xs btn-wd pull-right">Back</button></a>
                 </span> </h4>
-        </div><hr>
+        </div>
+        <form class="pull-right">
+                                            <input type="file" class="" name="file" id="file1" value="Import csv file"><span><button type="button" onclick="saveVoiceCallData();" class="btn btn-info btn-fill btn-xs">SAVE</button></span>
+
+                                        </form><hr>
         <div class="content">
             <form name="form" >
                 <div class="row">

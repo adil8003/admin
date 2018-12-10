@@ -239,14 +239,15 @@ class ApiController extends Controller {
         $arrReturn['status'] = FALSE;
         $this->layout = "";
         $connection = Yii::$app->db;
-        $objData = $connection->createCommand('Select m.imgtype,r.image,r.id,r.statusid,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
+        $objData = $connection->createCommand('Select a.tagline,m.imgtype,r.image,r.id,r.statusid,r.pname,r.addeddate,r.pland,r.location,r.price,p.name as ptype,bt.name as btype
                         from `residential` r 
                          LEFT join `respropertytype` rp on r.id = rp.residentialid    
                         LEFT join `propertytype` p on rp.propertytypeid = p.id 
                         LEFT join `buytype` bt on r.buytypeid = bt.id
                         LEFT join `imagegallery` m on m.`residentialid` = r.id
+                        LEFT join `amenities` a on a.`residentialid` = r.id AND a.type = '. 2 .'
                         LEFT join `proupdate` u on u.`residentialid` = r.id
-        where  r.statusid = ' . 2 . ' || r.statusid = ' . 3 . ' || r.statusid = ' . 4 . ' GROUP BY r.id ORDER BY `addeddate` DESC LIMIT 8')->queryAll();
+        where  r.statusid = ' . 2 . ' || r.statusid = ' . 3 . ' || r.statusid = ' . 4 . '  GROUP BY r.id ORDER BY `addeddate` DESC LIMIT 8')->queryAll();
         if ($objData) {
             $arrReturn['status'] = TRUE;
             $arrReturn['data'] = $objData;

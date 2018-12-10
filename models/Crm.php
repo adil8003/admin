@@ -22,6 +22,8 @@ use Yii;
  * @property string $addeddate
  * @property string $reffrom
  * @property integer $customerstatusid
+ * @property integer $userid
+ * @property double $salary
  */
 class Crm extends \yii\db\ActiveRecord
 {
@@ -39,8 +41,10 @@ class Crm extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['buytypeid', 'meetingtypeid', 'price', 'customerstatusid'], 'integer'],
+            [['buytypeid', 'meetingtypeid', 'price', 'customerstatusid', 'userid'], 'integer'],
             [['addeddate'], 'safe'],
+            [['userid', 'salary'], 'required'],
+            [['salary'], 'number'],
             [['cname', 'cemail', 'location', 'meetingstatus'], 'string', 'max' => 500],
             [['cphone', 'detailsofproperty', 'postremark', 'finalstatus'], 'string', 'max' => 700],
             [['reffrom'], 'string', 'max' => 200]
@@ -68,6 +72,8 @@ class Crm extends \yii\db\ActiveRecord
             'addeddate' => 'Addeddate',
             'reffrom' => 'Reffrom',
             'customerstatusid' => 'Customerstatusid',
+            'userid' => 'Userid',
+            'salary' => 'Salary',
         ];
     }
 }

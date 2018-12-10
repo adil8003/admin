@@ -163,7 +163,8 @@ function getkeylocationHtmlCard(dataAll) {
         if (startRecord <= k && k < endRecord) {
             html += '<div class="card shadow" style="    width: 298px;" >';
             html += '<div class="alert alert-info">';
-            html += '<span>'+ v.distance +' KM </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>' + v.kname + '</strong><span><a class="iconPencil " href="#" onclick="Updateform(`' + v.id + '`,`' + v.kname + '`,`' + v.distance + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span> ';
+            html += '<span>' + v.distance + ' KM </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>' + v.kname + '</strong><span><a class="iconPencil " href="#" onclick="Updateform(`' + v.id + '`,`' + v.kname + '`,`' + v.distance + '`);" id="editForm"> <i  class="ti-pencil teal-text pull-right " id="editIcon"></i></a></span>\n\
+<span><a class="iconPencil " href="#" onclick="getkeylocationid(`' + v.id + '`);" id="keylocationid"> <i  class="ti-trash teal-text pull-right " ></i></a></span> ';
             html += '</div>';
 //            html += '<p class="card-text text-info">' + v.aname + '</p>';
 //            html += '<p class="card-text text-danger"><span><p class="text-center text-danger"></p> </span></p>';
@@ -184,35 +185,51 @@ function getkeylocationHtmlCard(dataAll) {
     html += '</div><br>';
     return html;
 }
-
+function getkeylocationid(id) {
+    var obj = new Object();
+    obj.id = id;
+    $.ajax({
+        url: 'index.php?r=residential/deletekeylocation',
+        async: false,
+        data: obj,
+        type: 'POST',
+        success: function (data) {
+            showMessage('success', 'Key location deleted successfully.');
+            allKeyLocation();
+        },
+        error: function (data) {
+            showMessage('danger', 'Please try again.');
+        }
+    });
+}
 
 
 function saveLocation() {
     var res_id = $('#res_id').val();
-    if (validateLocation()) {
-        alertify.confirm("Are you sure you want add this key location?",
-                function () {
-                    var obj = new Object();
-                    obj.residentialid = res_id;
-                    obj.kname = $('#kname').val();
-                    obj.distance = $('#distance').val();
-                    $.ajax({
-                        url: 'index.php?r=residential/savekeylocation',
-                        async: false,
-                        data: obj,
-                        type: 'POST',
-                        success: function (data) {
-                            showMessage('success', 'Added successfully.');
-                            allKeyLocation();
-                            $('#kname').val(' ');
-                            $('#distance').val(' ');
-                        },
-                        error: function (data) {
-                            showMessage('danger', 'Please try again.');
-                        }
-                    });
-                });
-    }
+//    if (validateLocation()) {
+//        alertify.confirm("Are you sure you want add this key location?",
+//                function () {
+    var obj = new Object();
+    obj.residentialid = res_id;
+    obj.kname = $('#kname').val();
+    obj.distance = $('#distance').val();
+    $.ajax({
+        url: 'index.php?r=residential/savekeylocation',
+        async: false,
+        data: obj,
+        type: 'POST',
+        success: function (data) {
+            showMessage('success', 'Added successfully.');
+            allKeyLocation();
+            $('#kname').val(' ');
+            $('#distance').val(' ');
+        },
+        error: function (data) {
+            showMessage('danger', 'Please try again.');
+        }
+    });
+//                });
+//    }
 }
 function validateUpdateLocation() {
     var flag = true;
@@ -229,7 +246,7 @@ function validateUpdateLocation() {
         flag = false;
     } else {
         $('#err-udistance').html('');
-         if (isNaN(distance)) {
+        if (isNaN(distance)) {
             $('#err-udistance').html('Must be numerical');
             flag = false;
         }
@@ -246,13 +263,13 @@ function validateLocation() {
     } else {
         $('#err-kname').html('');
     }
-    
+
     if (distance == '') {
         $('#err-distance').html('Distance required');
         flag = false;
     } else {
         $('#err-distance').html('');
-         if (isNaN(distance)) {
+        if (isNaN(distance)) {
             $('#err-distance').html('Must be numerical');
             flag = false;
         }

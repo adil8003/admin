@@ -20,6 +20,7 @@ use Yii;
  * @property integer $statusid
  * @property string $addeddate
  * @property integer $protype
+ * @property integer $userid
  */
 class Commercial extends \yii\db\ActiveRecord
 {
@@ -37,8 +38,8 @@ class Commercial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'dname', 'buytypeid', 'ctypeid', 'location', 'landmark', 'address', 'price', 'statusid', 'protype'], 'required'],
-            [['buytypeid', 'ctypeid', 'price', 'statusid', 'protype'], 'integer'],
+            [['cname', 'dname', 'buytypeid', 'ctypeid', 'location', 'landmark', 'address', 'price', 'statusid', 'protype', 'userid'], 'required'],
+            [['buytypeid', 'ctypeid', 'price', 'statusid', 'protype', 'userid'], 'integer'],
             [['address'], 'string'],
             [['addeddate'], 'safe'],
             [['cname', 'dname', 'location', 'landmark'], 'string', 'max' => 500],
@@ -65,6 +66,7 @@ class Commercial extends \yii\db\ActiveRecord
             'statusid' => 'Statusid',
             'addeddate' => 'Addeddate',
             'protype' => 'Protype',
+            'userid' => 'Userid',
         ];
     }
 }

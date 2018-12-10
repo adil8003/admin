@@ -108,6 +108,22 @@ ALTER TABLE `commercial` CHANGE `ptype` `protype` INT(2) NOT NULL;
 ALTER TABLE `residential` CHANGE `ptype` `protype` INT(2) NOT NULL;
 ALTER TABLE `commercial` CHANGE `price` `price` BIGINT(20) NOT NULL;
 
+-- 25/11
+ALTER TABLE `voicecall` ADD FOREIGN KEY (`builderid`) REFERENCES builders(`id`)
+ALTER TABLE `voicecall` ADD FOREIGN KEY (`userid`) REFERENCES user(`id`)
+
+
+5/12
+ALTER TABLE `crm` ADD `userid` INT NOT NULL AFTER `customerstatusid`;
+ALTER TABLE `crm` ADD FOREIGN KEY (`userid`) REFERENCES user(`id`);
+
+ALTER TABLE `residential` ADD `userid` INT NOT NULL AFTER `protype`;
+ALTER TABLE `residential` ADD FOREIGN KEY (`userid`) REFERENCES user(`id`);
+
+ALTER TABLE `commercial` ADD `userid` INT NOT NULL AFTER `protype`;
+ALTER TABLE `commercial` ADD FOREIGN KEY (`userid`) REFERENCES user(`id`);
+
+ALTER TABLE `resale` ADD `userid` INT NOT NULL AFTER `protype`;
 
 
 

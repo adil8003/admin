@@ -17,6 +17,7 @@ use Yii;
  * @property string $cdetails
  * @property string $addeddate
  * @property integer $statusid
+ * @property string $tagline
  */
 class Amenities extends \yii\db\ActiveRecord
 {
@@ -35,9 +36,9 @@ class Amenities extends \yii\db\ActiveRecord
     {
         return [
             [['residentialid', 'commercialid', 'rentid', 'resaleid', 'type', 'statusid'], 'integer'],
-            [['aname', 'type', 'statusid'], 'required'],
-            [['cdetails'], 'string'],
+            [['cdetails', 'tagline'], 'string'],
             [['addeddate'], 'safe'],
+            [['statusid'], 'required'],
             [['aname'], 'string', 'max' => 300]
         ];
     }
@@ -58,6 +59,7 @@ class Amenities extends \yii\db\ActiveRecord
             'cdetails' => 'Cdetails',
             'addeddate' => 'Addeddate',
             'statusid' => 'Statusid',
+            'tagline' => 'Tagline',
         ];
     }
 }

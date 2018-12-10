@@ -183,3 +183,26 @@ function checkUniqueContact() {
         }
     });
 }
+function saveVoiceCallData() {
+    var formData = new FormData();
+    formData.append('file', $('#file1')[0].files[0]);
+    alertify.confirm("Are you sure you want add this?",
+            function () {
+                $.ajax({
+                    url: "index.php?r=crm/bulkuploadcustomers",
+                    async: false,
+                    type: 'POST',
+                    data: formData,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false, // tell jQuery not to set contentType
+                    success: function (data) {
+                        data = JSON.parse(data);
+                        if (data.status == true) {
+                        }
+                    },
+                    error: function (data) {
+                        showMessage('danger', 'Please try again.');
+                    }
+                });
+            });
+}

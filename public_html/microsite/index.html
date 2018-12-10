@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Puranik's Abitante</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+        <!--     Fonts and icons     -->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <!-- CSS Files -->
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="./assets/css/now-ui-kit.css?v=1.1.0" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="./assets/css/demo.css" rel="stylesheet" />
+        <style>
+            /*            .carousel-inner img {
+                            width: 100%;
+                            height: 100%;
+                        }*/
+            .errmsg{
+                color: red;
+                font-size: 10px;
+                float: right;
+                margin-right: 6px;
+                margin-top: -10px;
+            }
+            .mobile-footer-call {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                line-height: 35px;
+                background: #662d90;
+                color: #f2f2f2;
+            }
+            /*            .visible-xs {
+                            display: none;
+                        }*/
+            .mobile-footer-call1 {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                line-height: 35px;
+                background: #130303;
+                color: #f2f2f2;
+                text-align: center;
+            }
+            .visible-xs {
+                /*display: none;*/
+            }
+            section {
+                float: left;
+                width: 100%;
+            }
+            .border-right {
+                border-right: 1px solid #f2f2f2;
+            }
+            .col-6 {
+                width: 50%;
+            }
+            .carousel-inner > .item {
+                -webkit-transition: 0.6s ease-in-out left;
+                -moz-transition: 0.6s ease-in-out left;
+                -o-transition: 0.6s ease-in-out left;
+                transition: 0.6s ease-in-out left;
+            }
+            @media only screen and (max-width: 767px){
+                .visible-xs {
+                    display: block;
+                }
+            }
+            @media only screen and (max-width: 1200px){
+                .visible-xs {
+                    display: block;
+                }
+            }
+
+        </style>
+    </head>
+
+    <body class="index-page sidebar-collapse profile-page">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+            <div class="container">
+                <div class="navbar-translate">
+                    <a class="navbar-brand" href="index.html" rel="tooltip" title="Puranik's Abitante" data-placement="bottom" >
+                        Puranik's Abitante
+                    </a>
+                    <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar bar1"></span>
+                        <span class="navbar-toggler-bar bar2"></span>
+                        <span class="navbar-toggler-bar bar3"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="./assets/img/blurred-image-1.jpg">
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" onclick="Gallery()">
+                                <!--<i class="now-ui-icons arrows-1_cloud-download-93"></i>-->
+                                <p>Gallery</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" onclick="Amenities()">
+                                <!--<i class="now-ui-icons arrows-1_cloud-download-93"></i>-->
+                                <p> Amenities</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" onclick="siteStatus()">
+                                <!--<i class="now-ui-icons arrows-1_cloud-download-93"></i>-->
+                                <p> Site status</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:void(0)" onclick="keyDistance()">
+                                <!--<i class="now-ui-icons arrows-1_cloud-download-93"></i>-->
+                                <p> Key distances</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+        <!--<div class="wrapper">-->
+
+        <div class="page-header clear-filter" filter-color="orange">
+
+            <div class="page-header-image" data-parallax="true" style="background-image: url('./assets/img/ad.jpg');">
+            </div>
+            <div class="container">
+                <div class="content-center brand">
+                    <!--<img class="n-logo" src="./assets/img/now-logo.png" alt="">-->
+                    <h6 class="h1-seo">Puranik's Abitante</h6>
+                    <!--<h3>A beautiful Bootstrap 4 UI kit. Yours free.</h3>-->
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="section section-download gallery " id="#download-section" data-background-color="black">
+            <div class="container">
+                <div class="row justify-content-md-center">
+
+                    <div class="text-center col-md-12 col-lg-8">
+                        <br>
+                        <br>
+                        <h2 class="title category" style="color: #2c2c2c">Gallery</h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row text-center mt-12">
+                    <div class="col-md-12 ml-auto mr-auto">
+                        <div class="section " id="carousel">
+                            <div class="container">
+                                <div class="alert alert-info " role="alert">
+                                    <div class="container" >
+
+                                        <strong> MahaRERA Reg. No. :</strong>  Phase 1A- P52100000437, Phase 1B - P52100000569.
+
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="carousel-item active">
+                                                    <img class="d-block" src="assets/img/3.jpg" alt="First slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <!--<h5>Nature, United States</h5>-->
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="d-block" src="assets/img/2.jpg" alt="Second slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <!--<h5>Somewhere Beyond, United States</h5>-->
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="d-block" src="assets/img/4.jpg" alt="Second slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <!--<h5>Somewhere Beyond, United States</h5>-->
+                                                    </div>
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img class="d-block" src="assets/img/ad.jpg" alt="Third slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <!--<h5>Yellowstone National Park, United States</h5>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                                <i class="now-ui-icons arrows-1_minimal-left"></i>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                                <i class="now-ui-icons arrows-1_minimal-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+
+            </div>
+        </div>
+
+
+
+        <div class="section section-javascript amenities" id="javascriptComponents">
+            <div class="container">
+                <br>
+                <br>
+                <div class="col  text-center">
+                    <h2 class="title ">Amenities</h2>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="section " id="carousel">
+            <div class="container">
+                <div class="row ">
+                    <div class="col-12 text-center">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <p class="category" style="color:#662d90">
+                                    Kids' Play Area</p>
+                                <img src="assets/img/1.png" alt="Rounded Image" class="rounded">
+                            </div>
+                            <div class="col-sm-2" >
+                                <p class="category" style="color:#662d90">Barbeque with Café</p>
+                                <img src="assets/img/2.png" alt="Circle Image" class="rounded-circle">
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="category" style="color:#662d90">Vineyard</p>
+                                <img src="assets/img/3.png" alt="Raised Image" class="rounded img-raised">
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="category" style="color:#662d90">Market area
+                                </p>
+                                <img src="assets/img/4.png" alt="Thumbnail Image" class="rounded-circle img-raised">
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="category" style="color:#662d90">Amphitheatre</p>
+                                <img src="assets/img/5.png" alt="Raised Image" class="rounded img-raised">
+                            </div>
+                            <div class="col-sm-2">
+                                <p class="category" style="color:#662d90">Swimming Pool <span>with Deck</span></p>
+                                <img src="assets/img/6.png" alt="Thumbnail Image" class="rounded-circle img-raised">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="section  " id="javascriptComponents">
+            <div class="container currentstatus">
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="col  text-center">
+                    <h2 class="title ">Current photography</h2>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="col-md-12 ml-auto mr-auto" >
+            <div class="tab-content gallery">
+                <div class="tab-pane active" id="home" role="tabpanel">
+                    <div class="col-md-10 ml-auto mr-auto" >
+                        <div class="row collections"  >
+                            <div class="col-md-6">
+                                <img src="assets/img/bg1.jpg" alt="" class="img-raised">
+                                <img src="assets/img/bg2.jpg" alt="" class="img-raised">
+                            </div>
+                            <div class="col-md-6">
+                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
+                                <img src="assets/img/bg4.jpg" alt="" class="img-raised">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section section-javascript keydistance" id="javascriptComponents">
+            <div class="container">
+                <br>
+                <br>
+                <div class="col  text-center">
+                    <h2 class="title ">Key distances</h2>
+                </div>
+                <br>
+                <br>
+
+                <div class="section section-team text-center">
+                    <div class="container">
+                        <div class="team">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="team-player">
+                                        <h1 class="keydis">2Km</h1>
+                                        <p class="category" style="color:#662d90" >Mumbai-Pune Expressway</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="team-player">
+                                        <h1 class="keydis">4Km</h1>
+                                        <p class="category" style="color:#662d90">Chandni Chowk</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="team-player">
+                                        <h1 class="keydis">6Km</h1>
+                                        <p class="category" style="color:#662d90">Kothrud</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="section section-team text-center">
+                    <div class="container">
+                        <div class="team">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="team-player">
+                                        <h1 class="keydis">10Km</h1>
+                                        <p class="category" style="color:#662d90" >Pune University</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="team-player">
+                                        <h1 class="keydis">11Km</h1>
+                                        <p class="category" style="color:#662d90">Deccan</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="team-player">
+                                        <h1 class="keydis">15Km</h1>
+                                        <p class="category" style="color:#662d90">Hinjewadi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="section section-about-us">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto text-center">
+                        <h2 class="title">Who we are?</h2>
+                    </div>
+                </div>
+                <div class="separator separator-primary"></div>
+                <div class="section-story-overview">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <!-- Second image on the left side of the article -->
+                            <div class="image-container" style="background-image: url('assets/img/bg.jpg')"></div>
+                        </div>
+                        <div class="col-md-5">
+                            <!-- First image on the right side, above the article -->
+                            <h3>A FEW WORDS ABOUT US</h3>
+                            <p>At Puranik Builders we endeavor to build homes that make a statement and deliver a lifestyle rather than just a space to live in. For over four decades we have been offering beautifully crafted homes that meet the full spectrum of lifestyle needs. Our maxim is 'Ideas that stay with you', no wonder our every project is designed with ideas that give a new meaning to your lifestyle.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                        <h4 class="title title-up">Enquire Now</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form2" action="/mail.php" enctype = "multipart/form-data" method="POST">
+                            <div class="input-group form-group-no-border">
+
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                </span>
+                                <input type="text" id="name" name="name" class="form-control" placeholder=" Name...">  
+
+
+                            </div>
+                            <div class="errmsg" id="err-name"></div>     
+                            <div class="input-group form-group-no-border">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons tech_mobile "></i>
+                                </span>
+                                <input type="text" id="phone" name="phone" placeholder="Mobile no..." class="form-control" />
+                            </div>
+                            <div class="errmsg" id="err-phone"></div>     
+                            <div class="input-group form-group-no-border">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                </span>
+                                <input type="text" id="email" name="email" class="form-control" placeholder="Email...">
+                            </div>
+                            <div class="errmsg" id="err-email"></div>     
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="form2" onclick="post();" class="btn btn-info" style="background:#662d90 ">Enquire Now</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                        </button>
+                        <h4 class="title title-up">Thank You</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-success" role="alert">
+                            <div class="container">
+                                <div class="alert-icon">
+                                    <i class="now-ui-icons ui-2_like"></i>
+                                </div>
+                                <strong>Thank you for contacting us. We will be in touch with you very soon .</strong> 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  End Modal -->
+        <footer class="footer footer-default" style="background-color: #662d90bf;">
+            <div class="container">
+
+                <h5 style="color:#FFFFFF">Address : </h5>
+                <p class="description" style="text-align:justify;color: #FFFFFF">
+                    235/1 abitante
+                    behind crystal honda showroom,
+                    near hotel sunday monday,
+                    bavdhan bk,
+                    pune 411021</p>
+                <i class="fa fa-phone" style="color:#FFFFFF;display: inline-block;">&nbsp; 8275566989 </i><span style="float: right;display: inline-block;"><div class="copyright" style="color:#FFFFFF">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>, Designed by
+                        <a href="https://www.creative-tim.com" target="_blank" style="color:#FFFFFF"> &nbsp;&nbsp;uniquepaf.com</a>.
+                    </div></span>
+
+            </div>
+        </footer>
+
+        <hr>
+        <section class="mobile-footer-call visible-xs text-center">
+            <div class="row">
+                <div class="col-6 enq2">
+                    <a href="javascript:;" data-toggle="modal" data-target="#myModal" class="engbtn" data-event-category="Section" data-event-action="Click" data-event-name="Enquire Now" style="color:#FFFFFF">Enquire Now</a>
+                </div>
+                <div class="col-6 border-right">
+                    <!--<span class="sell_do_virtual_numbers">+91 20 3015 7048</span>-->
+                    <div class="call-center-vn"><a href="tel:+918275566989" style="color:#FFFFFF">+918275566989</a></div>
+                </div>
+            </div>
+        </section>
+        <!--</div>-->
+    </body>
+    <!--   Core JS Files   -->
+    <script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+    <script src="./assets/js/plugins/bootstrap-switch.js"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--  Plugin for the DatePicker, full documentation here: https://github.com/uxsolutions/bootstrap-datepicker -->
+    <script src="./assets/js/plugins/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
+    <script src="./assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+    <script type="text/javascript">
+//                            $(document).ready(function () {
+//                                // the body of this function is in assets/js/now-ui-kit.js
+//                                nowuiKit.initSliders();
+//                            });
+                            function post() {
+                                if (validateForm() == true) {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "mail.php",
+                                        data: {
+                                            "name": $('#name').val(),
+                                            'phone': $('#phone').val(),
+                                            'email': $('#email').val(),
+
+                                        },
+//                                    beforeSend: function () {
+//                                        //alert('beforeSend');
+//                                        $('.loader-bg').show();
+//                                        $('.enquire_Loader').show()
+//                                    },
+//                                    complete: function () {
+//                                        $('.loader-bg').hide();
+//                                        $('.enquire_Loader').hide();
+//                                    },
+                                        success: OnSuccess,
+                                        error: function (xhr, status, error) {
+                                            //alert(xhr.status);
+                                            //alert(xhr.responseText);
+                                        }
+                                    });
+
+                                } else {
+                                    return false;
+                                }
+
+
+                            }
+                            function OnSuccess(response) {
+                                $('#myModal').modal('hide');
+                                $('#myModal1').modal('show');
+                                setTimeout(function () {
+                                    $('#myModal1').modal('hide')
+                                }, 5000);
+
+                            }
+                            function validateForm() {
+
+                                var name = $('#name').val();
+                                if (name == null || name == "" || name == "name") {
+                                    $('#name').focus();
+                                    $('#err-name').html('Please Enter Your Name');
+                                    return false;
+                                }
+
+                                var phone = $('#phone').val();
+                                if (/^\d{10}$/.test(phone)) {
+                                    // value is ok, use it
+                                } else {
+                                    $('#phone').focus();
+                                    $('#err-phone').html('Invalid number; must be 10 digits only');
+                                    return false;
+                                }
+                                if (phone == "9999999999" || phone == "8888888888" || phone == "7777777777" || phone == "6666666666" || phone == "5555555555" || phone == "4444444444" || phone == "3333333333" || phone == "2222222222" || phone == "1111111111" || phone == "0000000000") {
+                                    $('#err-phone').html('Please Enter valid mobile number.');
+                                    return false;
+                                }
+                                if ((phone.substring(0, 1) == "0") || (phone.substring(0, 1) == "1") || (phone.substring(0, 1) == "2") || (phone.substring(0, 1) == "3") || (phone.substring(0, 1) == "4")) {
+                                    $('#err-phone').html('Please enter valid Mobile Number.');
+                                    return false;
+                                }
+
+
+                                var email = $('#email').val();
+                                if (email == null || email == "" || email == "Email Id") {
+                                    $('#email').focus();
+                                    $('#err-email').html('Please Enter Your Email.');
+                                    return false;
+                                }
+
+                                var email = $('#email').val();
+                                var atpos = email.indexOf("@");
+                                var dotpos = email.lastIndexOf(".");
+                                if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+                                    $('#email').focus();
+                                    $('#err-email').html('Please Enter a valid Email.');
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+
+                            }
+                            function scrollToDownload() {
+
+                                if ($('.section-download').length != 0) {
+                                    $("html, body").animate({
+                                        scrollTop: $('.section-download').offset().top
+                                    }, 1000);
+                                }
+                            }
+                            function Gallery() {
+
+                                if ($('.gallery').length != 0) {
+                                    $("html, body").animate({
+                                        scrollTop: $('.gallery').offset().top
+                                    }, 1000);
+                                }
+                            }
+                            function Amenities() {
+
+                                if ($('.amenities').length != 0) {
+                                    $("html, body").animate({
+                                        scrollTop: $('.amenities').offset().top
+                                    }, 1000);
+                                }
+                            }
+                            function siteStatus() {
+
+                                if ($('.currentstatus').length != 0) {
+                                    $("html, body").animate({
+                                        scrollTop: $('.currentstatus').offset().top
+                                    }, 1000);
+                                }
+                            }
+                            function keyDistance() {
+
+                                if ($('.keydistance').length != 0) {
+                                    $("html, body").animate({
+                                        scrollTop: $('.keydistance').offset().top
+                                    }, 1000);
+                                }
+                            }
+
+    </script>
+
+</html>

@@ -67,6 +67,7 @@ $(document).ready(function () {
                     htmlAction += '<a href="index.php?r=residential/keylocation&amp;id=' + data + '" title="Key location" class="teal-text"  ><i   class="ti-car teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=residential/image&amp;id=' + data + '" title="Image gallery" class="teal-text"  ><i   class="ti-gallery teal-text "></i></a>&nbsp;&nbsp;'
                     htmlAction += '<a href="index.php?r=residential/projectupdate&amp;id=' + data + '" title="Project update" class="teal-text"  ><i   class="fa fa-link teal-text "></i></a>&nbsp;&nbsp;'
+//                    htmlAction += '<a href="index.php?r=residential/projectupdate&amp;id=' + data + '" title="Project update" class="teal-text"  ><i   class="ti-split-h"></i></a>&nbsp;&nbsp;'
                     return htmlAction;
                 }
             }

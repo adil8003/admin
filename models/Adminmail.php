@@ -4,7 +4,6 @@ namespace app\models;
 
 use Yii;
 
-//class Videopath extends \yii\db\ActiveRecord
 class adminMail {
 
     public function sendEmail($arrAdminmail) {

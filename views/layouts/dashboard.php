@@ -48,11 +48,23 @@ AppAsset::register($this);
                                     <p>C-R-M</p>
                                 </a>
                             </li>
+<!--                            <li class="sub-menu">
+                                <a href="index.php?r=voicecall">
+                                    <i class="ti-user"></i>
+                                    <p>calling</p>
+                                </a>
+                            </li>-->
+                            <li class="sub-menu">
+                                <a href="index.php?r=users">
+                                    <i class="ti-user"></i>
+                                    <p>Users</p>
+                                </a>
+                            </li>
                             <li class="sub-menu">
                                 <a href="index.php?r=residential">
                                     <!--<i class="ti-blackboard"></i>-->
                                     <i class="fa fa-building" aria-hidden="true"></i>
-                                    <p>Residential project</p>
+                                    <p>New Residential project</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
@@ -71,13 +83,90 @@ AppAsset::register($this);
                             <li class="sub-menu">
                                 <a href="index.php?r=website/project">
                                     <i class="ti-help-alt"></i>
-                                    <p>Request Project</p>
+                                    <p>Post your project</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
                                 <a href="index.php?r=website/web">
                                     <i class="ti-user"></i>
-                                    <p>Customers</p>
+                                    <p>Website Customers</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=website">
+                                    <i class="ti-image"></i>
+                                    <p>website</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=profile">
+                                    <i class="ti-face-smile"></i>
+                                    <p>Profile</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=settings">
+                                    <i class="ti-settings"></i>
+                                    <p>Settings</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=task">
+                                    <i class="ti-settings"></i>
+                                    <p>Task</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=site/logout">
+                                    <i class="ti-lock"></i>
+                                    <p>Logout</p>
+                                </a>
+                            </li>
+
+                        <?php } ?>
+                        <?php if (Yii::$app->session['role'] === 'Employee') { ?>
+                            <li class="active">
+                                <a class="" href="index.php?r=dashboard">
+                                    <i class="ti-dashboard"></i>
+                                    <p>Dashboard</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=users/crm">
+                                    <i class="ti-user"></i>
+                                    <p>C-R-M</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=residential">
+                                    <!--<i class="ti-blackboard"></i>-->
+                                    <i class="fa fa-building" aria-hidden="true"></i>
+                                    <p>New Residential project</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=commercial">
+                                    <!--<i class="ti-blackboard"></i>-->
+                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                    <p>Commercial project</p>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="index.php?r=resale">
+                                    <i class="ti-exchange-vertical"></i>
+                                    <p>RESALE</p>
+                                </a>
+                            </li>
+<!--                            <li class="sub-menu">
+                                <a href="index.php?r=website/project">
+                                    <i class="ti-help-alt"></i>
+                                    <p>Request Project from website</p>
+                                </a>
+                            </li>-->
+                            <li class="sub-menu">
+                                <a href="index.php?r=website/web">
+                                    <i class="ti-user"></i>
+                                    <p>website Customers</p>
                                 </a>
                             </li>
                             <li class="sub-menu">
@@ -113,7 +202,7 @@ AppAsset::register($this);
 
                         <?php } ?>
 
-                        <?php if (Yii::$app->session['role'] === 'Employee') { ?>
+                        <?php if (Yii::$app->session['role'] === 'External employee') { ?>
                             <li class="active">
                                 <a class="" href="index.php?r=dashboard">
                                     <i class="ti-dashboard"></i>
@@ -121,35 +210,35 @@ AppAsset::register($this);
                                 </a>
                             </li>
                             <li class="sub-menu">
-                                <a href="index.php?r=crm">
-                                    <i class="ti-id-badge"></i>
-                                    <p>CRM</p>
+                                <a href="index.php?r=voicecall">
+                                    <i class="ti-user"></i>
+                                    <p>calling</p>
                                 </a>
                             </li>
-                            <li class="sub-menu">
-                                <a href="index.php?r=rent">
-                                    <i class="ti-blackboard"></i>
-                                    <p>RENT</p>
-                                </a>
-                            </li>
-                            <li class="sub-menu">
-                                <a href="index.php?r=resale">
-                                    <i class="ti-blackboard"></i>
-                                    <p>RESALE</p>
-                                </a>
-                            </li>
-                            <li class="sub-menu">
-                                <a href="index.php?r=residential">
-                                    <i class="ti-blackboard"></i>
-                                    <p>Residential</p>
-                                </a>
-                            </li>
-                            <li class="sub-menu">
-                                <a href="index.php?r=profile">
-                                    <i class="ti-face-smile"></i>
-                                    <p>Profile</p>
-                                </a>
-                            </li>
+                            <!--                            <li class="sub-menu">
+                                                            <a href="index.php?r=rent">
+                                                                <i class="ti-blackboard"></i>
+                                                                <p>RENT</p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="sub-menu">
+                                                            <a href="index.php?r=resale">
+                                                                <i class="ti-blackboard"></i>
+                                                                <p>RESALE</p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="sub-menu">
+                                                            <a href="index.php?r=residential">
+                                                                <i class="ti-blackboard"></i>
+                                                                <p>Residential</p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="sub-menu">
+                                                            <a href="index.php?r=profile">
+                                                                <i class="ti-face-smile"></i>
+                                                                <p>Profile</p>
+                                                            </a>
+                                                        </li>-->
                             <li class="sub-menu">
                                 <a href="index.php?r=site/logout">
                                     <i class="ti-lock"></i>
@@ -173,7 +262,7 @@ AppAsset::register($this);
                                 <span class="icon-bar bar2"></span>
                                 <span class="icon-bar bar3"></span>
                             </button>
-                            <a class="navbar-brand" href="#">Hi <?php echo Yii::$app->session['fullname']; ?> <span style="font-size: 15px;"> ( <?php echo Yii::$app->session['role']; ?>)</span></a>
+                            <a class="navbar-brand" href="#">Hi <?php echo Yii::$app->session['email']; ?> <span style="font-size: 15px;"> ( <?php echo Yii::$app->session['role']; ?>)</span></a>
                         </div>
                         <div class="collapse navbar-collapse">
                             <ul class="nav navbar-nav navbar-right">

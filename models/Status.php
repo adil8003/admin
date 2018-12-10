@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $name
  *
+ * @property Resale[] $resales
  * @property User[] $users
  */
 class Status extends \yii\db\ActiveRecord
@@ -42,6 +43,14 @@ class Status extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResales()
+    {
+        return $this->hasMany(Resale::className(), ['statusid' => 'id']);
     }
 
     /**

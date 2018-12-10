@@ -41,7 +41,7 @@ $(document).ready(function () {
     $.noConflict()
     $('#tblCrmCustomer').DataTable({
         ajax: "index.php?r=crm/getallcustomers",
-        "iDisplayLength": 5,
+        "iDisplayLength": 10,
         "columns": [
             {"data": "id",
                 "render": function (data, type, full, meta) {

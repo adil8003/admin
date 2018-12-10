@@ -152,7 +152,8 @@ class CommercialController extends Controller {
         header('Content-type: resources/png');
         readfile($file);
     }
- public function actionUploadresidentialamenities() {
+
+    public function actionUploadresidentialamenities() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $basePath = Yii::$app->params['basePath'];
@@ -232,7 +233,7 @@ class CommercialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
-    
+
     public function actionSaveproperty() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -241,7 +242,7 @@ class CommercialController extends Controller {
         $this->layout = "";
         if ($request->isPost) {
             try {
-                $objCommercial = new \app\models\Commercial;
+                $objCommercial = new \app\models\Commercial();
                 $objCommercial->cname = $request->post('cname');
                 $objCommercial->dname = $request->post('dname');
                 $objCommercial->location = $request->post('location');
@@ -253,6 +254,7 @@ class CommercialController extends Controller {
                 $objCommercial->reraid = $request->post('reraid');
                 $objCommercial->statusid = $request->post('statusid');
                 $objCommercial->protype = 3;
+                $objCommercial->userid = Yii::$app->session['userid'];
 
                 if ($objCommercial->save()) {
                     $arrReturn['status'] = TRUE;

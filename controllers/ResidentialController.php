@@ -59,7 +59,9 @@ class ResidentialController extends Controller {
     public function actionProjectupdate() {
         $request = Yii::$app->request;
         $id = $request->get('id');
+        $objPropertytype = \app\models\Propertytype::find()->all();
         return $this->render('projectupdate', [
+                    'objPropertytype' => $objPropertytype,
         ]);
     }
 
@@ -125,8 +127,72 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
+    public function actionDeleteamenities() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $basePath = Yii::$app->params['basePath'];
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            $resamenities = $request->post('id');
+            if ($id != 0) {
+                $objAmenities = \app\models\Amenities::find()->where(['id' => $resamenities])->one();
+                $objAmenities->delete();
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionDeletetagline() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $basePath = Yii::$app->params['basePath'];
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            $resamenities = $request->post('id');
+            if ($id != 0) {
+                $objAmenities = \app\models\Amenities::find()->where(['id' => $resamenities])->one();
+                $objAmenities->delete();
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionDeletekeylocation() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $basePath = Yii::$app->params['basePath'];
+        $this->layout = "";
+        if ($request->isPost) {
+            $id = $request->post('id');
+            $reskeylocationid = $request->post('id');
+            if ($id != 0) {
+                $objKeylocation = \app\models\Keylocation::find()->where(['id' => $reskeylocationid])->one();
+                $objKeylocation->delete();
+                $arrReturn['status'] = TRUE;
+                $arrReturn['msg'] = 'Deleted successfully.';
+            } else {
+                $arrReturn['msg'] = 'Please try again';
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
     public function actionDeletepropertybannerimg() {
-       $arrReturn = array();
+        $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $request = Yii::$app->request;
         $this->layout = "";
@@ -308,16 +374,17 @@ class ResidentialController extends Controller {
         $arrJSON['data'] = $arrResidential;
         echo json_encode($arrJSON);
     }
-  public function actionUploadpropertybanner() {
+
+    public function actionUploadpropertybanner() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $basePath = Yii::$app->params['basePath'];
-          $request = Yii::$app->request;
+        $request = Yii::$app->request;
         $this->layout = "";
         $id = $request->get('id');
         if (!empty($_FILES)) {
             $uploaddir = 'resources/propertybanner/';
-            $image_name = md5(date('Ymdhis')). rand(10000, 9999);
+            $image_name = md5(date('Ymdhis')) . rand(10000, 9999);
             $uploadfile = $basePath . $uploaddir . $image_name . ".jpg";
             if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
                 $objResidential = Residential::findOne(['id' => $id]);
@@ -330,7 +397,8 @@ class ResidentialController extends Controller {
         }
         echo json_encode($arrReturn);
     }
-      public function actionGetresbyid() {
+
+    public function actionGetresbyid() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
         $request = Yii::$app->request;
@@ -344,7 +412,8 @@ class ResidentialController extends Controller {
         echo json_encode($arrReturn);
         die;
     }
-      public function actionLinkrespropertybannerimg() {
+
+    public function actionLinkrespropertybannerimg() {
         $request = Yii::$app->request;
         $id = $request->get('id');
         $objResidential = Residential::findOne($id);
@@ -353,6 +422,7 @@ class ResidentialController extends Controller {
         header('Content-type: resources/png');
         readfile($file);
     }
+
     public function actionSaveproperty() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -375,6 +445,7 @@ class ResidentialController extends Controller {
                 $objResidential->landtypeid = $request->post('landtypeid');
                 $objResidential->image = $basePath . '/resources/propertybanner/not_found.png';
                 $objResidential->protype = 1;
+                $objResidential->userid = Yii::$app->session['userid'];
                 if ($objResidential->save()) {
                     $arrReturn['status'] = TRUE;
                     $arrReturn['id'] = $objResidential->id;
@@ -414,8 +485,6 @@ class ResidentialController extends Controller {
                     $objAmenities->aname = $request->post('aname');
                     $objAmenities->type = 1;
                     $objAmenities->statusid = 2;
-
-
                     if ($objAmenities->save()) {
                         $arrReturn['status'] = TRUE;
                         $arrReturn['id'] = $objAmenities->id;
@@ -423,6 +492,39 @@ class ResidentialController extends Controller {
                     }
                 } else {
                     $arrReturn['crmerr'][] = $objAmenities->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionUpdatetagline() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        $id = $request->post('id');
+        if ($request->isPost) {
+            try {
+                if ($id != ' ') {
+                    $objtagline = \app\models\Amenities:: find()->where(['id' => $id])->one();
+                    $objtagline->residentialid = $request->post('residentialid');
+                    $objtagline->tagline = $request->post('tagline');
+                    $objtagline->type = 2;
+                    $objtagline->statusid = 2;
+                    if ($objtagline->save()) {
+                        $arrReturn['status'] = TRUE;
+                        $arrReturn['id'] = $objtagline->id;
+                        $arrReturn['msg'] = 'save successfully.';
+                    }
+                } else {
+                    $arrReturn['crmerr'][] = $objtagline->getErrors();
                 }
                 $transaction->commit();
                 yii::info('all modal saved');
@@ -491,7 +593,7 @@ class ResidentialController extends Controller {
                     $objRupdate->status = $request->post('status');
                     $objRupdate->possesiondate = $date1;
                     $objRupdate->yearofconstruct = $date;
-                    $objRupdate->salablearea = $request->post('salablearea');
+                    $objRupdate->salablearea = 0;
                     $objRupdate->carpetarea = $request->post('carpetarea');
                     $objRupdate->reraid = $request->post('reraid');
                     if ($objRupdate->save()) {
@@ -526,11 +628,44 @@ class ResidentialController extends Controller {
                 $objRupdate->residentialid = $request->post('residentialid');
                 $objRupdate->wing = $request->post('wing');
                 $objRupdate->status = $request->post('status');
-                $objRupdate->possesiondate = $request->post('possesiondate');
+                $objRupdate->possesiondate = 0;
                 $objRupdate->yearofconstruct = $request->post('yearofconstruct');
-                $objRupdate->salablearea = $request->post('salablearea');
+                $objRupdate->salablearea = 0;
                 $objRupdate->carpetarea = $request->post('carpetarea');
-                $objRupdate->reraid = $request->post('reraid');
+                $objRupdate->reraid = 0;
+                if ($objRupdate->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objRupdate->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                } else {
+                    $arrReturn['reserr'][] = $objRupdate->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+    public function actionSavewingsdetails() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            try {
+                $objRupdate = new \app\models\Consdetails();
+                $objRupdate->residentialid = $request->post('residentialid');
+                $objRupdate->reraid = $request->post('wing');
+                $objRupdate->carpetarea = $request->post('carpetarea');
+                $objRupdate->posdate = $request->post('posdate');
+                $objRupdate->posquarter = $request->post('postype');
+                $objRupdate->propertytypeid = $request->post('wing');
+                $objRupdate->price = $request->post('price');
+                $objRupdate->wstatus = $request->post('wstatus');
                 if ($objRupdate->save()) {
                     $arrReturn['status'] = TRUE;
                     $arrReturn['id'] = $objRupdate->id;
@@ -587,12 +722,34 @@ class ResidentialController extends Controller {
         $id = $request->get('residentialid');
         $objData = $connection->createCommand('Select a.id,a.aname,a.statusid,a.type,a.addeddate
                         from `amenities` a 
-                        where a.residentialid =' . $id . ' ORDER BY `addeddate` DESC ')->queryAll();
+                        where a.residentialid =' . $id . ' AND type = ' . 1 . '   ORDER BY `addeddate` DESC ')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
             $arrTemp['id'] = $objrow['id'];
             $arrTemp['aname'] = $objrow['aname'];
+            $arrfollow[] = $arrTemp;
+        }
+        $arrJSON['data'] = $arrfollow;
+        echo json_encode($arrJSON);
+    }
+
+    public function actionGetalltagline() {
+        $arrfollow['status'] = FALSE;
+        $arrJSON = array();
+        $arrfollow = array();
+        $this->layout = "";
+        $connection = Yii::$app->db;
+        $request = Yii::$app->request;
+        $id = $request->get('residentialid');
+        $objData = $connection->createCommand('Select a.id,a.tagline,a.statusid,a.type,a.addeddate
+                        from `amenities` a 
+                        where a.residentialid =' . $id . ' AND type = ' . 2 . ' ORDER BY `addeddate` DESC ')->queryAll();
+        foreach ($objData AS $objrow) {
+            $arrTemp = array();
+            $arrTemp['status'] = TRUE;
+            $arrTemp['id'] = $objrow['id'];
+            $arrTemp['tagline'] = $objrow['tagline'];
             $arrfollow[] = $arrTemp;
         }
         $arrJSON['data'] = $arrfollow;
@@ -663,6 +820,37 @@ class ResidentialController extends Controller {
                 $objAmenities->residentialid = $request->post('residentialid');
                 $objAmenities->aname = $request->post('aname');
                 $objAmenities->type = 1;
+                $objAmenities->statusid = 2;
+
+                if ($objAmenities->save()) {
+                    $arrReturn['status'] = TRUE;
+                    $arrReturn['id'] = $objAmenities->id;
+                    $arrReturn['msg'] = 'save successfully.';
+                } else {
+                    $arrReturn['reserr'][] = $objAmenities->getErrors();
+                }
+                $transaction->commit();
+                yii::info('all modal saved');
+            } catch (Exception $ex) {
+                $arrReturn['curexp'] = $e->getMessage();
+                $transaction->rollBack();
+            }
+        }
+        echo json_encode($arrReturn);
+    }
+
+    public function actionSavetagline() {
+        $transaction = Yii::$app->db->beginTransaction();
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+        $request = Yii::$app->request;
+        $this->layout = "";
+        if ($request->isPost) {
+            try {
+                $objAmenities = new \app\models\Amenities();
+                $objAmenities->residentialid = $request->post('residentialid');
+                $objAmenities->tagline = $request->post('tagline');
+                $objAmenities->type = 2;
                 $objAmenities->statusid = 2;
 
                 if ($objAmenities->save()) {

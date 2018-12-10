@@ -28,6 +28,8 @@ use Yii;
  * @property string $remarks
  * @property integer $statusid
  * @property string $added_date
+ * @property integer $protype
+ * @property integer $userid
  *
  * @property Status $status
  */
@@ -47,9 +49,9 @@ class Resale extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image', 'price', 'carpetarea', 'propertytypeid', 'statusid'], 'required'],
+            [['image', 'price', 'carpetarea', 'propertytypeid', 'statusid', 'protype', 'userid'], 'required'],
             [['price'], 'number'],
-            [['propertytypeid', 'statusid'], 'integer'],
+            [['propertytypeid', 'statusid', 'protype', 'userid'], 'integer'],
             [['remarks'], 'string'],
             [['added_date'], 'safe'],
             [['ownername', 'contact', 'image', 'societyname', 'buildingname', 'wing', 'flatnumber', 'floornumber', 'location', 'landmark', 'propertyfacing', 'furniture'], 'string', 'max' => 700],
@@ -86,6 +88,8 @@ class Resale extends \yii\db\ActiveRecord
             'remarks' => 'Remarks',
             'statusid' => 'Statusid',
             'added_date' => 'Added Date',
+            'protype' => 'Protype',
+            'userid' => 'Userid',
         ];
     }
 

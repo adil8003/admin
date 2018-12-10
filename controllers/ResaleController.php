@@ -210,6 +210,7 @@ class ResaleController extends Controller {
                 $objResale->remarks = $request->post('remarks');
                 $objResale->image = $basePath . '/resources/propertybanner/not_found.png';
                 $objResale->protype = 2;
+                $objResale->userid = Yii::$app->session['userid'];
 
 
                 if ($objResale->save()) {

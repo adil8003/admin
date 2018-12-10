@@ -20,6 +20,8 @@ use Yii;
  * @property integer $landtypeid
  * @property string $image
  * @property string $addeddate
+ * @property integer $protype
+ * @property integer $userid
  */
 class Residential extends \yii\db\ActiveRecord
 {
@@ -37,8 +39,8 @@ class Residential extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dname', 'pname', 'location', 'buytypeid', 'pland', 'landmark', 'address', 'price', 'statusid', 'landtypeid'], 'required'],
-            [['buytypeid', 'price', 'statusid', 'landtypeid'], 'integer'],
+            [['dname', 'pname', 'location', 'buytypeid', 'landmark', 'address', 'price', 'statusid', 'landtypeid', 'protype', 'userid'], 'required'],
+            [['buytypeid', 'price', 'statusid', 'landtypeid', 'protype', 'userid'], 'integer'],
             [['image'], 'string'],
             [['addeddate'], 'safe'],
             [['dname', 'pname', 'location', 'pland', 'landmark'], 'string', 'max' => 200],
@@ -65,6 +67,8 @@ class Residential extends \yii\db\ActiveRecord
             'landtypeid' => 'Landtypeid',
             'image' => 'Image',
             'addeddate' => 'Addeddate',
+            'protype' => 'Protype',
+            'userid' => 'Userid',
         ];
     }
 }

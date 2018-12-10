@@ -7,28 +7,28 @@ use Yii;
 //class Videopath extends \yii\db\ActiveRecord
 class mail {
 
-    public function sendEmail($arrMailDetails) {
-        $email = 'abhishekk@uniquepaf.com';
-        $date = date('d/m/Y');
-        $to = $arrMailDetails['toemail'];
-        $subject = $arrMailDetails['subject'];
-        $body = $this->getEmailHeader();
-        $body .= $arrMailDetails['body'];
-        $body .= $this->getEmailFooter();
-        $header = 'MIME-Version: 1.0' . "\r\n";
-        $header .= 'From:Unique property <'. $from .'>' . "\r\n" .
-                'Content-type: text/html' . "\r\n" .
-//                'Reply-To: sadil8003@gmail.com' . "\r\n" .
-//                     'CC: asauravsuman@gmail.com ' . "\r\n" .
-                'X-Mailer: PHP/' . phpversion();
-
-        $mail = mail($to, $subject, $body, $header);
-        if ($mail) {
-            $arrReturn['status'] = TRUE;
-        } else {
-            $arrReturn['status'] = FALSE;
-        }
-    }
+//    public function sendEmail($arrMailDetails) {
+//        $email = 'abhishekk@uniquepaf.com';
+//        $date = date('d/m/Y');
+//        $to = $arrMailDetails['toemail'];
+//        $subject = $arrMailDetails['subject'];
+//        $body = $this->getEmailHeader();
+//        $body .= $arrMailDetails['body'];
+//        $body .= $this->getEmailFooter();
+//        $header = 'MIME-Version: 1.0' . "\r\n";
+//        $header .= 'From:Unique property <'. $from .'>' . "\r\n" .
+//                'Content-type: text/html' . "\r\n" .
+////                'Reply-To: sadil8003@gmail.com' . "\r\n" .
+////                     'CC: asauravsuman@gmail.com ' . "\r\n" .
+//                'X-Mailer: PHP/' . phpversion();
+//
+//        $mail = mail($to, $subject, $body, $header);
+//        if ($mail) {
+//            $arrReturn['status'] = TRUE;
+//        } else {
+//            $arrReturn['status'] = FALSE;
+//        }
+//    }
     public function sendFollowupEmail($arrMailDetails) {
 //        $from = 'abhishekk@uniquepaf.com';
         $from = 'contact@uniquepaf.com ';
@@ -42,7 +42,8 @@ class mail {
 //        $header .= 'From:Unique property <'. contact@uniquepaf.com .'>' . "\r\n" .
         $header .= 'From:Unique property <'. $from  .'>' . "\r\n" .
                 'Content-type: text/html' . "\r\n" .
-                'Reply-To: '.$to.'' . "\r\n" .
+                'Reply-To: '. $to . ' ' . "\r\n" .
+                     'CC: abhishek83shekhar@gmail.com ' . "\r\n" .
                      'CC: sadil8003@gmail.com ' . "\r\n" .
                 'X-Mailer: PHP/' . phpversion();
 

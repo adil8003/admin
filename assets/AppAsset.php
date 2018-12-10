@@ -42,8 +42,9 @@ class AppAsset extends AssetBundle {
         "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.css",
         "https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css",
 //        "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/css/britecharts.css",
-        "https://cdn.jsdelivr.net/npm/britecharts/dist/css/britecharts.min.css",
-        "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css",
+//        "https://cdn.jsdelivr.net/npm/britecharts/dist/css/britecharts.min.css",
+//        "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css",
+         "vendor/assets/css/daterangepicker.css",
         "vendor/assets/select2/select2.css",
         "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css",
     ];
@@ -71,11 +72,11 @@ class AppAsset extends AssetBundle {
         "https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.1/jquery.rateyo.min.js",
         "https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.1/jquery.twbsPagination.js",
         "https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js",
-        "https://cdn.jsdelivr.net/npm/britecharts@2/dist/bundled/britecharts.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/bundled/britecharts.min.js",
-        "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js",
+//        "https://cdn.jsdelivr.net/npm/britecharts@2/dist/bundled/britecharts.min.js",
+//        "https://cdnjs.cloudflare.com/ajax/libs/britecharts/3.0.0/bundled/britecharts.min.js",
+//        "https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js",
         "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js",
-        "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js",
+//        "vendor/assets/js/daterangepicker.js",
         "https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js",
         "http://js.nicedit.com/nicEdit-latest.js"
     ];

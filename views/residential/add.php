@@ -118,7 +118,7 @@ $this->title = Yii::t('app', ' Add residential');
                                 <span class="asterik">*</span>
                                 <span class="errmsg" id="err-propertytypeid"></span>
                             </label>
-                            <select class="js-example-basic-multiple"  placeholder="Select department" id="propertytypeid" name="propertytypeid" multiple="multiple" style='width:481px'>
+                            <select class=""  placeholder="Select department" id="propertytypeid" name="propertytypeid" multiple="multiple" >
                                 <?php
                                 foreach ($objPropertytype as $key => $value) {
                                     echo "<option value='$value->id' >" . $value->name . "</option>";

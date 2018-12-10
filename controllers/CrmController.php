@@ -103,6 +103,120 @@ class CrmController extends Controller {
         ]);
     }
 
+    public function actionBulkuploadcustomers() {
+        $arrReturn = array();
+        $arrReturn['status'] = FALSE;
+
+        if (isset($_FILES['file'])) {
+
+            $file = $_FILES ['file'];
+            $file_name = $file['name'];
+            $file_tmp = $file['tmp_name'];
+            $file_size = $file['size'];
+            $file_error = $file['error'];
+            $file_ext = explode('.', $file_name);
+            $filename = strtolower($file_ext[0]);
+            $file_ext = strtolower(end($file_ext));
+            $allowed = array('csv');
+            if (in_array($file_ext, $allowed)) {
+
+                if ($file_error === 0) {
+                    if ($file_size <= 20971524) {
+                        $basePath = Yii::$app->params['basePath'];
+                        $file_name_new = $filename . '.' . $file_ext;
+                        $uploaddir = 'resources/file/';
+                        $file_destination = $basePath . $uploaddir . $file_name_new;
+
+                        if (move_uploaded_file($_FILES['file']['tmp_name'], $file_destination)) {
+                            $fileInput = file_get_contents($basePath . 'resources/file/' . $file_name_new);
+                            $Lines = explode("\r\n", $fileInput);
+                            for ($i = 0; $i < count($Lines); $i++) {
+
+                                set_time_limit(0);
+                                $data = explode(",", $Lines[$i]);
+
+                                $toUpload = [];
+
+                                if ($i != 0 and ! empty($Lines[$i])) {
+
+                                    $toUpload['cname'] = trim(ucfirst($data[0]));
+                                    $toUpload['cphone'] = trim(ucfirst($data[1]));
+                                    $toUpload['cemail'] = trim(ucfirst($data[2]));
+                                    $toUpload['buytypeid'] = trim(ucfirst($data[3]));
+                                    $toUpload['meetingtypeid'] = trim(ucfirst($data[4]));
+                                    $toUpload['price'] = trim(ucfirst($data[5]));
+                                    $toUpload['location'] = trim(ucfirst($data[6]));
+                                    $toUpload['meetingstatus'] = trim(ucfirst($data[7]));
+                                    $toUpload['detailsofproperty'] = trim(ucfirst($data[8]));
+                                    $toUpload['postremark'] = trim(ucfirst($data[9]));
+                                    $toUpload['finalstatus'] = trim(ucfirst($data[10]));
+                                    $toUpload['reffrom'] = trim(ucfirst($data[11]));
+                                    $toUpload['customerstatusid'] = trim(ucfirst($data[12]));
+                                    $toUpload['userid'] = trim(ucfirst($data[13]));
+                                    $toUpload['salary'] = trim(ucfirst($data[14]));
+                                    $toUpload['salary'] = trim(ucfirst($data[15]));
+//                                    $myString = $toUpload['mobile'];
+                                    $newMobArray = str_replace("'", "", $toUpload['cphone']);
+
+                                    $handle = file_get_contents($basePath . '/resources/file/' . $file_name_new, "r");
+                                    $transaction = Yii::$app->db->beginTransaction();
+                                    try {
+                                        $objCamsms = new \app\models\Crm();
+                                        $objCamsms->cname = ($toUpload['cname'] != ' ') ? $toUpload['cname'] : 'NA';
+                                        $objCamsms->cphone = ($newMobArray != ' ') ? $newMobArray : 0;
+                                        $objCamsms->cemail = ( $toUpload['cemail'] != ' ') ? $toUpload['cemail'] : 'NA';
+                                        $objCamsms->buytypeid = ( $toUpload['buytypeid'] != ' ') ? $toUpload['buytypeid'] : 5;
+                                        $objCamsms->meetingtypeid = ( $toUpload['meetingtypeid'] != ' ') ? $toUpload['meetingtypeid'] : 5;
+                                        $objCamsms->price = ( $toUpload['price'] != ' ') ? $toUpload['price'] : 0;
+                                        $objCamsms->location = ( $toUpload['location'] != ' ') ? $toUpload['location'] : 'NA';
+                                        $objCamsms->meetingstatus = ( $toUpload['meetingstatus'] != ' ') ? $toUpload['meetingstatus'] : 'NA';
+                                        $objCamsms->detailsofproperty = ( $toUpload['detailsofproperty'] != ' ') ? $toUpload['detailsofproperty'] : 'NA';
+                                        $objCamsms->postremark = ( $toUpload['postremark'] != ' ') ? $toUpload['postremark'] : 'NA';
+                                        $objCamsms->finalstatus = ( $toUpload['finalstatus'] != ' ') ? $toUpload['finalstatus'] : 'NA';
+                                        $objCamsms->reffrom = ( $toUpload['reffrom'] != ' ') ? $toUpload['reffrom'] : 'NA';
+                                        $objCamsms->customerstatusid = ( $toUpload['customerstatusid'] != ' ') ? $toUpload['customerstatusid'] : 4;
+                                        $objCamsms->userid = ( $toUpload['userid'] != ' ') ? $toUpload['userid'] : 1;
+                                        $objCamsms->salary = ( $toUpload['salary'] != ' ') ? $toUpload['salary'] : 0;
+
+                                        if ($objCamsms->save()) {
+                                            $arrReturn['status'] = TRUE;
+                                            $arrReturn['id'] = $objCamsms->id;
+                                            $arrReturn['msg'] = 'save successfully.';
+
+//                                            foreach ($toUpload['salary'] as $key => $value) {
+                                                $objPtype = new \app\models\Ptype ();
+                                                $objPtype->crm_id = $objCamsms->id;
+                                                $objPtype->propertytypeid = $toUpload['salary'];
+                                                $objPtype->save();
+//                                            }
+                                        }
+//                                        else 
+//                                            {
+//                                            $arrReturn['reserr'][] = $objCamsms->getErrors();
+//                                        }
+//                                            echo "<pre>";
+//                print_r($toUpload);
+//                echo "<pre>";die;
+//                                        }
+//                                }
+                                        $transaction->commit();
+//                                        yii::info('all modal saved');
+                                    } catch (Exception $ex) {
+                                        $arrReturn['curexp'] = $e->getMessage();
+//                                        $transaction->rollBack();
+                                    }
+                                }
+                            }
+                            // return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        echo json_encode($arrReturn);
+    }
+
     public function actionSavefollowup() {
         $transaction = Yii::$app->db->beginTransaction();
         $arrReturn = array();
@@ -203,6 +317,8 @@ class CrmController extends Controller {
                 $objCrm->finalstatus = $request->post('finalstatus');
                 $objCrm->customerstatusid = $request->post('statusid');
                 $objCrm->reffrom = $request->post('reffrom');
+                $objCrm->salary = 0;
+                $objCrm->userid = Yii::$app->session['userid'];
 
                 if ($objCrm->save()) {
                     $arrReturn['status'] = TRUE;
@@ -328,7 +444,7 @@ class CrmController extends Controller {
                         LEFT JOIN  `ptype` pt on pt.crm_id = c.id
                     	LEFT JOIN `propertytype` p on p.id = pt.propertytypeid     
                         LEFT join `buytype` bt on c.buytypeid = bt.id
-                        where c.customerstatusid = ' . 2 . ' ||  c.customerstatusid = ' . 1 . '   GROUP BY c.id')->queryAll();
+                        where c.customerstatusid = ' . 2 . ' ||  c.customerstatusid = ' . 1 . ' ||  c.customerstatusid = ' . 4 . '   GROUP BY c.id')->queryAll();
         foreach ($objData AS $objrow) {
             $arrTemp = array();
             $arrTemp['status'] = TRUE;
@@ -390,7 +506,7 @@ class CrmController extends Controller {
                          LEFT join `followup` f on f.crm_id = c.id 
                          LEFT JOIN `propertytype` p on p.id = pt.propertytypeid    
                          LEFT join `customerstatus` cs on cs.id = c.customerstatusid 
-                        LEFT join `buytype` bt on c.buytypeid = bt.id where c.customerstatusid = ' . 2 . '  ||  c.customerstatusid = ' . 1 . '   GROUP BY f.id')->queryAll();
+                        LEFT join `buytype` bt on c.buytypeid = bt.id where c.customerstatusid = ' . 2 . '  ||  c.customerstatusid = ' . 1 . ' ||  c.customerstatusid = ' . 4 . '  GROUP BY f.id')->queryAll();
         foreach ($objData AS $objrow) {
             $M = date('m', strtotime($objrow['followupdate']));
             $D = date('d', strtotime($objrow['followupdate']));
@@ -550,6 +666,7 @@ class CrmController extends Controller {
         $arrJSON['data'] = $arrfollow;
         echo json_encode($arrJSON);
     }
+
     public function actionInactivecus() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -570,6 +687,7 @@ class CrmController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
     public function actionActivecustomer() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
@@ -590,6 +708,7 @@ class CrmController extends Controller {
         }
         echo json_encode($arrReturn);
     }
+
     public function actionActivecustome() {
         $arrReturn = array();
         $arrReturn['status'] = FALSE;
